@@ -1,0 +1,54 @@
+﻿body {
+}
+
+.Cal_Theme .ajax__calendar_container {
+    background-color: #EDCF81;
+    border: solid 1px #cccccc;
+}
+
+.Cal_Theme .ajax__calendar_header {
+    background-color: #FFFFEA;
+    margin-bottom: 4px;
+}
+
+.Cal_Theme .ajax__calendar_title,
+.Cal_Theme .ajax__calendar_next,
+.Cal_Theme .ajax__calendar_prev {
+    color: #004080;
+    padding-top: 3px;
+}
+
+.Cal_Theme .ajax__calendar_body {
+    background-color: #FFFFEA;
+    border: solid 1px #cccccc;
+}
+
+.Cal_Theme .ajax__calendar_dayname {
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 4px;
+    margin-top: 3px;
+}
+
+.Cal_Theme .ajax__calendar_day {
+    text-align: center;
+}
+
+.Cal_Theme .ajax__calendar_hover .ajax__calendar_day,
+.Cal_Theme .ajax__calendar_hover .ajax__calendar_month,
+.Cal_Theme .ajax__calendar_hover .ajax__calendar_year,
+.Cal_Theme .ajax__calendar_active {
+    color: #FFFFFF;
+    font-weight: bold;
+    background-color: #4A89B9;
+}
+
+.Cal_Theme .ajax__calendar_today {
+    font-weight: bold;
+}
+
+.Cal_Theme .ajax__calendar_other,
+.Cal_Theme .ajax__calendar_hover .ajax__calendar_today,
+.Cal_Theme .ajax__calendar_hover .ajax__calendar_title {
+    color: #000000;
+}

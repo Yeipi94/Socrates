@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="BuscarINE">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="prefixText" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="count" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="estado" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="BuscarINEResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BuscarINEResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Get">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Nombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Estado" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getIneNacional">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="knownCategoryValues" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getIneNacionalResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getIneNacionalResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_List_Ine">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="Estado" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="knownCategoryValues" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_List_IneResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="get_List_IneResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ListNac2017">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="knownCategoryValues" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="category" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ListNac2017Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ListNac2017Result" type="tns:ArrayOfCascadingDropDownNameValue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfCascadingDropDownNameValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="CascadingDropDownNameValue" nillable="true" type="tns:CascadingDropDownNameValue" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CascadingDropDownNameValue">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="value" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="isDefaultValue" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="optionTitle" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="Get_Estados">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="knownCategoryValues" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="category" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_EstadosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_EstadosResult" type="tns:ArrayOfCascadingDropDownNameValue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ListEstado">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="knownCategoryValues" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="category" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ListEstadoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ListEstadoResult" type="tns:ArrayOfCascadingDropDownNameValue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ListMunicipio">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="knownCategoryValues" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="category" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ListMunicipioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ListMunicipioResult" type="tns:ArrayOfCascadingDropDownNameValue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ListColonia">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="knownCategoryValues" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="category" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Get_ListColoniaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Get_ListColoniaResult" type="tns:ArrayOfCascadingDropDownNameValue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Ges_Estatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="knownCategoryValues" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="category" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Ges_EstatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Ges_EstatusResult" type="tns:ArrayOfCascadingDropDownNameValue" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarPersonas">
+        <s:complexType />
+      </s:element>
+      <s:element name="ListarPersonasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarPersonasResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="BuscarINESoapIn">
+    <wsdl:part name="parameters" element="tns:BuscarINE" />
+  </wsdl:message>
+  <wsdl:message name="BuscarINESoapOut">
+    <wsdl:part name="parameters" element="tns:BuscarINEResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSoapIn">
+    <wsdl:part name="parameters" element="tns:Get" />
+  </wsdl:message>
+  <wsdl:message name="GetSoapOut">
+    <wsdl:part name="parameters" element="tns:GetResponse" />
+  </wsdl:message>
+  <wsdl:message name="getIneNacionalSoapIn">
+    <wsdl:part name="parameters" element="tns:getIneNacional" />
+  </wsdl:message>
+  <wsdl:message name="getIneNacionalSoapOut">
+    <wsdl:part name="parameters" element="tns:getIneNacionalResponse" />
+  </wsdl:message>
+  <wsdl:message name="get_List_IneSoapIn">
+    <wsdl:part name="parameters" element="tns:get_List_Ine" />
+  </wsdl:message>
+  <wsdl:message name="get_List_IneSoapOut">
+    <wsdl:part name="parameters" element="tns:get_List_IneResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ListNac2017SoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ListNac2017" />
+  </wsdl:message>
+  <wsdl:message name="Get_ListNac2017SoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ListNac2017Response" />
+  </wsdl:message>
+  <wsdl:message name="Get_EstadosSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_Estados" />
+  </wsdl:message>
+  <wsdl:message name="Get_EstadosSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_EstadosResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ListEstadoSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ListEstado" />
+  </wsdl:message>
+  <wsdl:message name="Get_ListEstadoSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ListEstadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ListMunicipioSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ListMunicipio" />
+  </wsdl:message>
+  <wsdl:message name="Get_ListMunicipioSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ListMunicipioResponse" />
+  </wsdl:message>
+  <wsdl:message name="Get_ListColoniaSoapIn">
+    <wsdl:part name="parameters" element="tns:Get_ListColonia" />
+  </wsdl:message>
+  <wsdl:message name="Get_ListColoniaSoapOut">
+    <wsdl:part name="parameters" element="tns:Get_ListColoniaResponse" />
+  </wsdl:message>
+  <wsdl:message name="Ges_EstatusSoapIn">
+    <wsdl:part name="parameters" element="tns:Ges_Estatus" />
+  </wsdl:message>
+  <wsdl:message name="Ges_EstatusSoapOut">
+    <wsdl:part name="parameters" element="tns:Ges_EstatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="ListarPersonasSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarPersonas" />
+  </wsdl:message>
+  <wsdl:message name="ListarPersonasSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarPersonasResponse" />
+  </wsdl:message>
+  <wsdl:portType name="AutocompletarServiceSoap">
+    <wsdl:operation name="BuscarINE">
+      <wsdl:input message="tns:BuscarINESoapIn" />
+      <wsdl:output message="tns:BuscarINESoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <wsdl:input message="tns:GetSoapIn" />
+      <wsdl:output message="tns:GetSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getIneNacional">
+      <wsdl:input message="tns:getIneNacionalSoapIn" />
+      <wsdl:output message="tns:getIneNacionalSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="get_List_Ine">
+      <wsdl:input message="tns:get_List_IneSoapIn" />
+      <wsdl:output message="tns:get_List_IneSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ListNac2017">
+      <wsdl:input message="tns:Get_ListNac2017SoapIn" />
+      <wsdl:output message="tns:Get_ListNac2017SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_Estados">
+      <wsdl:input message="tns:Get_EstadosSoapIn" />
+      <wsdl:output message="tns:Get_EstadosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ListEstado">
+      <wsdl:input message="tns:Get_ListEstadoSoapIn" />
+      <wsdl:output message="tns:Get_ListEstadoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ListMunicipio">
+      <wsdl:input message="tns:Get_ListMunicipioSoapIn" />
+      <wsdl:output message="tns:Get_ListMunicipioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Get_ListColonia">
+      <wsdl:input message="tns:Get_ListColoniaSoapIn" />
+      <wsdl:output message="tns:Get_ListColoniaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="Ges_Estatus">
+      <wsdl:input message="tns:Ges_EstatusSoapIn" />
+      <wsdl:output message="tns:Ges_EstatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ListarPersonas">
+      <wsdl:input message="tns:ListarPersonasSoapIn" />
+      <wsdl:output message="tns:ListarPersonasSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AutocompletarServiceSoap" type="tns:AutocompletarServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="BuscarINE">
+      <soap:operation soapAction="http://tempuri.org/BuscarINE" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <soap:operation soapAction="http://tempuri.org/Get" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getIneNacional">
+      <soap:operation soapAction="http://tempuri.org/getIneNacional" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_List_Ine">
+      <soap:operation soapAction="http://tempuri.org/get_List_Ine" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ListNac2017">
+      <soap:operation soapAction="http://tempuri.org/Get_ListNac2017" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Estados">
+      <soap:operation soapAction="http://tempuri.org/Get_Estados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ListEstado">
+      <soap:operation soapAction="http://tempuri.org/Get_ListEstado" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ListMunicipio">
+      <soap:operation soapAction="http://tempuri.org/Get_ListMunicipio" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ListColonia">
+      <soap:operation soapAction="http://tempuri.org/Get_ListColonia" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ges_Estatus">
+      <soap:operation soapAction="http://tempuri.org/Ges_Estatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarPersonas">
+      <soap:operation soapAction="http://tempuri.org/ListarPersonas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AutocompletarServiceSoap12" type="tns:AutocompletarServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="BuscarINE">
+      <soap12:operation soapAction="http://tempuri.org/BuscarINE" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get">
+      <soap12:operation soapAction="http://tempuri.org/Get" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getIneNacional">
+      <soap12:operation soapAction="http://tempuri.org/getIneNacional" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_List_Ine">
+      <soap12:operation soapAction="http://tempuri.org/get_List_Ine" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ListNac2017">
+      <soap12:operation soapAction="http://tempuri.org/Get_ListNac2017" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_Estados">
+      <soap12:operation soapAction="http://tempuri.org/Get_Estados" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ListEstado">
+      <soap12:operation soapAction="http://tempuri.org/Get_ListEstado" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ListMunicipio">
+      <soap12:operation soapAction="http://tempuri.org/Get_ListMunicipio" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Get_ListColonia">
+      <soap12:operation soapAction="http://tempuri.org/Get_ListColonia" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Ges_Estatus">
+      <soap12:operation soapAction="http://tempuri.org/Ges_Estatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ListarPersonas">
+      <soap12:operation soapAction="http://tempuri.org/ListarPersonas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AutocompletarService">
+    <wsdl:port name="AutocompletarServiceSoap" binding="tns:AutocompletarServiceSoap">
+      <soap:address location="http://localhost:49837/AutocompletarService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AutocompletarServiceSoap12" binding="tns:AutocompletarServiceSoap12">
+      <soap12:address location="http://localhost:49837/AutocompletarService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
