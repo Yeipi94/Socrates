@@ -5,28 +5,15 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <!-- Bootstrap stuff -->
-<%--    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">--%>
-<%--    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">--%>
-<%--    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>--%>
-<%--    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>--%>
+   
     <script type="text/javascript" src='https://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
 	<script src="../dist/locationpicker.jquery.min.js"></script>
 	<script src="../src/angularLocationpicker.jquery.js"></script>
 
-<%--	    <script type="text/javascript" src='http://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>--%>
 
     <script type="text/html" src="https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJrTLr-GyuEmsRBfy61i59si0&key=AIzaSyCxW-VPfw8x42DIwrfQ9gL8sh-iu42QhCY"> </script>
 
 
-	<%--<script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbmMQ2Ma1uZKipVyBagGkaxAmd65aRXPg&callback=initMap&libraries=places&v=weekly"
-      defer
-    ></script>--%>
-
-
-	<%--	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />--%>
-<%--	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>--%>
 
 		<style>       
       #map {
@@ -69,8 +56,6 @@
 
 		/*FUNCION PARA LLENAR CAJAS DE TEXTO DESPUES DE SELECCIONAR OPCION AUTOCOMPLETADO*/
 		function ClientItemSelected(sender, e) {
-<%--			$get("<%=lblClave.ClientID %>").value = e.get_value();--%>
-
 			var row = e._item.parentElement;
 			$get("<%=txtClaveE.ClientID %>").value = row.getElementsByTagName('td')[1].textContent;
 		
@@ -99,17 +84,10 @@
 
 		
 
-		
-      <%--  $("#<%=ddlDistrito.ClientID%>").select2({
-            placeholder: "Seleccionar una Opción",
-            allowClear: true
 
-        });--%>
 		function SetContextKey() {
 
 			$find('<%=AutoCompleteExtender1.ClientID %>').set_contextKey($get("<%=ddlEstados_Cat.ClientID %>").value);
-			<%--var dni = $get("<%=ddlEstados_Cat.ClientID %>").value;
-			alert(dni);--%>
 		}
 
 		function pageLoad() {
@@ -117,15 +95,7 @@
 				placeholder: "Seleccionar Estado",
 
 			});
-			<%--$("#<%=ddlEstado.ClientID%>").select2({
-				placeholder: "Seleccionar Estados",
 
-			});--%>
-			<%--$("#<%=ddlMunicipio.ClientID%>").select2({
-				placeholder: "Seleccionar Municipios",
-
-			});
-		--%>
 			
 			$("#<%=cord1.ClientID%>").select2({
 				placeholder: "Y",
@@ -135,12 +105,6 @@
 				placeholder: "X",
 
 			});
-			<%--$("#<%=ddlRegiones.ClientID%>").select2({
-                placeholder: "Seleccionar una Región",
-
-			});--%>
-
-			
 		}
 		
 
@@ -153,27 +117,11 @@
 			
 		}
 
-		//FUNCION PARA MOSTRAR EN MODAL
-		<%--function SetContextKey() {
-			$find('<%=IDExtensor.ClientID%>').set_contextKey($get("<%=txtName.ClientID %>").value);
-		}--%>
-
 
 		function viaSeleccionada(source, eventArgs) {
-           //alert(" Key : " + eventArgs.get_text() + "  Value :  " + eventArgs.get_value());
-<%--           document.getElementById('<%= txtClaveE.ClientID %>').innerText = eventArgs.get_value();--%>
+     
 		}
 
-
-		//function selectItem() {
-		//    var comletionList = $find("IDExtensor").get_completionList();
-		//    for (i = 0; i < comletionList.childNodes.length; i++) {
-		//        var _value = comletionList.childNodes[i]._value;
-		//        comletionList.childNodes[i]._value = _value.substring(_value.lastIndexOf('|') + 1);
-		//        _value = _value.substring(0, _value.lastIndexOf('|'));
-		//        comletionList.childNodes[i].innerHTML = _value.replace('|', '<br />');
-		//    }
-		//}
 
 
 		function selectItem() {
@@ -209,10 +157,7 @@
 
 
 
-                                                     
-  <%--  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAXmadCgIa7Krs0IG1pE5V1iPtU6j3_o6k&callback=initMap">
-    </script>--%>
+
 	 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbmMQ2Ma1uZKipVyBagGkaxAmd65aRXPg&callback=initMap&libraries=places">
     </script>  
@@ -330,10 +275,6 @@
 															<asp:HiddenField ID="hfCustomerId" runat="server" />
 
 
-															<%--OnClientItemSelected="GetID"
-								CompletionListCssClass="autocomplete_completionListElement" 
-								CompletionListItemCssClass="autocomplete_listItem"
-								CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem"--%>
 														</div>
 													</div>
 													<div class="col-sm-12 col-md-6 col-lg-4">
@@ -720,43 +661,7 @@
 
 
 	<script>
-		///***********************************MAPA DE UN SOLO PUNTO**********************************************
-
-
-		//$('#locationpickerOptions2').locationpicker({
-
-		//	// these are default options
-		//	location: {
-		//		latitude: 25.6438666,
-		//		longitude: -100.2769715
-		//	},
-			
-		//	radius: 500,
-		//	zoom: 15,
-		//	scrollwheel: true,
-		//	inputBinding: {
-
-		//		latitudeInput: $('#Latitud_Y'),
-		//		longitudeInput: $('#Longitud_X'),
-		//		radiusInput: null,
-		//		locationNameInput: $('#us3-address')
-
-		//	},
-		//	enableAutocompleteBlur: false,
-		//	enableReverseGeocode: true,
-		//	draggable: true,
-		//	// must be undefined to use the default gMaps marker
-		//	enableAutocomplete: true,
-		//	enableReverseGeocode: true,
-		//	draggable: true,
-		//	markerIcon: undefined,
-		//	enableAutocomplete: true,
-		//	onchanged: function (currentLocation, radius, isMarkerDropped) {
-			
-		//	}
-
-		//});
-
+		
 
 		$('#locationpickerOptions2').locationpicker({
 			radius: 5,
@@ -785,337 +690,10 @@
 		});
 		
 
-		<%--function initMap() {
-
-			var Latitud = parseFloat($get('<%=cord1.ClientID %>').value);
-			var Longitud = parseFloat($get("<%=cord2.ClientID %>").value);
-			var mty = { lat: Latitud, lng: Longitud };
-			//var mty = { lat: 25.6438666, lng: -100.2769715 };
-			var map = new google.maps.Map(
-				document.getElementById('map'), { zoom: 15, center: mty });
-			var marker = new google.maps.Marker({ position: mty, map: map, title: "Monterrey (La ciudad de las montañas)" });
-
-			var contentString =
-				'<div id="content">' +
-				'<div id="siteNotice">' +
-				"</div>" +
-				'<h1 id="firstHeading" class="firstHeading">Monterrey</h1>' +
-				'<div id="bodyContent">' +
-				"<p><b>Monterrey</b>, tambien conocida como <b>la ciudad de las montañas</b>, </p>" +
-				'<p>Referencia: Monterrey, <a href="https://es.wikipedia.org/wiki/Monterrey">' +
-				"https://es.wikipedia.org/wiki/Monterrey</a>" +
-				"</div>" +
-				"</div>";
-
-			var infowindow = new google.maps.InfoWindow({
-				content: contentString
-			});
-
-			marker.addListener("click", function () {
-				infowindow.open(map, marker);
-			});
-
-		}--%>
 
 		$(document).ready(function () {
 			$('.js-example-basic-single').select2();
 		});
-
-
-
-
-<%--				$(document).ready(function () {
-					TriggerDropkick();
-				});
-
-				var prm = Sys.WebForms.PageRequestManager.getInstance();
-
-				prm.add_endRequest(function () {
-					TriggerDropkick();
-				});
-
-				function TriggerDropkick() {
-					$("#<%= ddlEstado.ClientID %>, #<%= ddlMun.ClientID %>").dropkick({
-						mobile: true
-					});
-				} --%>
-
-
-				//$(function () {
-				//	$("#standard").customselect();
-
-
-
-
-
-
-
-
-				//});
-
-		//$('#ddlEstad').trigger('change');
-
-		//$('#ddlMunicipio').trigger('change');
-
-
-
-<%--		$(document).ready(function () {
-
-			$.ajax({
-				type: "POST",
-				url: "AutocompletarService.asmx/Get_ListMunicipio",
-				dataType: "json",
-				data: "{}",
-				contentType: "application/json; charset=utf-8",
-				success: function (data) {
-					if (data.d) {
-						//alert(data.d);
-						var datafromServer = data.d.split(":");
-						$('#<%= ddlEstad.ClientID %>').change().;
-					}
-				},
-				error: function (XMLHttpRequest, textStatus, errorThrown) {
-					alert(textStatus);
-				}
-			});
-
-		 });--%>
-
-
-
-
-
-		//$('#ddlEstad').on("select2:select", function (event) {
-		//	var countryParam =
-		//	{
-		//		"countryId": $("#ddlEstad option:selected").val()
-		//	};
-		//	$.ajax({
-		//		url: "AutocompletarService.asmx/Get_ListMunicipio",
-		//		data: JSON.stringify({ ddlParams: countryParam }),
-		//		type: 'POST',
-		//		cache: false,
-		//		contentType: 'application/json; charset=utf-8',
-		//		dataType: "json",
-		//		success: function (result) {
-		//			var markup;
-		//			var dbSelect = $('#ddlMunicipio');
-		//			dbSelect.empty();
-		//			for (var i = 0; i < result.length; i++) {
-		//				dbSelect.append($('<option/>', {
-		//					value: result.City[i].Value,
-		//					text: result.City[i].Text
-		//				}));
-		//			}
-		//		},
-		//		error: function (xhr, ajaxOptions, thrownError) {
-		//			alert(thrownError);
-		//		}
-		//	});
-		//});
-		//function Getdet(Name) {
-		//	$.ajax({
-		//		type: "POST",
-		//		url: "AutocompletarService.asmx/Get_ListMunicipio", // add web service Name and web service Method Name  
-		//		data: "{'knownCategoryValues':'" + Name + "'}", //web Service method Parameter Name and ,user Input value which in Name Variable.  
-		//		contentType: "application/json; charset=utf-8",
-		//		dataType: "json",
-		//		success: function (response) {
-		//			$("#ddlEstad").html(response.d); //getting the Response from JSON  
-		//		},
-		//		failure: function (msg) {
-		//			alert(msg);
-		//		}
-		//	});
-		//}   
-		//$('#ddlEstad').trigger('change')
-		//$.ajax({
-		//	type: "POST",
-		//	url: "AutocompletarService.asmx/Get_ListMunicipio",
-		//	data: '{name: "' + $get("#ddlEstad").value + '" }',
-		//	contentType: "application/json; charset=utf-8",
-		//	dataType: "json",
-		//	success: OnSuccess,
-		//	failure: function (response) {
-		//		alert(response.d);
-		//	}
-		//});
-
-		//var studentSelect = $('#ddlEstad');
-		//$.ajax({
-		//	type: 'GET',
-		//	url: 'AutocompletarService.asmx/Get_ListMunicipio' + studentId
-		//}).then(function (data) {
-		//	// create the option and append to Select2
-		//	var option = new Option(data.full_name, data.id, true, true);
-		//	studentSelect.append(option).trigger('change');
-
-		//	// manually trigger the `select2:select` event
-		//	studentSelect.trigger({
-		//		type: 'select2:select',
-		//		params: {
-		//			data: data
-		//		}
-		//	});
-		//});
-
-		//$('#ddlMunicipio').val(2)({
-		//	ajax: {
-		//		url: "AutocompletarService.asmx/Get_ListMunicipio",
-		//	}
-		//});
-
-
-
-		//$(document).ready(function () {
-		//	$("._statusDDL").val(2)({
-		//		url: 'AutocompletarService.asmx/Get_ListMunicipio'
-		//	});
-		//});
-
-		$(document).ready(function () {
-
-			<%--$("#<%=ddlEstad.ClientID%>").select2({
-				placeholder: "Seleccionar Estado",
-				
-			});--%>
-
-
-
-			//var dato = document.getElementById('ddlEstad').value;
-
-
-				//dato.change(function () {
-				//	alert("Ha seleccionado: " + IndexValue);
-				//});
-
-
-				<%--var IndexValue = document.getElementById("<%=ddlEstad.ClientID%>").selectedIndex;
-
-				var SelectedVal = document.getElementById("<%=ddlEstad.ClientID%>").options[IndexValue].text;
-
-				$("#<%=valor.ClientID%>").click(function () {
-					$("#<%=valor.ClientID%>").change();
-				});--%>
-		})
-
-<%--		$(document).ready(function () {
-
-			$("#<%=ddlEstado.ClientID%>").select2({
-
-					placeholder: "Seleccionar Nombre",
-
-				//allowClear: true
-			});
-		})
-
-
-
-		$(document).ready(function () {
-			$("#<%=ddlMunicipio.ClientID%>").select2({
-
-					placeholder: "Seleccionar Municipio",
-
-				//allowClear: true
-			});
-		})
-
-
-
-
-		$(document).ready(function () {
-
-			$("#<%=ddlColonia.ClientID%>").select2({
-
-					placeholder: "Seleccionar Colonias",
-
-
-
-					//allowClear: true
-
-				});
-
-
-			});
-
-		$(document).ready(function () {
-
-			$("#<%=ddlEstatus.ClientID%>").select2({
-
-					placeholder: "Seleccionar Estatus",
-
-
-
-					//allowClear: true
-
-				});
-
-
-			});--%>
-
-
-<%--		function LoadCiudades(result) {
-			//quito los options que pudiera tener previamente el combo
-			$("#<%=ddlMunicipio.ClientID%>").html("");
-
-				//recorro cada item que devuelve el servicio web y lo aÃ±ado como un opcion
-				$.each(result.d, function () {
-					$("#<%=ddlMunicipio.ClientID%>").append($("<option></option>").attr("value", this.cod).text(this.descripcion))
-				});
-			}--%>
-
-		//var Estado_JS = document.getElementById("ddlEstad");
-		//var Municipio = document.getElementById("ddlMunicipio");
-
-		//Estado.onchange();
-		//Municipio.onchange();
-		//onchange = 'alert(this.value)'
-		//function checkTabPress(e) {
-		//	'use strict';
-		//	var ele = document.activeElement;
-
-		//	if (e.keyCode === 9 && ele.nodeName.toLowerCase() === 'a') {
-		//		console.log(ele.href);
-		//	}
-		//}
-
-		
-
-
-
-		///**********************MAPA CON PUNTOS MULTIPLES ****************************************
-		//document.addEventListener('keyup', function (e) {
-		//	checkTabPress(e);
-		//}, false);
-		//var map;
-		//function initMap() {
-		//	map = new google.maps.Map(document.getElementById('map'), {
-		//		zoom: 4,
-		//		center: new google.maps.LatLng(2.8, -187.3),
-		//		mapTypeId: 'satellite'
-				
-		//	});
-
-		//	// Create a <script> tag and set the USGS URL as the source.
-		//	var script = document.createElement('script');
-		//	// This example uses a local copy of the GeoJSON stored at
-		//	// http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-		//	script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
-		//	document.getElementsByTagName('head')[0].appendChild(script);
-		//}
-
-		//// Loop through the results array and place a marker for each
-		//// set of coordinates.
-		//window.eqfeed_callback = function (results) {
-		//	for (var i = 0; i < results.features.length; i++) {
-		//		var coords = results.features[i].geometry.coordinates;
-		//		var latLng = new google.maps.LatLng(coords[1], coords[0]);
-		//		var marker = new google.maps.Marker({
-		//			position: latLng,
-		//			map: map
-		//		});
-		//	}
-		//}
 
 
 

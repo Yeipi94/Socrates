@@ -63,168 +63,28 @@ public partial class Territorial : System.Web.UI.Page
                         //.CreateAutoCompleteItem(string.Format("{0}-{1}-{2}-{3}-{4}-{5}-{6}-{7}-{8}-{9}-{10}-{11}-{12}-{13}-{14}-{15}-{16}-{17}-{18}-{19}",
                         .CreateAutoCompleteItem(string.Format("{0}-{1}-{2}-{3}-{4}",
                         sdr["Nombre_Comp"].ToString(), sdr["CVE"], sdr["FechaN"], sdr["calle"], sdr["num_exterior"]
-						//sdr["edad"]
 
-						//sdr["colonia"],
-						//sdr["E"],
-						//sdr["d_estado"],
-
-						//sdr["INT"],
-						//sdr["CP"],
-						//sdr["municipio"],
-						//sdr["seccion"],
-						//sdr["edo_nac"],
-						//sdr["fecha_nac"],
-						//sdr["sexo"],
-						//sdr["partido_afil"]
 						),
 
                         sdr["CVE"].ToString()));
 
-                        //Datos.Add(sdr["CVE"].ToString());
-                        //_Datos.Add(sdr["Nombre_comp"].ToString());
-
-						//Datos.Add(sdr["Nombre_Comp"].ToString() + " | " + sdr["CVE"].ToString() + " | " + sdr["d_estado"].ToString() + "</p> ");
-
-						//Datos.Add(sdr["Nombre_Comp"].ToString());
-						//Console.WriteLine("{0}\t{1}", sdr.GetInt32(0), sdr.GetString(1));
-						//string clave = sdr.GetString(0);
-						//string  Nombre = sdr.GetString(1);
-
-
-						//Datos.Add(new Datos { clave = sdr.GetString(0), Nombre= sdr.GetString(1) });
-						//Datos objMenu = new Datos();
-      //                  objMenu.clave = sdr["CVE"].ToString();
-      //                  objMenu.Nombre = sdr["Nombre_Comp"].ToString();
-
-
-      //                  _Datos.Add(objMenu);
-
-
-
-
                     }
 
-                    //for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                    //{
-                    //    ClientMaster CMobj = nuevo  ClientMaster();
-                    //    CMobj.ClientId = Convert.ToInt32(ds.Tables[0].Rows[i]["ClientId"].ToString());
-                    //    CMobj.ClientName = ds.Tables[0].Rows[i]["ClntName"].ToString();
-                    //    ClientLists.Add(CMobj);
-                    //}
-
-
-                    //List<string> ClientLists = new List<string>();
-                    //for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-                    //{
-                    //    ClientMaster CMobj = nuevo  ClientMaster();
-                    //    CMobj.ClientId = Convert.ToInt32(ds.Tables[0].Rows[i]["ClientId"].ToString());
-                    //    CMobj.ClientName = ds.Tables[0].Rows[i]["ClntName"].ToString();
-                    //    ClientLists.Add(CMobj);
-                    //}
-
-
-                    //while (reader.Read())
-                    //{
-                    //	Combo.Add(new Combos { Id = reader.GetInt32(0), Nombre = reader.GeString(1) });
-                    //}
-                    //sdr.Close();
-                    //cmd.Dispose();
-                    //conn.Close();
-                    //return Autocompletar(Nombre, clave);
 
                 }
                 conn.Close();
-				//return Datos(Nombre, clave);
                 return _Datos;
 
 
 
             }
         }
-
-
-		//SqlDataReader reader;
-  //      string conexion = System.Configuration.ConfigurationManager.ConnectionStrings["SISTEM_ALIADOSConnectionString"].ToString();
-  //      SqlConnection cn = new SqlConnection(conexion);
-  //      cn.Open();
-  //      SqlCommand cmd = new SqlCommand("sp_BusquedaNacional", cn);
-  //      cmd.CommandType = CommandType.StoredProcedure;
-  //      cmd.Parameters.Add("@NOMBRE_COMP", SqlDbType.VarChar).Value = prefixText;
-  //      cmd.Parameters.Add("@Estado", SqlDbType.Char).Value = contextKey;
-
-  //      reader = cmd.ExecuteReader();
-  //      List<Datos> Datos = new List<Datos>();
-  //      try
-  //      {
-  //          while (reader.Read())
-  //          {
-  //              Datos.Add(new Datos { clave = reader.GetString(0), count=reader.GetInt32(1), Nombre = reader.GetString(2) });
-  //          }
-  //          reader.Close();
-  //          cmd.Dispose();
-  //          cn.Close();
-  //          return Autocompletar(Nombre, count, clave);
-  //      }
-  //      catch (Exception Ex)
-  //      {
-  //          throw new Exception(Ex.Message);
-  //      }
-
     }
-
-    
-    //LISTA DE ESTADOS
-   
-
-
-    //LISTA DE DISTRITOS O REGIONALES, SECCIONES Y MANZANAS
-    //public void Estatus()
-    //{
-    //    ddlEstatus.DataSource = Consultar("SELECT id_Asignacion, Asignacion FROM tbl_Asignacion where status=1");
-    //    ddlEstatus.DataTextField = "Asignacion";//Texto que se desea mostrar en dropdow
-    //    ddlEstatus.DataValueField = "id_Asignacion";//Valor de las lista en cada opcion
-    //    ddlEstatus.DataBind();
-    //    ddlEstatus.Items.Insert(0, new ListItem("Seleccionar", ""));//el valor que le mostrara al usuario en el dropdowlist
-    //}
-
-  
-
-
 
 
 
     protected void ddlCatalogo_SelectedIndexChanged(object sender, EventArgs e)
     {
-        //int Estado = Convert.ToInt32(ddlEstado.SelectedValue);
-        //int Estatus = Convert.ToInt32(ddlEstatus.SelectedValue.Trim());
-
-        //if (Estatus == 1)
-        //{
-
-        //    using (SqlConnection con = new SqlConnection(strConnString))
-        //    {
-        //        SqlCommand com = new SqlCommand("select y, x from tbl_Distritos_y_x where distrito_local="+ Estado+"", con);
-        //        com.CommandType = CommandType.Text;
-        //        //comando2.Parameters.AddWithValue("@IdPersona", txtIntegrante.Text);
-        //        con.Open();
-        //        SqlDataReader registro2 = com.ExecuteReader();
-        //        if (registro2.Read())
-        //        {
-        //            cord1.Text = Convert.ToDecimal(registro2["y"]).ToString();
-        //            cord2.Text = Convert.ToDecimal(registro2["x"]).ToString();
-
-
-        //        }
-        //        else
-        //        {
-        //            cord1.Text = "";
-        //            cord2.Text = "";
-        //        }
-
-        //    }
-        //}
-
     }
 
    
@@ -238,10 +98,6 @@ public partial class Territorial : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand(strSql, con);
             cmd.CommandType = CommandType.StoredProcedure;
             con.Open();
-
-            //cmd.Parameters.AddWithValue("@fk_num_empleado_cap", get_Session().Trim());
-
-
             cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
             cmd.Parameters.AddWithValue("@apellido_paterno", txtApellidoPa.Text);
             cmd.Parameters.AddWithValue("@apellido_materno", txtApellidoMa.Text);
@@ -286,10 +142,8 @@ public partial class Territorial : System.Web.UI.Page
                 txtColonia.Text = "";
                 txtMunicipio.Text = "";
                 txtseccion.Text = "";
-                //txtClaveE.Text = "";
                 txtTelefono.Text = "";
                 txtCodigo.Text = "";
-                //ddlManzana.Text = "";
             }
             else
             {
@@ -305,10 +159,6 @@ public partial class Territorial : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand(strSql, con);
             cmd.CommandType = CommandType.StoredProcedure;
             con.Open();
-
-            //cmd.Parameters.AddWithValue("@fk_num_empleado_cap", get_Session().Trim());
-
-
             cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
             cmd.Parameters.AddWithValue("@apellido_paterno", txtApellidoPa.Text);
             cmd.Parameters.AddWithValue("@apellido_materno", txtApellidoMa.Text);
@@ -329,15 +179,9 @@ public partial class Territorial : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@fk_idMunicipio", ddlMunicipio.SelectedValue.Trim());
             cmd.Parameters.AddWithValue("@fk_idDistrito", ddlDistrito.SelectedValue.Trim());
             cmd.Parameters.AddWithValue("@fk_Regional", ddlRegiones.SelectedValue.Trim());
-
             cmd.Parameters.AddWithValue("@estado", "");
-
             cmd.Parameters.AddWithValue("@y", cord1.Text);
-
-
             cmd.Parameters.AddWithValue("@x", cord2.Text);
-
-
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)/*si rowsAffected (1) es mayor a 0*/
             {
@@ -355,10 +199,8 @@ public partial class Territorial : System.Web.UI.Page
                 txtColonia.Text = "";
                 txtMunicipio.Text = "";
                 txtseccion.Text = "";
-                //txtClaveE.Text = "";
                 txtTelefono.Text = "";
                 txtCodigo.Text = "";
-                //ddlManzana.Text = "";
             }
             else
             {
@@ -374,10 +216,6 @@ public partial class Territorial : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand(strSql, con);
             cmd.CommandType = CommandType.StoredProcedure;
             con.Open();
-
-            //cmd.Parameters.AddWithValue("@fk_num_empleado_cap", get_Session().Trim());
-
-
             cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
             cmd.Parameters.AddWithValue("@apellido_paterno", txtApellidoPa.Text);
             cmd.Parameters.AddWithValue("@apellido_materno", txtApellidoMa.Text);
@@ -399,15 +237,9 @@ public partial class Territorial : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@fk_idDistrito", ddlDistrito.SelectedValue.Trim());
             cmd.Parameters.AddWithValue("@fk_Regional", ddlRegiones.SelectedValue.Trim());
             cmd.Parameters.AddWithValue("@fk_Seccion", ddlSecciones.SelectedValue.Trim());
-
             cmd.Parameters.AddWithValue("@estado", "");
-
             cmd.Parameters.AddWithValue("@y", cord1.Text);
-
-
             cmd.Parameters.AddWithValue("@x", cord2.Text);
-
-
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)/*si rowsAffected (1) es mayor a 0*/
             {
@@ -425,10 +257,8 @@ public partial class Territorial : System.Web.UI.Page
                 txtColonia.Text = "";
                 txtMunicipio.Text = "";
                 txtseccion.Text = "";
-                //txtClaveE.Text = "";
                 txtTelefono.Text = "";
                 txtCodigo.Text = "";
-                //ddlManzana.Text = "";
             }
             else
             {
@@ -444,10 +274,6 @@ public partial class Territorial : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand(strSql, con);
             cmd.CommandType = CommandType.StoredProcedure;
             con.Open();
-
-            //cmd.Parameters.AddWithValue("@fk_num_empleado_cap", get_Session().Trim());
-
-
             cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
             cmd.Parameters.AddWithValue("@apellido_paterno", txtApellidoPa.Text);
             cmd.Parameters.AddWithValue("@apellido_materno", txtApellidoMa.Text);
@@ -470,15 +296,9 @@ public partial class Territorial : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@fk_Regional", ddlRegiones.SelectedValue.Trim());
             cmd.Parameters.AddWithValue("@fk_Seccion", ddlSecciones.SelectedValue.Trim());
             cmd.Parameters.AddWithValue("@fk_Manzana", ddlManzanas.SelectedValue.Trim());
-
             cmd.Parameters.AddWithValue("@estado", "");
-
             cmd.Parameters.AddWithValue("@y", cord1.Text);
-
-
             cmd.Parameters.AddWithValue("@x", cord2.Text);
-
-
             int rowsAffected = cmd.ExecuteNonQuery();
             if (rowsAffected > 0)/*si rowsAffected (1) es mayor a 0*/
             {
@@ -496,10 +316,8 @@ public partial class Territorial : System.Web.UI.Page
                 txtColonia.Text = "";
                 txtMunicipio.Text = "";
                 txtseccion.Text = "";
-                //txtClaveE.Text = "";
                 txtTelefono.Text = "";
                 txtCodigo.Text = "";
-                //ddlManzana.Text = "";
             }
             else
             {
@@ -511,57 +329,6 @@ public partial class Territorial : System.Web.UI.Page
     }
 
    
-
-   
-
-
-    //protected void btnCancelar_Click(object sender, EventArgs e)
-    //{
-    //    txtClaveE.Text = "";
-    //    txtNombre.Text = "";
-    //    txtApellidoPa.Text = "";
-    //    txtApellidoMa.Text = "";
-    //    txtFechaN.Text = "";
-    //    txtAfiliacion.Text = "";
-    //    txtCalle.Text = "";
-    //    txtNumE.Text = "";
-    //    txtNumeroI.Text = "";
-    //    txtColonia.Text = "";
-    //    txtMunicipio.Text = "";
-    //    txtseccion.Text = "";
-    //    //txtClaveE.Text = "";
-    //    txtTelefono.Text = "";
-    //    txtCodigo.Text = "";
-    //    //ddlManzana.Text = "";
-    //}
-
-
-    //private void GetClaveElector(string ProductName)
-    //{
-    //    string cs = ConfigurationManager.ConnectionStrings["SISTEM_ALIADOSConnectionString"].ConnectionString;
-    //    using (SqlConnection con = new SqlConnection(cs))
-    //    {
-    //        SqlCommand com = new SqlCommand("sp_GetTerritorial", con);
-
-    //        com.CommandType = CommandType.StoredProcedure;
-    //        com.Parameters.AddWithValue("@clave", ProductName);
-    //        SqlDataAdapter da = new SqlDataAdapter(com);
-    //        DataSet ds = new DataSet();
-    //        da.Fill(ds);
-    //        DataTable dt = ds.Tables[0];
-    //        con.Close();
-    //        //Binding TextBox From dataTable  
-    //        txtNombre.Text = dt.Rows[0]["nombre"].ToString();
-    //        txtApellidoPa.Text = dt.Rows[0]["apellido_Pa"].ToString();
-    //        txtApellidoMa.Text = dt.Rows[0]["apellido_Ma"].ToString();
-    //        txtCalle.Text = dt.Rows[0]["calle"].ToString();
-
-
-
-    //    }
-
-    //}
-
     
     protected void txtClaveE_TextChanged(object sender, EventArgs e)
     {
@@ -578,12 +345,6 @@ public partial class Territorial : System.Web.UI.Page
   
     protected void ddlMunicipio_SelectedIndexChanged(object sender, EventArgs e)
     {
-        //string municipio = ddlMunicipio.SelectedValue;
-        //ddlColonia.DataSource = Consultar("  SELECT distinct( colonia) FROM tbl_CodigoPostCol where municipio='" + municipio + "' and d_estado='NUEVO LEON'");
-        //ddlColonia.DataTextField = "colonia";
-        //ddlColonia.DataValueField = "colonia";
-        //ddlColonia.DataBind();
-        //ddlColonia.Items.Insert(0, new ListItem("Seleccionar", ""));
     }
     protected void ddlColonia_SelectedIndexChanged(object sender, EventArgs e)
     {
@@ -618,40 +379,8 @@ public partial class Territorial : System.Web.UI.Page
 
     }
 
-
-
-    //public string[] docentes(string prefixText, int count)
-    //{
-    //    string conexion = System.Configuration.ConfigurationManager.ConnectionStrings["SISTEM_ALIADOSConnectionString"].ToString();
-    //    using (SqlConnection cn = new SqlConnection(conexion))
-    //    {
-    //        SqlCommand cmd = new SqlCommand("SELECT top(15) Nombre_Comp FROM tbl_INEPersonas   WHERE Nombre_Comp  like  @nombre_comp +'%'", cn);
-    //        cmd.Parameters.AddWithValue("@nombre_comp", prefixText);
-    //        SqlDataReader dr = default(SqlDataReader);
-    //        cmd.Connection.Open();
-    //        dr = cmd.ExecuteReader();
-    //        List<string> items = new List<string>();
-    //        while (dr.Read())
-    //        {
-    //            items.Add(dr["Nombre_Comp"].ToString());
-
-    //        }
-    //        cmd.Connection.Close();
-    //        return items.ToArray();
-
-    //    }
-    //}
-
     protected void TextBox1_TextChanged(object sender, EventArgs e)
     {
-        //List<Datos> Lista = new List<Datos>();
-
-        //txtClaveE.Text = Lista[0].ToString();
-        //txtNombre.Text = Lista[1].ToString();
-        //string customerId = Request.Form[lblClave.UniqueID];
-        //string customerName = Request.Form[txtAutocomplete.UniqueID];
-
-
         try
         {
             AutocompletarService dbws = new AutocompletarService();
@@ -669,8 +398,6 @@ public partial class Territorial : System.Web.UI.Page
         txtseccion.Text = dt.Rows[0]["seccion"].ToString().Trim();
         txtMunicipio.Text = dt.Rows[0]["municipio"].ToString();
         txtFechaN.Text = Convert.ToDateTime(dt.Rows[0]["FechaN"]).ToString("yyyy-MM-dd").TrimEnd();
-
-       
             string nombreCom = dt.Rows[0]["Nombre_comp"].ToString();
             if (nombreCom != "")
             {
@@ -679,7 +406,6 @@ public partial class Territorial : System.Web.UI.Page
                 {
                     SqlCommand com = new SqlCommand("Select nombre_comp, partido_afil from tbl_PartidoNacional where nombre_comp='" + nombre + "'", con);
                     com.CommandType = CommandType.Text;
-                    //comando2.Parameters.AddWithValue("@IdPersona", txtIntegrante.Text);
                     con.Open();
                     SqlDataReader registro2 = com.ExecuteReader();
                     if (registro2.Read())
@@ -707,18 +433,6 @@ public partial class Territorial : System.Web.UI.Page
                     }
 
                 }
-
-
-
-
-
-
-
-
-
-
-
-
             }
             else
             {
@@ -730,53 +444,53 @@ public partial class Territorial : System.Web.UI.Page
 
         }
 
-        //try
-        //{
-        //    string seccion = dt.Rows[0]["seccion"].ToString();
-        //    if (seccion != "")
-        //    {
-        //        string seccion2 = Convert.ToString(dt.Rows[0]["seccion"]);
-        //        com = new SqlCommand("Select Top_25_2009_gral, Top_25_2009_porc, Top25DifGral2009, 3Cond_2009_25_porc, Top_25_2015_PRI, Top_25_2015_porc_PRI, Top25DifGral2015, 3Cond_2015_25_porc from tbl_Secciones2009_2015NL where seccion='" + seccion2 + "'", con);
-        //        com.CommandType = CommandType.Text;
-        //        //comando2.Parameters.AddWithValue("@IdPersona", txtIntegrante.Text);
-        //        con.Open();
-        //        SqlDataReader rd = com.ExecuteReader();
-        //        if (rd.Read())
-        //        {
+		try
+		{
+			string seccion = dt.Rows[0]["seccion"].ToString();
+			if (seccion != "")
+			{
+				string seccion2 = Convert.ToString(dt.Rows[0]["seccion"]);
+				com = new SqlCommand("Select Top_25_2009_gral, Top_25_2009_porc, Top25DifGral2009, 3Cond_2009_25_porc, Top_25_2015_PRI, Top_25_2015_porc_PRI, Top25DifGral2015, 3Cond_2015_25_porc from tbl_Secciones2009_2015NL where seccion='" + seccion2 + "'", con);
+				com.CommandType = CommandType.Text;
+				//comando2.Parameters.AddWithValue("@IdPersona", txtIntegrante.Text);
+				con.Open();
+				SqlDataReader rd = com.ExecuteReader();
+				if (rd.Read())
+				{
 
 
 
-        //            txtgral2009.Text = rd["Top_25_2009_gral"].ToString();
-        //            txtporciento2009.Text = rd["Top_25_2009_porc"].ToString();
-        //            txtdif2009.Text = rd["Top25DifGral2009"].ToString();
-        //            txtcond2009.Text = rd["3Cond_2009_25_porc"].ToString();
-        //            txtgral2015.Text = rd["Top_25_2015_PRI"].ToString();
-        //            txtporciento2015.Text = rd["Top_25_2015_porc_PRI"].ToString();
-        //            txtdif2015.Text = rd["Top25DifGral2015"].ToString();
-        //            txtcond2015.Text = rd["3Cond_2015_25_porc"].ToString();
+					txtgral2009.Text = rd["Top_25_2009_gral"].ToString();
+					txtporciento2009.Text = rd["Top_25_2009_porc"].ToString();
+					txtdif2009.Text = rd["Top25DifGral2009"].ToString();
+					txtcond2009.Text = rd["3Cond_2009_25_porc"].ToString();
+					txtgral2015.Text = rd["Top_25_2015_PRI"].ToString();
+					txtporciento2015.Text = rd["Top_25_2015_porc_PRI"].ToString();
+					txtdif2015.Text = rd["Top25DifGral2015"].ToString();
+					txtcond2015.Text = rd["3Cond_2015_25_porc"].ToString();
 
 
 
 
-        //        }
-        //        else
-        //        {
-        //            txtAfiliacion.Text = "";
-        //        }
+				}
+				else
+				{
+					txtAfiliacion.Text = "";
+				}
 
-        //    }
-        //    else
-        //    {
+			}
+			else
+			{
 
-        //    }
-        //}
-        //catch
-        //{
+			}
+		}
+		catch
+		{
 
-        //}
-        //con.Close();
+		}
+		con.Close();
 
-        ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#Asignaciones').modal('show')", true);
+		ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#Asignaciones').modal('show')", true);
 
     }
 
