@@ -260,7 +260,7 @@
 															<asp:TextBox ID="txtAutocomplete" CssClass="form-control" runat="server" OnTextChanged="TextBox1_TextChanged" AutoPostBack="true" placeholder="Nombre Completo" onkeyup="SetContextKey()"></asp:TextBox>
 															<cc1:AutoCompleteExtender ServiceMethod="Autocompletar"
 																MinimumPrefixLength="2"
-																CompletionInterval="1000"
+																CompletionInterval="200"
 																EnableCaching="false"
 																CompletionSetCount="10"
 																TargetControlID="txtAutocomplete"
@@ -605,6 +605,71 @@
 				</div>
 			</div>
 		</div>
+
+
+	<div class="col-sm-12 col-md-12 col-lg-12">
+			<div class="card">
+				<div class="card-body">
+					<div class="row">
+						<h4 class="card-title">Estadistica Secciones 2009</h4>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Lista Top 25% Gral.</label>
+                                    <asp:TextBox ID="txtgral2009" runat="server" class="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Top 25% votos</label>
+                                    <asp:TextBox ID="txtporciento2009" runat="server" class="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Top 25% vs 2°Lug.</label>
+                                    <asp:TextBox ID="txtdif2009" runat="server" class="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>"Meta 3 de 3"</label>
+                                    <asp:TextBox ID="txtcond2009" runat="server" class="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+                        <h4 class="card-title">Estadistica Secciones 2015</h4>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Lista Top 25% Gral.</label>
+                                    <asp:TextBox ID="txtgral2015" runat="server" class="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Top 25% votos</label>
+                                    <asp:TextBox ID="txtporciento2015" runat="server" class="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Top 25% vs 2°Lug.</label>
+                                    <asp:TextBox ID="txtdif2015" runat="server" class="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>"Meta 3 de 3"</label>
+                                    <asp:TextBox ID="txtcond2015" runat="server" class="form-control" Enabled="false"></asp:TextBox>
+                                </div>
+                            </div>
+                        </div>
+
+						</div>
+					</div>
+				</div>
+			</div>
 		<div class="col-sm-12 col-md-12 col-lg-12" runat="server" visible="false">
 			<div class="card">
 				<div class="card-body">

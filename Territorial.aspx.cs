@@ -90,240 +90,245 @@ public partial class Territorial : System.Web.UI.Page
    
     protected void btnRegistrar_Click(object sender, EventArgs e)
     {
-        if ( ddlDistrito.SelectedValue!= null & ddlRegiones.SelectedValue == "")
-        {
-            string strSql;
-            SqlConnection con = new SqlConnection(strConnString);
-            strSql = "sp_Insert_Distritales";
-            SqlCommand cmd = new SqlCommand(strSql, con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            con.Open();
-            cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
-            cmd.Parameters.AddWithValue("@apellido_paterno", txtApellidoPa.Text);
-            cmd.Parameters.AddWithValue("@apellido_materno", txtApellidoMa.Text);
-            cmd.Parameters.AddWithValue("@fecha_nac", txtFechaN.Text);
-            cmd.Parameters.AddWithValue("@afiliacion", txtAfiliacion.Text);
-            cmd.Parameters.AddWithValue("@calle", txtCalle.Text);
-            cmd.Parameters.AddWithValue("@num_ext", txtNumE.Text);
-            cmd.Parameters.AddWithValue("@num_int", txtNumeroI.Text);
-            cmd.Parameters.AddWithValue("@colonia", txtColonia.Text);
-            cmd.Parameters.AddWithValue("@municipio", txtMunicipio.Text);
-            cmd.Parameters.AddWithValue("@seccion", Convert.ToInt32(txtseccion.Text));
-            cmd.Parameters.AddWithValue("@clave_elector", txtClaveE.Text.Trim());
-            cmd.Parameters.AddWithValue("@telefono", txtTelefono.Text);
-            cmd.Parameters.AddWithValue("@codigoP", txtCodigo.Text);
-            cmd.Parameters.AddWithValue("@manzana", "");
-            cmd.Parameters.AddWithValue("@fk_idPersonas", 1);
-            cmd.Parameters.AddWithValue("@fk_idEstado", ddlEstad.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@fk_idMunicipio", ddlMunicipio.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@fk_idDistrito", ddlDistrito.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@estado", "");
-
-            cmd.Parameters.AddWithValue("@y", cord1.Text);
-
-
-            cmd.Parameters.AddWithValue("@x", cord2.Text);
-
-
-            int rowsAffected = cmd.ExecuteNonQuery();
-            if (rowsAffected > 0)/*si rowsAffected (1) es mayor a 0*/
+        Page.Validate();
+		if (Page.IsValid)
+		{
+            if (ddlDistrito.SelectedValue != null & ddlRegiones.SelectedValue == "")
             {
-                Notificacion.Visible = true;
-                txtAutocomplete.Text = "";
-                txtClaveE.Text = "";
-                txtNombre.Text = "";
-                txtApellidoPa.Text = "";
-                txtApellidoMa.Text = "";
-                txtFechaN.Text = "";
-                txtAfiliacion.Text = "";
-                txtCalle.Text = "";
-                txtNumE.Text = "";
-                txtNumeroI.Text = "";
-                txtColonia.Text = "";
-                txtMunicipio.Text = "";
-                txtseccion.Text = "";
-                txtTelefono.Text = "";
-                txtCodigo.Text = "";
-            }
-            else
-            {
-                throw new Exception("Llenar todos los campos");
+                string strSql;
+                SqlConnection con = new SqlConnection(strConnString);
+                strSql = "sp_Insert_Distritales";
+                SqlCommand cmd = new SqlCommand(strSql, con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
+                cmd.Parameters.AddWithValue("@apellido_paterno", txtApellidoPa.Text);
+                cmd.Parameters.AddWithValue("@apellido_materno", txtApellidoMa.Text);
+                cmd.Parameters.AddWithValue("@fecha_nac", txtFechaN.Text);
+                cmd.Parameters.AddWithValue("@afiliacion", txtAfiliacion.Text);
+                cmd.Parameters.AddWithValue("@calle", txtCalle.Text);
+                cmd.Parameters.AddWithValue("@num_ext", txtNumE.Text);
+                cmd.Parameters.AddWithValue("@num_int", txtNumeroI.Text);
+                cmd.Parameters.AddWithValue("@colonia", txtColonia.Text);
+                cmd.Parameters.AddWithValue("@municipio", txtMunicipio.Text);
+                cmd.Parameters.AddWithValue("@seccion", Convert.ToInt32(txtseccion.Text));
+                cmd.Parameters.AddWithValue("@clave_elector", txtClaveE.Text.Trim());
+                cmd.Parameters.AddWithValue("@telefono", txtTelefono.Text);
+                cmd.Parameters.AddWithValue("@codigoP", txtCodigo.Text);
+                cmd.Parameters.AddWithValue("@manzana", "");
+                cmd.Parameters.AddWithValue("@fk_idPersonas", 1);
+                cmd.Parameters.AddWithValue("@fk_idEstado", ddlEstad.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_idMunicipio", ddlMunicipio.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_idDistrito", ddlDistrito.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@estado", "");
 
-            }
-        }
-        else if ( ddlRegiones.SelectedValue!= null & ddlSecciones.SelectedValue == "")
-        {
-            string strSql;
-            SqlConnection con = new SqlConnection(strConnString);
-            strSql = "sp_Insert_Regional";
-            SqlCommand cmd = new SqlCommand(strSql, con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            con.Open();
-            cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
-            cmd.Parameters.AddWithValue("@apellido_paterno", txtApellidoPa.Text);
-            cmd.Parameters.AddWithValue("@apellido_materno", txtApellidoMa.Text);
-            cmd.Parameters.AddWithValue("@fecha_nac", txtFechaN.Text);
-            cmd.Parameters.AddWithValue("@afiliacion", txtAfiliacion.Text);
-            cmd.Parameters.AddWithValue("@calle", txtCalle.Text);
-            cmd.Parameters.AddWithValue("@num_ext", txtNumE.Text);
-            cmd.Parameters.AddWithValue("@num_int", txtNumeroI.Text);
-            cmd.Parameters.AddWithValue("@colonia", txtColonia.Text);
-            cmd.Parameters.AddWithValue("@municipio", txtMunicipio.Text);
-            cmd.Parameters.AddWithValue("@seccion", Convert.ToInt32(txtseccion.Text));
-            cmd.Parameters.AddWithValue("@clave_elector", txtClaveE.Text.Trim());
-            cmd.Parameters.AddWithValue("@telefono", txtTelefono.Text);
-            cmd.Parameters.AddWithValue("@codigoP", txtCodigo.Text);
-            cmd.Parameters.AddWithValue("@manzana", "");
-            cmd.Parameters.AddWithValue("@fk_idPersonas", 1);
-            cmd.Parameters.AddWithValue("@fk_idEstado", ddlEstad.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@fk_idMunicipio", ddlMunicipio.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@fk_idDistrito", ddlDistrito.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@fk_Regional", ddlRegiones.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@estado", "");
-            cmd.Parameters.AddWithValue("@y", cord1.Text);
-            cmd.Parameters.AddWithValue("@x", cord2.Text);
-            int rowsAffected = cmd.ExecuteNonQuery();
-            if (rowsAffected > 0)/*si rowsAffected (1) es mayor a 0*/
-            {
-                Notificacion.Visible = true;
-                txtAutocomplete.Text = "";
-                txtClaveE.Text = "";
-                txtNombre.Text = "";
-                txtApellidoPa.Text = "";
-                txtApellidoMa.Text = "";
-                txtFechaN.Text = "";
-                txtAfiliacion.Text = "";
-                txtCalle.Text = "";
-                txtNumE.Text = "";
-                txtNumeroI.Text = "";
-                txtColonia.Text = "";
-                txtMunicipio.Text = "";
-                txtseccion.Text = "";
-                txtTelefono.Text = "";
-                txtCodigo.Text = "";
-            }
-            else
-            {
-                throw new Exception("Llenar todos los campos");
+                cmd.Parameters.AddWithValue("@y", cord1.Text);
 
-            }
-        }
-        else if ( ddlSecciones.SelectedValue!= null & ddlManzanas.SelectedValue == "")
-        {
-            string strSql;
-            SqlConnection con = new SqlConnection(strConnString);
-            strSql = "sp_Insert_Secciones";
-            SqlCommand cmd = new SqlCommand(strSql, con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            con.Open();
-            cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
-            cmd.Parameters.AddWithValue("@apellido_paterno", txtApellidoPa.Text);
-            cmd.Parameters.AddWithValue("@apellido_materno", txtApellidoMa.Text);
-            cmd.Parameters.AddWithValue("@fecha_nac", txtFechaN.Text);
-            cmd.Parameters.AddWithValue("@afiliacion", txtAfiliacion.Text);
-            cmd.Parameters.AddWithValue("@calle", txtCalle.Text);
-            cmd.Parameters.AddWithValue("@num_ext", txtNumE.Text);
-            cmd.Parameters.AddWithValue("@num_int", txtNumeroI.Text);
-            cmd.Parameters.AddWithValue("@colonia", txtColonia.Text);
-            cmd.Parameters.AddWithValue("@municipio", txtMunicipio.Text);
-            cmd.Parameters.AddWithValue("@seccion", Convert.ToInt32(txtseccion.Text));
-            cmd.Parameters.AddWithValue("@clave_elector", txtClaveE.Text.Trim());
-            cmd.Parameters.AddWithValue("@telefono", txtTelefono.Text);
-            cmd.Parameters.AddWithValue("@codigoP", txtCodigo.Text);
-            cmd.Parameters.AddWithValue("@manzana", "");
-            cmd.Parameters.AddWithValue("@fk_idPersonas", 1);
-            cmd.Parameters.AddWithValue("@fk_idEstado", ddlEstad.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@fk_idMunicipio", ddlMunicipio.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@fk_idDistrito", ddlDistrito.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@fk_Regional", ddlRegiones.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@fk_Seccion", ddlSecciones.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@estado", "");
-            cmd.Parameters.AddWithValue("@y", cord1.Text);
-            cmd.Parameters.AddWithValue("@x", cord2.Text);
-            int rowsAffected = cmd.ExecuteNonQuery();
-            if (rowsAffected > 0)/*si rowsAffected (1) es mayor a 0*/
-            {
-                Notificacion.Visible = true;
-                txtAutocomplete.Text = "";
-                txtClaveE.Text = "";
-                txtNombre.Text = "";
-                txtApellidoPa.Text = "";
-                txtApellidoMa.Text = "";
-                txtFechaN.Text = "";
-                txtAfiliacion.Text = "";
-                txtCalle.Text = "";
-                txtNumE.Text = "";
-                txtNumeroI.Text = "";
-                txtColonia.Text = "";
-                txtMunicipio.Text = "";
-                txtseccion.Text = "";
-                txtTelefono.Text = "";
-                txtCodigo.Text = "";
-            }
-            else
-            {
-                throw new Exception("Llenar todos los campos");
 
-            }
-        }
-        else if (ddlSecciones.SelectedValue != null & ddlManzanas.SelectedValue != null)
-        {
-            string strSql;
-            SqlConnection con = new SqlConnection(strConnString);
-            strSql = "sp_Manzanal_Secciones";
-            SqlCommand cmd = new SqlCommand(strSql, con);
-            cmd.CommandType = CommandType.StoredProcedure;
-            con.Open();
-            cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
-            cmd.Parameters.AddWithValue("@apellido_paterno", txtApellidoPa.Text);
-            cmd.Parameters.AddWithValue("@apellido_materno", txtApellidoMa.Text);
-            cmd.Parameters.AddWithValue("@fecha_nac", txtFechaN.Text);
-            cmd.Parameters.AddWithValue("@afiliacion", txtAfiliacion.Text);
-            cmd.Parameters.AddWithValue("@calle", txtCalle.Text);
-            cmd.Parameters.AddWithValue("@num_ext", txtNumE.Text);
-            cmd.Parameters.AddWithValue("@num_int", txtNumeroI.Text);
-            cmd.Parameters.AddWithValue("@colonia", txtColonia.Text);
-            cmd.Parameters.AddWithValue("@municipio", txtMunicipio.Text);
-            cmd.Parameters.AddWithValue("@seccion", Convert.ToInt32(txtseccion.Text));
-            cmd.Parameters.AddWithValue("@clave_elector", txtClaveE.Text.Trim());
-            cmd.Parameters.AddWithValue("@telefono", txtTelefono.Text);
-            cmd.Parameters.AddWithValue("@codigoP", txtCodigo.Text);
-            cmd.Parameters.AddWithValue("@manzana", "");
-            cmd.Parameters.AddWithValue("@fk_idPersonas", 1);
-            cmd.Parameters.AddWithValue("@fk_idEstado", ddlEstad.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@fk_idMunicipio", ddlMunicipio.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@fk_idDistrito", ddlDistrito.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@fk_Regional", ddlRegiones.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@fk_Seccion", ddlSecciones.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@fk_Manzana", ddlManzanas.SelectedValue.Trim());
-            cmd.Parameters.AddWithValue("@estado", "");
-            cmd.Parameters.AddWithValue("@y", cord1.Text);
-            cmd.Parameters.AddWithValue("@x", cord2.Text);
-            int rowsAffected = cmd.ExecuteNonQuery();
-            if (rowsAffected > 0)/*si rowsAffected (1) es mayor a 0*/
-            {
-                Notificacion.Visible = true;
-                txtAutocomplete.Text = "";
-                txtClaveE.Text = "";
-                txtNombre.Text = "";
-                txtApellidoPa.Text = "";
-                txtApellidoMa.Text = "";
-                txtFechaN.Text = "";
-                txtAfiliacion.Text = "";
-                txtCalle.Text = "";
-                txtNumE.Text = "";
-                txtNumeroI.Text = "";
-                txtColonia.Text = "";
-                txtMunicipio.Text = "";
-                txtseccion.Text = "";
-                txtTelefono.Text = "";
-                txtCodigo.Text = "";
-            }
-            else
-            {
-                throw new Exception("Llenar todos los campos");
+                cmd.Parameters.AddWithValue("@x", cord2.Text);
 
+
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected > 0)/*si rowsAffected (1) es mayor a 0*/
+                {
+                    Notificacion.Visible = true;
+                    txtAutocomplete.Text = "";
+                    txtClaveE.Text = "";
+                    txtNombre.Text = "";
+                    txtApellidoPa.Text = "";
+                    txtApellidoMa.Text = "";
+                    txtFechaN.Text = "";
+                    txtAfiliacion.Text = "";
+                    txtCalle.Text = "";
+                    txtNumE.Text = "";
+                    txtNumeroI.Text = "";
+                    txtColonia.Text = "";
+                    txtMunicipio.Text = "";
+                    txtseccion.Text = "";
+                    txtTelefono.Text = "";
+                    txtCodigo.Text = "";
+                }
+                else
+                {
+                    throw new Exception("Llenar todos los campos");
+
+                }
             }
+            else if (ddlRegiones.SelectedValue != null & ddlSecciones.SelectedValue == "")
+            {
+                string strSql;
+                SqlConnection con = new SqlConnection(strConnString);
+                strSql = "sp_Insert_Regional";
+                SqlCommand cmd = new SqlCommand(strSql, con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
+                cmd.Parameters.AddWithValue("@apellido_paterno", txtApellidoPa.Text);
+                cmd.Parameters.AddWithValue("@apellido_materno", txtApellidoMa.Text);
+                cmd.Parameters.AddWithValue("@fecha_nac", txtFechaN.Text);
+                cmd.Parameters.AddWithValue("@afiliacion", txtAfiliacion.Text);
+                cmd.Parameters.AddWithValue("@calle", txtCalle.Text);
+                cmd.Parameters.AddWithValue("@num_ext", txtNumE.Text);
+                cmd.Parameters.AddWithValue("@num_int", txtNumeroI.Text);
+                cmd.Parameters.AddWithValue("@colonia", txtColonia.Text);
+                cmd.Parameters.AddWithValue("@municipio", txtMunicipio.Text);
+                cmd.Parameters.AddWithValue("@seccion", Convert.ToInt32(txtseccion.Text));
+                cmd.Parameters.AddWithValue("@clave_elector", txtClaveE.Text.Trim());
+                cmd.Parameters.AddWithValue("@telefono", txtTelefono.Text);
+                cmd.Parameters.AddWithValue("@codigoP", txtCodigo.Text);
+                cmd.Parameters.AddWithValue("@manzana", "");
+                cmd.Parameters.AddWithValue("@fk_idPersonas", 1);
+                cmd.Parameters.AddWithValue("@fk_idEstado", ddlEstad.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_idMunicipio", ddlMunicipio.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_idDistrito", ddlDistrito.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_Regional", ddlRegiones.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@estado", "");
+                cmd.Parameters.AddWithValue("@y", cord1.Text);
+                cmd.Parameters.AddWithValue("@x", cord2.Text);
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected > 0)/*si rowsAffected (1) es mayor a 0*/
+                {
+                    Notificacion.Visible = true;
+                    txtAutocomplete.Text = "";
+                    txtClaveE.Text = "";
+                    txtNombre.Text = "";
+                    txtApellidoPa.Text = "";
+                    txtApellidoMa.Text = "";
+                    txtFechaN.Text = "";
+                    txtAfiliacion.Text = "";
+                    txtCalle.Text = "";
+                    txtNumE.Text = "";
+                    txtNumeroI.Text = "";
+                    txtColonia.Text = "";
+                    txtMunicipio.Text = "";
+                    txtseccion.Text = "";
+                    txtTelefono.Text = "";
+                    txtCodigo.Text = "";
+                }
+                else
+                {
+                    throw new Exception("Llenar todos los campos");
+
+                }
+            }
+            else if (ddlSecciones.SelectedValue != null & ddlManzanas.SelectedValue == "")
+            {
+                string strSql;
+                SqlConnection con = new SqlConnection(strConnString);
+                strSql = "sp_Insert_Secciones";
+                SqlCommand cmd = new SqlCommand(strSql, con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
+                cmd.Parameters.AddWithValue("@apellido_paterno", txtApellidoPa.Text);
+                cmd.Parameters.AddWithValue("@apellido_materno", txtApellidoMa.Text);
+                cmd.Parameters.AddWithValue("@fecha_nac", txtFechaN.Text);
+                cmd.Parameters.AddWithValue("@afiliacion", txtAfiliacion.Text);
+                cmd.Parameters.AddWithValue("@calle", txtCalle.Text);
+                cmd.Parameters.AddWithValue("@num_ext", txtNumE.Text);
+                cmd.Parameters.AddWithValue("@num_int", txtNumeroI.Text);
+                cmd.Parameters.AddWithValue("@colonia", txtColonia.Text);
+                cmd.Parameters.AddWithValue("@municipio", txtMunicipio.Text);
+                cmd.Parameters.AddWithValue("@seccion", Convert.ToInt32(txtseccion.Text));
+                cmd.Parameters.AddWithValue("@clave_elector", txtClaveE.Text.Trim());
+                cmd.Parameters.AddWithValue("@telefono", txtTelefono.Text);
+                cmd.Parameters.AddWithValue("@codigoP", txtCodigo.Text);
+                cmd.Parameters.AddWithValue("@manzana", "");
+                cmd.Parameters.AddWithValue("@fk_idPersonas", 1);
+                cmd.Parameters.AddWithValue("@fk_idEstado", ddlEstad.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_idMunicipio", ddlMunicipio.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_idDistrito", ddlDistrito.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_Regional", ddlRegiones.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_Seccion", ddlSecciones.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@estado", "");
+                cmd.Parameters.AddWithValue("@y", cord1.Text);
+                cmd.Parameters.AddWithValue("@x", cord2.Text);
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected > 0)/*si rowsAffected (1) es mayor a 0*/
+                {
+                    Notificacion.Visible = true;
+                    txtAutocomplete.Text = "";
+                    txtClaveE.Text = "";
+                    txtNombre.Text = "";
+                    txtApellidoPa.Text = "";
+                    txtApellidoMa.Text = "";
+                    txtFechaN.Text = "";
+                    txtAfiliacion.Text = "";
+                    txtCalle.Text = "";
+                    txtNumE.Text = "";
+                    txtNumeroI.Text = "";
+                    txtColonia.Text = "";
+                    txtMunicipio.Text = "";
+                    txtseccion.Text = "";
+                    txtTelefono.Text = "";
+                    txtCodigo.Text = "";
+                }
+                else
+                {
+                    throw new Exception("Llenar todos los campos");
+
+                }
+            }
+            else if (ddlSecciones.SelectedValue != null & ddlManzanas.SelectedValue != null)
+            {
+                string strSql;
+                SqlConnection con = new SqlConnection(strConnString);
+                strSql = "sp_Manzanal_Secciones";
+                SqlCommand cmd = new SqlCommand(strSql, con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                cmd.Parameters.AddWithValue("@nombre", txtNombre.Text);
+                cmd.Parameters.AddWithValue("@apellido_paterno", txtApellidoPa.Text);
+                cmd.Parameters.AddWithValue("@apellido_materno", txtApellidoMa.Text);
+                cmd.Parameters.AddWithValue("@fecha_nac", txtFechaN.Text);
+                cmd.Parameters.AddWithValue("@afiliacion", txtAfiliacion.Text);
+                cmd.Parameters.AddWithValue("@calle", txtCalle.Text);
+                cmd.Parameters.AddWithValue("@num_ext", txtNumE.Text);
+                cmd.Parameters.AddWithValue("@num_int", txtNumeroI.Text);
+                cmd.Parameters.AddWithValue("@colonia", txtColonia.Text);
+                cmd.Parameters.AddWithValue("@municipio", txtMunicipio.Text);
+                cmd.Parameters.AddWithValue("@seccion", Convert.ToInt32(txtseccion.Text));
+                cmd.Parameters.AddWithValue("@clave_elector", txtClaveE.Text.Trim());
+                cmd.Parameters.AddWithValue("@telefono", txtTelefono.Text);
+                cmd.Parameters.AddWithValue("@codigoP", txtCodigo.Text);
+                cmd.Parameters.AddWithValue("@manzana", "");
+                cmd.Parameters.AddWithValue("@fk_idPersonas", 1);
+                cmd.Parameters.AddWithValue("@fk_idEstado", ddlEstad.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_idMunicipio", ddlMunicipio.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_idDistrito", ddlDistrito.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_Regional", ddlRegiones.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_Seccion", ddlSecciones.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_Manzana", ddlManzanas.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@estado", "");
+                cmd.Parameters.AddWithValue("@y", cord1.Text);
+                cmd.Parameters.AddWithValue("@x", cord2.Text);
+                int rowsAffected = cmd.ExecuteNonQuery();
+                if (rowsAffected > 0)/*si rowsAffected (1) es mayor a 0*/
+                {
+                    Notificacion.Visible = true;
+                    txtAutocomplete.Text = "";
+                    txtClaveE.Text = "";
+                    txtNombre.Text = "";
+                    txtApellidoPa.Text = "";
+                    txtApellidoMa.Text = "";
+                    txtFechaN.Text = "";
+                    txtAfiliacion.Text = "";
+                    txtCalle.Text = "";
+                    txtNumE.Text = "";
+                    txtNumeroI.Text = "";
+                    txtColonia.Text = "";
+                    txtMunicipio.Text = "";
+                    txtseccion.Text = "";
+                    txtTelefono.Text = "";
+                    txtCodigo.Text = "";
+                }
+                else
+                {
+                    throw new Exception("Llenar todos los campos");
+
+                }
+            }
+
         }
 
     }
@@ -432,65 +437,113 @@ public partial class Territorial : System.Web.UI.Page
                         txtAfiliacion.Text = "";
                     }
 
+
+
+
                 }
+
             }
             else
             {
 
             }
-        }
+
+			
+				string seccion = txtseccion.Text.ToString();
+				if (seccion != "")
+				{
+                SqlConnection con = new SqlConnection(strConnString);
+
+                    string seccion2 = Convert.ToString(dt.Rows[0]["seccion"]);
+                SqlCommand com = new SqlCommand("Select Top_25_2009_gral, Top_25_2009_porc, Top25DifGral2009, 3Cond_2009_25_porc, Top_25_2015_PRI, Top_25_2015_porc_PRI, Top25DifGral2015, 3Cond_2015_25_porc from tbl_Secciones2009_2015NL where seccion='" + seccion2 + "'", con);
+					com.CommandType = CommandType.Text;
+					//comando2.Parameters.AddWithValue("@IdPersona", txtIntegrante.Text);
+					con.Open();
+					SqlDataReader rd = com.ExecuteReader();
+					if (rd.Read())
+					{
+
+
+
+						txtgral2009.Text = rd["Top_25_2009_gral"].ToString();
+						txtporciento2009.Text = rd["Top_25_2009_porc"].ToString();
+						txtdif2009.Text = rd["Top25DifGral2009"].ToString();
+						txtcond2009.Text = rd["3Cond_2009_25_porc"].ToString();
+						txtgral2015.Text = rd["Top_25_2015_PRI"].ToString();
+						txtporciento2015.Text = rd["Top_25_2015_porc_PRI"].ToString();
+						txtdif2015.Text = rd["Top25DifGral2015"].ToString();
+						txtcond2015.Text = rd["3Cond_2015_25_porc"].ToString();
+
+
+
+
+					}
+					else
+					{
+						txtAfiliacion.Text = "";
+					}
+                con.Close();
+
+            }
+				else
+				{
+
+				}
+			
+			
+		}
         catch
         {
 
         }
 
-		try
-		{
-			string seccion = dt.Rows[0]["seccion"].ToString();
-			if (seccion != "")
-			{
-				string seccion2 = Convert.ToString(dt.Rows[0]["seccion"]);
-				com = new SqlCommand("Select Top_25_2009_gral, Top_25_2009_porc, Top25DifGral2009, 3Cond_2009_25_porc, Top_25_2015_PRI, Top_25_2015_porc_PRI, Top25DifGral2015, 3Cond_2015_25_porc from tbl_Secciones2009_2015NL where seccion='" + seccion2 + "'", con);
-				com.CommandType = CommandType.Text;
-				//comando2.Parameters.AddWithValue("@IdPersona", txtIntegrante.Text);
-				con.Open();
-				SqlDataReader rd = com.ExecuteReader();
-				if (rd.Read())
-				{
+        //try
+        //{
+        //    string seccion = dt.Rows[0]["seccion"].ToString();
+        //    if (seccion != "")
+        //    {
+        //        string seccion2 = Convert.ToString(dt.Rows[0]["seccion"]);
+        //        com = new SqlCommand("Select Top_25_2009_gral, Top_25_2009_porc, Top25DifGral2009, 3Cond_2009_25_porc, Top_25_2015_PRI, Top_25_2015_porc_PRI, Top25DifGral2015, 3Cond_2015_25_porc from tbl_Secciones2009_2015NL where seccion='" + seccion2 + "'", con);
+        //        com.CommandType = CommandType.Text;
+        //        //comando2.Parameters.AddWithValue("@IdPersona", txtIntegrante.Text);
+        //        con.Open();
+        //        SqlDataReader rd = com.ExecuteReader();
+        //        if (rd.Read())
+        //        {
 
 
 
-					txtgral2009.Text = rd["Top_25_2009_gral"].ToString();
-					txtporciento2009.Text = rd["Top_25_2009_porc"].ToString();
-					txtdif2009.Text = rd["Top25DifGral2009"].ToString();
-					txtcond2009.Text = rd["3Cond_2009_25_porc"].ToString();
-					txtgral2015.Text = rd["Top_25_2015_PRI"].ToString();
-					txtporciento2015.Text = rd["Top_25_2015_porc_PRI"].ToString();
-					txtdif2015.Text = rd["Top25DifGral2015"].ToString();
-					txtcond2015.Text = rd["3Cond_2015_25_porc"].ToString();
+        //            txtgral2009.Text = rd["Top_25_2009_gral"].ToString();
+        //            txtporciento2009.Text = rd["Top_25_2009_porc"].ToString();
+        //            txtdif2009.Text = rd["Top25DifGral2009"].ToString();
+        //            txtcond2009.Text = rd["3Cond_2009_25_porc"].ToString();
+        //            txtgral2015.Text = rd["Top_25_2015_PRI"].ToString();
+        //            txtporciento2015.Text = rd["Top_25_2015_porc_PRI"].ToString();
+        //            txtdif2015.Text = rd["Top25DifGral2015"].ToString();
+        //            txtcond2015.Text = rd["3Cond_2015_25_porc"].ToString();
 
 
 
 
-				}
-				else
-				{
-					txtAfiliacion.Text = "";
-				}
+        //        }
+        //        else
+        //        {
+        //            txtAfiliacion.Text = "";
+        //        }
 
-			}
-			else
-			{
+        //    }
+        //    else
+        //    {
 
-			}
-		}
-		catch
-		{
+        //    }
+        //}
+        //catch
+        //{
 
-		}
-		con.Close();
+        //}
+        //con.Close();
 
-		ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#Asignaciones').modal('show')", true);
+        ClientScript.RegisterStartupScript(this.GetType(), "Popup", "$('#Asignaciones').modal('show')", true);
 
     }
 

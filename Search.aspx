@@ -123,7 +123,7 @@
 									CompletionListItemCssClass="autocomplete_listItem"
 									CompletionListHighlightedItemCssClass="autocomplete_highlightedListItem"
 									MinimumPrefixLength="2"
-									CompletionInterval="1000" 
+									CompletionInterval="500" 
 									EnableCaching="true" 
 									CompletionSetCount="20"  
 									TargetControlID="txtNombre" 
@@ -136,8 +136,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="row" >
-					</div>
+					
 					<div class="row">
 						<div class="col-7 align-self-center">
 							<h4 class="card-title mb-3">REGISTROS INE <small><asp:Label runat="server" ID="Label2"></asp:Label></small></h4>

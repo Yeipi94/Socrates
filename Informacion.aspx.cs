@@ -17,14 +17,34 @@ public partial class Informacion : System.Web.UI.Page
     DataTable dt;
     protected void Page_Load(object sender, EventArgs e)
     {
-        try
+        Consulta_Info();
+        if (!Page.IsPostBack)
+        {          
+            CargaInfoTel();
+            CargaInfoTel2();
+        }
+    }
+
+	private void Consulta_Info()
+	{
+        string cs = ConfigurationManager.ConnectionStrings["SISTEM_ALIADOSConnectionString"].ConnectionString;
+        using (SqlConnection con = new SqlConnection(cs))
         {
+
+            int entidad = Convert.ToInt32(Request.QueryString["entidad"]);
             string Clave_Rec = String.IsNullOrEmpty(Request.QueryString["clave"]) ? "" : Request.QueryString["clave"].ToString();
-            string entidad = Request.QueryString["entidad"];
-            txtClave.Text = Clave_Rec.ToString().Trim();
-            AutocompletarService List_Serv = new AutocompletarService();
-            string claveR = txtClave.Text;
-            DataTable dtt = List_Serv.get_List_Ine(Convert.ToInt32(entidad), Convert.ToString(Clave_Rec));
+
+            SqlCommand com = new SqlCommand("sp_InformacioNacional", con);
+
+            com.CommandType = CommandType.StoredProcedure;
+            com.Parameters.AddWithValue("@id_Estado", entidad);
+            com.Parameters.AddWithValue("@CVE", Clave_Rec);
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            DataTable dtt = ds.Tables[0];
+            con.Close();
+            txtClave.Text = dtt.Rows[0]["CVE"].ToString();
             txtNombre.Text = dtt.Rows[0]["Nombre_Comp"].ToString();
             txtEdad.Text = dtt.Rows[0]["edad"].ToString();
             txtCalle.Text = dtt.Rows[0]["calle"].ToString();
@@ -41,26 +61,11 @@ public partial class Informacion : System.Web.UI.Page
             txtEstadoN.Text = dtt.Rows[0]["edo_nac"].ToString();
             txtFechaN.Text = dtt.Rows[0]["FechaN"].ToString();
             txtSexo.Text = dtt.Rows[0]["sexo"].ToString().Trim();
-            txtAfiliacion.Text=dtt.Rows[0]["partido_afil"].ToString().TrimEnd();
-        }
-        catch
-		{
-
-		}
-
-
-        if (!Page.IsPostBack)
-        {
-            //MaintainScrollPositionOnPostBack = true;
-           
-            CargaInfoTel();
-            CargaInfoTel2();
+            txtAfiliacion.Text = dtt.Rows[0]["partido_afil"].ToString().TrimEnd();
         }
     }
 
-   
-   
-    private void CargaInfoTel()
+	private void CargaInfoTel()
     {
         try
         {

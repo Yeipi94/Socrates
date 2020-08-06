@@ -23,23 +23,45 @@
         var data = google.visualization.arrayToDataTable(<%=obtenerDatos()%>);
 
         var options = {
-          title: 'Distrito'
+            title: 'Distrito',
+			slices: {
+				0: { color: 'rgb(255, 79, 112)' },
+				1: { color: 'rgb(1, 202, 241)' },
+            },
+            pieHole: 0.50,
+            
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 
-        chart.draw(data, options);
+          chart.draw(data, options);
+
+		  var percent = 0;
+		  // start the animation loop
+		  var handler = setInterval(function () {
+			  // values increment
+			  percent += 1;
+			  // apply new values
+			  data.setValue(0, 1, percent);
+			  data.setValue(1, 1, 100 - percent);
+			  // update the pie
+			  chart.draw(data, options);
+			  // check if we have reached the desired value
+			  if (percent > handler)
+				  // stop the loop
+				  clearInterval(handler);
+		  }, 30);
       }
 	</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
  
     <div class="row">
-		<div class="col-12">
+		<div class="col-lg-4 col-md-12">
 			<div class="card">
 				<div class="card-body">
-
-					<div id="piechart"></div>
+					<h4 class="card-title">Avance por distrito</h4>
+					<div id="piechart" class="mt-2" style="height:283px; width:100%;"></div>
 
 				</div>
 			</div>

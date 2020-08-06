@@ -17,247 +17,94 @@
 	<script type="text/javascript">
 
 
-		function pageLoad() {
-			$("#<%=ddlEstado.ClientID%>").select2({
-				placeholder: "Seleccionar Estado",
-
-			});
-			$("#<%=ddlMunicipio.ClientID%>").select2({
-				placeholder: "Seleccionar Estado",
-
-			});
-			$("#<%=ddlColonia.ClientID%>").select2({
-				placeholder: "Seleccionar Estado",
-
-			});
-			$("#<%=ddlEstatus.ClientID%>").select2({
-				placeholder: "Seleccionar Estado",
-
-			});
-		}
 
 
-	</script>
+</script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 	
-			<div class="row">
-				<div class="alert alert-danger alert-dismissible fade in" role="alert" id="msgError" runat="server" style="display: none; background-color: #ad0a0a; color: #fff"></div>
-				<canvas id="goodCanvas1" width="400" height="100" aria-label="Hello ARIA World" role="img"></canvas>
 
-				<div class="col-sm-12 col-md-12 col-lg-12">
-					<div class="card">
-						<div class="card-body">
+	<div class="row">
+		<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" ScriptMode="Debug"></asp:ScriptManager>
+		<div class="alert alert-danger alert-dismissible fade in" role="alert" id="msgError" runat="server" style="display: none; background-color: #ad0a0a; color: #fff"></div>
 
-
-							<div class="row">
-								<div class="col-7 align-self-center">
-									<h4 class="card-title mb-3">ASIGNACIÓN TERRITORIAL</h4>
-
-								</div>
-								<div class="col-5 align-self-center">
-									<div class="customize-input float-right">
-										<button type="button" title="Asignaciones" class="btn btn-primary" data-target="#Asignaciones" data-toggle="modal"><span class='fas fa-plus'></span>Nuevo</button>
-									</div>
-								</div>
-							</div>
-
-							<div class="row">
-								<div class="col-sm-12 col-md-6 col-lg-3">
-
-									<div class="form-group">
-										<label>Estados</label>
-										<asp:DropDownList ID="ddlEstado" runat="server" CssClass="js-example-basic-single" Width="100%" OnSelectedIndexChanged="MunicipioSeleccionado" AutoPostBack="true"></asp:DropDownList>
-									</div>
-								</div>
-								<div class="col-sm-12 col-md-6 col-lg-3">
-									<div class="form-group">
-										<label>Municipios</label>
-										<asp:DropDownList ID="ddlMunicipio" runat="server" CssClass="js-example-basic-single" Width="100%" AutoPostBack="true" OnSelectedIndexChanged="ColoniaSeleccionar"></asp:DropDownList>
-									</div>
-								</div>
-								<div class="col-sm-12 col-md-6 col-lg-3">
-									<div class="form-group">
-										<label>Colonias</label>
-										<asp:DropDownList ID="ddlColonia" runat="server" CssClass="js-example-basic-single" Width="100%"></asp:DropDownList>
-									</div>
-								</div>
-								<div class="col-sm-12 col-md-6 col-lg-3">
-									<div class="form-group">
-										<label>Estatus</label>
-										<asp:DropDownList ID="ddlEstatus" runat="server" CssClass="js-example-basic-single" Width="100%" OnTextChanged="DdlNivel_TextChanged"></asp:DropDownList>
-									</div>
-								</div>
-
-								<div class="input-group">
-									<div class="input-group-btn">
-										<asp:Button ID="btnBuscar" runat="server" CssClass="btn btn-primary" OnClick="btnBuscar_Click1" Text="Buscar" />
-
-										<%--								<button type="button" class="btn btn-primary" id="btnactualizar">Buscar</button>--%>
-									</div>
-								</div>
-							</div>
+		<div class="col-sm-12 col-md-12 col-lg-12">
+			<div class="card">
+				<div class="card-body">
 
 
-							<div class="table-responsive">
-								<table id="tbl_personas" class="table table-striped table-bordered no-wrap">
-									<thead>
-										<tr>
-											<th>Clave Elector</th>
-											<th>Nombre Completo</th>
-											<th>Colonia</th>
-											<th>Municipio</th>
-											<th>Entidad</th>
-											<%--                                    <th>Acciones</th>--%>
-										</tr>
-									</thead>
-									<%--<tfoot>
-											<tr>
-												<th>Clave Elector</th>
-												<th>Nombre Completo</th>
-												<th>Colonia</th>
-												<th>Municipio</th>
-												<th>Entidad</th>
-											</tr>
-										</tfoot>--%>
-									<%-- <tbody id="tbl_body_table">
-                                <!-- DATA POR MEDIO DE AJAX-->
-                            </tbody>--%>
-									<tbody>
-										<!-- DATA POR MEDIO DE AJAX-->
-									</tbody>
-								</table>
-							</div>
+					<div class="row">
+						<div class="col-7 align-self-center">
+							<h4 class="card-title mb-3">DISTRITOS ASIGNADOS</h4>
 
 						</div>
-					</div>
-				</div>
-
-
-			</div>
-			<div class="row">
-				<div class="col-12">
-					<div class="card">
-						<div class="card-body">
-							<h4 class="card-title">Avance Secciones</h4>
-							<div class="row" runat="server" visible="false">
-								<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-
-								<div class="col-xs-12 col-lg-3">
-									<div class="form-group">
-										<label>Distritales</label>
-										<%-- <asp:DropDownList ID="ddlEstad" runat="server" CssClass="form-control form-control-sm" AutoPostBack="true" OnSelectedIndexChanged="ddlEstad_SelectedIndexChanged"></asp:DropDownList>
-                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator3" ControlToValidate="ddlEstad" ErrorMessage="Obligatorio." ForeColor="Red" ValidationGroup="FrmRequerido"></asp:RequiredFieldValidator>
-                                <asp:CascadingDropDown ID="CascadingDropDown3" runat="server" Category="Estados" TargetControlID="ddlEstad" LoadingText="Cargando Estados.." ServicePath="../AutocompletarService.asmx" ServiceMethod="Get_Estados" PromptText="Selecciona"></asp:CascadingDropDown>--%>
-									</div>
-								</div>
-								<div class="col-xs-12 col-lg-3">
-									<div class="form-group">
-										<label>Municipio</label>
-										<asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control form-control-sm"></asp:DropDownList>
-										<%--                                <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="ddlMunicipio" ErrorMessage="Obligatorio." ForeColor="Red" ValidationGroup="FrmRequerido"></asp:RequiredFieldValidator>--%>
-										<%--                                    <asp:CascadingDropDown ID="CascadingDropDown2" runat="server" Category="Municipio" TargetControlID="ddlMunicipio" LoadingText="Cargando Estados.." ParentControlID="ddlEstad"  ServicePath="../AutocompletarService.asmx" ServiceMethod="Get_Municipios" PromptText="Selecciona"></asp:CascadingDropDown>--%>
-									</div>
-								</div>
-							</div>
-							<div class="d-flex align-items-center mb-4">
-								<h4 class="card-title">Meta | Sección</h4>
-								<div class="ml-auto">
-									<div class="dropdown sub-dropdown">
-										<button class="btn btn-link text-muted dropdown-toggle" type="button"
-											id="dd1" data-toggle="dropdown" aria-haspopup="true"
-											aria-expanded="false">
-											<i data-feather="more-vertical"></i>
-										</button>
-										<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dd1">
-											<a class="dropdown-item" href="#">Insert</a>
-											<a class="dropdown-item" href="#">Update</a>
-											<a class="dropdown-item" href="#">Delete</a>
-										</div>
-									</div>
-								</div>
-							</div>
-
-
-							<div class="table-responsive">
-								<asp:GridView ID="Gw_ListaAsignacion" class="table-bordered no-wrap table table-sm mb-0" runat="server" OnPageIndexChanging="Gw_ListaAsignacion_PageIndexChanging" AutoGenerateColumns="false" DataKeyNames="clave_elector" PagerSettings-Position="Top" OnRowDataBound="Gw_ListaAsignacion_RowDataBound" OnSelectedIndexChanged="Gw_ListaAsignacion_SelectedIndexChanged" HeaderStyle-CssClass="info">
-									<HeaderStyle CssClass="bg-danger text-white" />
-									<Columns>
-										<asp:BoundField DataField="clave_elector" HeaderText="seccion" ReadOnly="True" SortExpression="nombre" />
-										<asp:BoundField DataField="nombre" HeaderText="seccion" ReadOnly="True" SortExpression="nombre" />
-										<asp:BoundField DataField="fecha_nac" HeaderText="Avance" SortExpression="fecha_nac" />
-										<asp:BoundField DataField="calle" HeaderText="Faltante" SortExpression="calle" />
-										<asp:BoundField DataField="num_ext" HeaderText="Num. Exterior" SortExpression="num_ext" />
-										<asp:BoundField DataField="colonia" HeaderText="Colonia" SortExpression="colonia" />
-									</Columns>
-									<HeaderStyle />
-									<PagerSettings Mode="NumericFirstLast" Position="Bottom" FirstPageText="1" LastPageText="2" NextPageText="3" PreviousPageText="" Visible="false" />
-									<PagerStyle VerticalAlign="Bottom" />
-								</asp:GridView>
-								<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:SISTEM_ALIADOSConnectionString %>"></asp:SqlDataSource>
-							</div>
-
-
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-
-			<div class="row">
-
-
-				<div class="col-8" runat="server" visible="false">
-					<div class="card">
-
-						<div class="card-body">
-
-							<div class="">
-								<b class="label label-danger">Haga clic para mostrar u ocultar columna: </b>
-								<div class="btn-group">
-
-
-									<a class="showHide btn waves-effect waves-light btn btn-success" data-columnindex="0">Distrito</a>
-									<a class="showHide btn waves-effect waves-light btn btn-success" data-columnindex="1">Nombre</a>
-									<a class="showHide btn waves-effect waves-light btn btn-success" data-columnindex="2">Appellido Pa.</a>
-									<a class="showHide btn waves-effect waves-light btn btn-success" data-columnindex="3">Apellido Ma</a>
-								</div>
-							</div>
-							<br />
-							<div class="box-body table-responsive">
-								<table id="studentTable" class="table table-bordered table-hover text-center">
-									<thead>
-										<tr>
-											<th>Distrito</th>
-											<th>Nombre</th>
-											<th>Apellido Pa.</th>
-											<th>Apellido Ma.</th>
-										</tr>
-									</thead>
-									<tfoot>
-										<tr>
-											<th>id_Distrital</th>
-											<th>nombre</th>
-											<th>apellido_paterno</th>
-											<th>apellido_materno</th>
-										</tr>
-									</tfoot>
-								</table>
+						<div class="col-5 align-self-center">
+							<div class="customize-input float-right">
+								<button type="button" title="Asignaciones" class="btn btn-primary" data-target="#Asignaciones" data-toggle="modal"><span class='fas fa-plus'></span>Nuevo</button>
 							</div>
 						</div>
 					</div>
+
+					<div class="row">
+						<div class="col-xs-12 col-lg-6">
+							<div class="form-group">
+								<label>Estados</label>
+								<asp:DropDownList ID="ddlEstad" runat="server" CssClass="form-control"></asp:DropDownList>
+								<asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator8" ControlToValidate="ddlEstad" ErrorMessage="Obligatorio." ForeColor="Red" ValidationGroup="FrmRequerido"></asp:RequiredFieldValidator>
+								<asp:CascadingDropDown ID="CascadingDropDown3" runat="server" Category="Estados" TargetControlID="ddlEstad" LoadingText="Cargando Estados.." ServicePath="../AutocompletarService.asmx" ServiceMethod="Get_ListEstado" PromptText="Seleccionar Estado"></asp:CascadingDropDown>
+
+							</div>
+						</div>
+
+						<div class="col-xs-12 col-lg-6">
+							<div class="form-group">
+								<label>Municipios</label>
+								<asp:DropDownList ID="ddlMunicipio" runat="server" CssClass="form-control"></asp:DropDownList>
+								<asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator9" ControlToValidate="ddlMunicipio" ErrorMessage="Obligatorio." ForeColor="Red" ValidationGroup="FrmRequerido"></asp:RequiredFieldValidator>
+								<asp:CascadingDropDown ID="StateCascading" runat="server" Category="Municipios" TargetControlID="ddlMunicipio" ParentControlID="ddlEstad" LoadingText="Cargando Municipios..." ServiceMethod="Get_ListMunicipio" ServicePath="../AutocompletarService.asmx" PromptText="Seleccionar Municipios"></asp:CascadingDropDown>
+
+							</div>
+						</div>
+
+
+					</div>
+
+
+					<div class="table-responsive">
+						<asp:GridView ID="Gw_ListaAsignacion" class="table-bordered no-wrap table table-sm mb-0" runat="server" OnPageIndexChanging="Gw_ListaAsignacion_PageIndexChanging" AutoGenerateColumns="false" DataKeyNames="clave_elector" PagerSettings-Position="Top" OnRowDataBound="Gw_ListaAsignacion_RowDataBound" OnSelectedIndexChanged="Gw_ListaAsignacion_SelectedIndexChanged" HeaderStyle-CssClass="info">
+							<HeaderStyle CssClass="bg-danger text-white" />
+							<Columns>
+								<asp:BoundField DataField="clave_elector" HeaderText="seccion" ReadOnly="True" SortExpression="nombre" />
+								<asp:BoundField DataField="nombre" HeaderText="seccion" ReadOnly="True" SortExpression="nombre" />
+								<asp:BoundField DataField="fecha_nac" HeaderText="Avance" SortExpression="fecha_nac" />
+								<asp:BoundField DataField="calle" HeaderText="Faltante" SortExpression="calle" />
+								<asp:BoundField DataField="num_ext" HeaderText="Num. Exterior" SortExpression="num_ext" />
+								<asp:BoundField DataField="colonia" HeaderText="Colonia" SortExpression="colonia" />
+							</Columns>
+							<HeaderStyle />
+							<PagerSettings Mode="NumericFirstLast" Position="Bottom" FirstPageText="1" LastPageText="2" NextPageText="3" PreviousPageText="" Visible="false" />
+							<PagerStyle VerticalAlign="Bottom" />
+						</asp:GridView>
+						<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:SISTEM_ALIADOSConnectionString %>"></asp:SqlDataSource>
+					</div>
+
+
+
+
+
 				</div>
-
-
-				<canvas id="myChart" width="400" height="400"></canvas>
-
-
 			</div>
-	
+		</div>
 
-	<script src="js/List_Personas.js"></script>
+
+	</div>
+
+
+
+
+
+
 
 
 	<%--
@@ -265,6 +112,7 @@
     PONER EN CONTRO TIPO CAJA DE TEXTO
     onchange="javascript:Changed( this );"--%>
 	<script src="js/Catalogos.js"></script>
+	<script src="js/List_Personas.js"></script>
 	<script type="text/javascript">
 
 		//function ListaDistritos() {

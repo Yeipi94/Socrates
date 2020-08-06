@@ -580,17 +580,14 @@ public class AutocompletarService : System.Web.Services.WebService
 
         SqlConnection conn = new SqlConnection(conexion);
         DataSet ds = new DataSet();
-        int id_Estado;
         int id_Municipio;
-        StringDictionary estado = AjaxControlToolkit.CascadingDropDown.ParseKnownCategoryValuesString(knownCategoryValues);
-        id_Estado = Convert.ToInt32(estado["Estados"]);
+        
    
-        StringDictionary distrito = AjaxControlToolkit.CascadingDropDown.ParseKnownCategoryValuesString(knownCategoryValues);
-        id_Municipio = Convert.ToInt32(distrito["Municipios"]);
+        StringDictionary StateDetails = AjaxControlToolkit.CascadingDropDown.ParseKnownCategoryValuesString(knownCategoryValues);
+        id_Municipio = Convert.ToInt32(StateDetails["Municipios"]);
    
 
-        SqlCommand cmd = new SqlCommand("select distrito_local from tbl_Distritos_y_x  where fk_Estado=@Estado and fk_Municipio=@municipio", conn);
-        cmd.Parameters.AddWithValue("@Estado", id_Estado);
+        SqlCommand cmd = new SqlCommand("select id, distrito_local from tbl_Distritos_y_x  where fk_Municipio=@municipio", conn);
         cmd.Parameters.AddWithValue("@municipio", id_Municipio);
        
         SqlDataAdapter adp = new SqlDataAdapter(cmd);
@@ -601,7 +598,7 @@ public class AutocompletarService : System.Web.Services.WebService
         List<CascadingDropDownNameValue> CityDetails = new List<CascadingDropDownNameValue>();
         foreach (DataRow DR in ds.Tables[0].Rows)
         {
-            string CityID = DR["distrito_local"].ToString();
+            string CityID = DR["id"].ToString();
             string City = DR["distrito_local"].ToString();
             CityDetails.Add(new CascadingDropDownNameValue(City, CityID));
         }
@@ -623,15 +620,14 @@ public class AutocompletarService : System.Web.Services.WebService
 
         SqlConnection conn = new SqlConnection(conexion);
         DataSet ds = new DataSet();
-        int idE;
-        int municipio;
-        int municipio;
-        StringDictionary statedetails = AjaxControlToolkit.CascadingDropDown.ParseKnownCategoryValuesString(knownCategoryValues);
-        stateID = Convert.ToInt32(statedetails["Distritos"]);
+
+        int distrito;
+        StringDictionary Cat_Estado = AjaxControlToolkit.CascadingDropDown.ParseKnownCategoryValuesString(knownCategoryValues);
+        distrito = Convert.ToInt32(Cat_Estado["Distritos"]);
 
 
-        SqlCommand cmd = new SqlCommand("select distinct(colonia), id  from tbl_CodigoPostCol  where c_mnpio=" + stateID + "", conn);
-        // cmd.Parameters.AddWithValue("@StateID", StateId)  
+        SqlCommand cmd = new SqlCommand("SELECT id, region  FROM [solaris].[dbo].[tbl_Regiones_y_x] where id_Distrito=@distrito", conn);
+        cmd.Parameters.AddWithValue("@distrito", distrito); 
 
         SqlDataAdapter adp = new SqlDataAdapter(cmd);
         adp.Fill(ds);
@@ -642,7 +638,7 @@ public class AutocompletarService : System.Web.Services.WebService
         foreach (DataRow DR in ds.Tables[0].Rows)
         {
             string CityID = DR["id"].ToString();
-            string City = DR["colonia"].ToString();
+            string City = DR["region"].ToString();
             CityDetails.Add(new CascadingDropDownNameValue(City, CityID));
         }
         conn.Close();
