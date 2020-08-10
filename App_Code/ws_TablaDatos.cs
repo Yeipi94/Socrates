@@ -46,5 +46,55 @@ public class ws_TablaDatos : System.Web.Services.WebService
         cnn.close();
         return dt;
     }
+    [WebMethod]
+    public DataTable GetListaRegiones()
+    {
+        Connections cnn = new Connections();
+        SqlCommand cmd = new SqlCommand();
+        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        cmd.CommandText = "sp_ListRegionales";
+        cmd.Connection = cnn.cnn();
+        SqlDataReader dr = cmd.ExecuteReader();
+        DataTable dt = new DataTable();
+        dt.Load(dr);
+
+        cmd.Connection.Close();
+        cnn.close();
+        return dt;
+    }
+
+    [WebMethod]
+    public DataTable GetListaSecciones()
+    {
+        Connections cnn = new Connections();
+        SqlCommand cmd = new SqlCommand();
+        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        cmd.CommandText = "sp_ListSecciones";
+        cmd.Connection = cnn.cnn();
+        SqlDataReader dr = cmd.ExecuteReader();
+        DataTable dt = new DataTable();
+        dt.Load(dr);
+
+        cmd.Connection.Close();
+        cnn.close();
+        return dt;
+    }
+
+    [WebMethod]
+    public DataTable GetListaManzanas()
+    {
+        Connections cnn = new Connections();
+        SqlCommand cmd = new SqlCommand();
+        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+        cmd.CommandText = "sp_ListManzanas";
+        cmd.Connection = cnn.cnn();
+        SqlDataReader dr = cmd.ExecuteReader();
+        DataTable dt = new DataTable();
+        dt.Load(dr);
+
+        cmd.Connection.Close();
+        cnn.close();
+        return dt;
+    }
 
 }

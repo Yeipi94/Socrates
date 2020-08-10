@@ -245,28 +245,24 @@
 											<span class="hide-menu">Distritos</span>
 										</a>
 									</li>
-									<li class="sidebar-item">
-										<a href="#1" class="sidebar-link">
-											<span class="hide-menu">Zonas</span>
-										</a>
-									</li>
+									
                                     <li class="sidebar-item">
-										<a href="#2" class="sidebar-link">
+										<a href="Regiones.aspx" class="sidebar-link">
 											<span class="hide-menu">Regiones</span>
 										</a>
 									</li>
                                     <li class="sidebar-item">
-										<a href="#3" class="sidebar-link">
+										<a href="Seccionales.aspx" class="sidebar-link">
 											<span class="hide-menu">Secciones</span>
 										</a>
 									</li>
                                     <li class="sidebar-item">
-										<a href="#4" class="sidebar-link">
+										<a href="Manzaneros.aspx" class="sidebar-link">
 											<span class="hide-menu">Manzanas</span>
 										</a>
 									</li>
                                     <li class="sidebar-item">
-										<a href="#5" class="sidebar-link">
+										<a href="Votantes.aspx" class="sidebar-link">
 											<span class="hide-menu">Votantes</span>
 										</a>
 									</li>

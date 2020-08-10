@@ -626,8 +626,8 @@ public class AutocompletarService : System.Web.Services.WebService
         distrito = Convert.ToInt32(Cat_Estado["Distritos"]);
 
 
-        SqlCommand cmd = new SqlCommand("SELECT id, region  FROM [solaris].[dbo].[tbl_Regiones_y_x] where id_Distrito=@distrito", conn);
-        cmd.Parameters.AddWithValue("@distrito", distrito); 
+        SqlCommand cmd = new SqlCommand("SELECT id, region  FROM tbl_Regiones_y_x where id_Distrito=@id_Distrito", conn);
+        cmd.Parameters.AddWithValue("@id_Distrito", distrito); 
 
         SqlDataAdapter adp = new SqlDataAdapter(cmd);
         adp.Fill(ds);
@@ -658,14 +658,14 @@ public class AutocompletarService : System.Web.Services.WebService
 
         SqlConnection conn = new SqlConnection(conexion);
         DataSet ds = new DataSet();
-        int stateID;
-        int CountryID;
+        int Region;
+        
         StringDictionary statedetails = AjaxControlToolkit.CascadingDropDown.ParseKnownCategoryValuesString(knownCategoryValues);
-        stateID = Convert.ToInt32(statedetails["Regiones"]);
+        Region = Convert.ToInt32(statedetails["Regiones"]);
 
 
-        SqlCommand cmd = new SqlCommand("select distinct(colonia), id  from tbl_CodigoPostCol  where c_mnpio=" + stateID + "", conn);
-        // cmd.Parameters.AddWithValue("@StateID", StateId)  
+        SqlCommand cmd = new SqlCommand("select id, seccion from Seccion_y_x  where fk_Region=@fk_Region", conn);
+        cmd.Parameters.AddWithValue("@fk_Region", Region); 
 
         SqlDataAdapter adp = new SqlDataAdapter(cmd);
         adp.Fill(ds);
@@ -676,7 +676,7 @@ public class AutocompletarService : System.Web.Services.WebService
         foreach (DataRow DR in ds.Tables[0].Rows)
         {
             string CityID = DR["id"].ToString();
-            string City = DR["colonia"].ToString();
+            string City = DR["seccion"].ToString();
             CityDetails.Add(new CascadingDropDownNameValue(City, CityID));
         }
         conn.Close();
@@ -697,14 +697,13 @@ public class AutocompletarService : System.Web.Services.WebService
 
         SqlConnection conn = new SqlConnection(conexion);
         DataSet ds = new DataSet();
-        int stateID;
-        int CountryID;
+        int seccion;
         StringDictionary statedetails = AjaxControlToolkit.CascadingDropDown.ParseKnownCategoryValuesString(knownCategoryValues);
-        stateID = Convert.ToInt32(statedetails["Secciones"]);
+        seccion = Convert.ToInt32(statedetails["Secciones"]);
 
 
-        SqlCommand cmd = new SqlCommand("select distinct(colonia), id  from tbl_CodigoPostCol  where c_mnpio=" + stateID + "", conn);
-        // cmd.Parameters.AddWithValue("@StateID", StateId)  
+        SqlCommand cmd = new SqlCommand("select id, manzana from tbl_Manzanas_y_x  where fk_Seccion=@seccion", conn);
+        cmd.Parameters.AddWithValue("@seccion", seccion); 
 
         SqlDataAdapter adp = new SqlDataAdapter(cmd);
         adp.Fill(ds);
@@ -715,7 +714,7 @@ public class AutocompletarService : System.Web.Services.WebService
         foreach (DataRow DR in ds.Tables[0].Rows)
         {
             string CityID = DR["id"].ToString();
-            string City = DR["colonia"].ToString();
+            string City = DR["manzana"].ToString();
             CityDetails.Add(new CascadingDropDownNameValue(City, CityID));
         }
         conn.Close();

@@ -75,10 +75,10 @@
 						<asp:GridView ID="Gw_ListaAsignacion" class="table-bordered no-wrap table table-sm mb-0" runat="server" OnPageIndexChanging="Gw_ListaAsignacion_PageIndexChanging" AutoGenerateColumns="false" DataKeyNames="clave_elector" PagerSettings-Position="Top" OnRowDataBound="Gw_ListaAsignacion_RowDataBound" OnSelectedIndexChanged="Gw_ListaAsignacion_SelectedIndexChanged" HeaderStyle-CssClass="info">
 							<HeaderStyle CssClass="bg-danger text-white" />
 							<Columns>
-								<asp:BoundField DataField="clave_elector" HeaderText="seccion" ReadOnly="True" SortExpression="nombre" />
-								<asp:BoundField DataField="nombre" HeaderText="seccion" ReadOnly="True" SortExpression="nombre" />
-								<asp:BoundField DataField="fecha_nac" HeaderText="Avance" SortExpression="fecha_nac" />
-								<asp:BoundField DataField="calle" HeaderText="Faltante" SortExpression="calle" />
+								<asp:BoundField DataField="clave_elector" HeaderText="Clave Elector" ReadOnly="True" SortExpression="clave_elector" />
+								<asp:BoundField DataField="nombre" HeaderText="Nombre" ReadOnly="True" SortExpression="nombre" />
+								<asp:BoundField DataField="fecha_nac" HeaderText="Fecha Nac." SortExpression="fecha_nac" />
+								<asp:BoundField DataField="calle" HeaderText="Calle" SortExpression="calle" />
 								<asp:BoundField DataField="num_ext" HeaderText="Num. Exterior" SortExpression="num_ext" />
 								<asp:BoundField DataField="colonia" HeaderText="Colonia" SortExpression="colonia" />
 							</Columns>

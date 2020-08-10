@@ -120,7 +120,7 @@ public partial class Territorial : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@fk_idEstado", ddlEstad.SelectedValue.Trim());
                 cmd.Parameters.AddWithValue("@fk_idMunicipio", ddlMunicipio.SelectedValue.Trim());
                 cmd.Parameters.AddWithValue("@fk_idDistrito", ddlDistrito.SelectedValue.Trim());
-                cmd.Parameters.AddWithValue("@estado", "");
+                cmd.Parameters.AddWithValue("@estado", true);
 
                 cmd.Parameters.AddWithValue("@y", cord1.Text);
 
@@ -181,8 +181,8 @@ public partial class Territorial : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@fk_idEstado", ddlEstad.SelectedValue.Trim());
                 cmd.Parameters.AddWithValue("@fk_idMunicipio", ddlMunicipio.SelectedValue.Trim());
                 cmd.Parameters.AddWithValue("@fk_idDistrito", ddlDistrito.SelectedValue.Trim());
-                cmd.Parameters.AddWithValue("@fk_Regional", ddlRegiones.SelectedValue.Trim());
-                cmd.Parameters.AddWithValue("@estado", "");
+                cmd.Parameters.AddWithValue("@fk_idRegion", ddlRegiones.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@estado", true);
                 cmd.Parameters.AddWithValue("@y", cord1.Text);
                 cmd.Parameters.AddWithValue("@x", cord2.Text);
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -238,9 +238,9 @@ public partial class Territorial : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@fk_idEstado", ddlEstad.SelectedValue.Trim());
                 cmd.Parameters.AddWithValue("@fk_idMunicipio", ddlMunicipio.SelectedValue.Trim());
                 cmd.Parameters.AddWithValue("@fk_idDistrito", ddlDistrito.SelectedValue.Trim());
-                cmd.Parameters.AddWithValue("@fk_Regional", ddlRegiones.SelectedValue.Trim());
-                cmd.Parameters.AddWithValue("@fk_Seccion", ddlSecciones.SelectedValue.Trim());
-                cmd.Parameters.AddWithValue("@estado", "");
+                cmd.Parameters.AddWithValue("@fk_idRegion", ddlRegiones.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_idSeccion", ddlSecciones.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@estado", true);
                 cmd.Parameters.AddWithValue("@y", cord1.Text);
                 cmd.Parameters.AddWithValue("@x", cord2.Text);
                 int rowsAffected = cmd.ExecuteNonQuery();
@@ -273,7 +273,7 @@ public partial class Territorial : System.Web.UI.Page
             {
                 string strSql;
                 SqlConnection con = new SqlConnection(strConnString);
-                strSql = "sp_Manzanal_Secciones";
+                strSql = "sp_Insert_Manzaneros";
                 SqlCommand cmd = new SqlCommand(strSql, con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 con.Open();
@@ -296,10 +296,10 @@ public partial class Territorial : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@fk_idEstado", ddlEstad.SelectedValue.Trim());
                 cmd.Parameters.AddWithValue("@fk_idMunicipio", ddlMunicipio.SelectedValue.Trim());
                 cmd.Parameters.AddWithValue("@fk_idDistrito", ddlDistrito.SelectedValue.Trim());
-                cmd.Parameters.AddWithValue("@fk_Regional", ddlRegiones.SelectedValue.Trim());
-                cmd.Parameters.AddWithValue("@fk_Seccion", ddlSecciones.SelectedValue.Trim());
-                cmd.Parameters.AddWithValue("@fk_Manzana", ddlManzanas.SelectedValue.Trim());
-                cmd.Parameters.AddWithValue("@estado", "");
+                cmd.Parameters.AddWithValue("@fk_idRegion", ddlRegiones.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_idSeccion", ddlSecciones.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@fk_idManzana", ddlManzanas.SelectedValue.Trim());
+                cmd.Parameters.AddWithValue("@estado", true);
                 cmd.Parameters.AddWithValue("@y", cord1.Text);
                 cmd.Parameters.AddWithValue("@x", cord2.Text);
                 int rowsAffected = cmd.ExecuteNonQuery();

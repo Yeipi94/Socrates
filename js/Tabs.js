@@ -15,8 +15,8 @@ function showTab(n) {
     }
     if (n == (x.length - 1))
     {
-        document.getElementById("nextBtn").innerHTML = "Registrar";
-
+        //document.getElementById("nextBtn").innerHTML = "Registrar";
+        document.getElementById("nextBtn").style.display = "none";
     }
     else
     {
@@ -37,7 +37,8 @@ function nextPrev(n) {
     // if you have reached the end of the form...
     if (currentTab >= x.length) {
         // ... the form gets submitted:
-        document.getElementById("regTab").submit();
+        //document.getElementById("regTab").submit();
+       
         return false;
     }
     // Otherwise, display the correct tab:
