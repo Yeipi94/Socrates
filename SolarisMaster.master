@@ -172,14 +172,9 @@
                                         class="svg-icon mr-2 ml-1"></i>
                                         Account Setting</a>--%>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="javascript:void(0)" onclick="btLogOut">
-                                        <i data-feather="power" class="svg-icon mr-2 ml-1"></i>
-                                        Salir</a>
-<%--                                    <div class="dropdown-divider"></div>--%>
-                                   <%-- <div class="pl-4 p-3">
-                                        <a href="javascript:void(0)" class="btn btn-sm btn-info">View
-                                        Profile</a>
-                                    </div>--%>
+
+                                    <asp:linkbutton ID="lnkLogOut" CssClass="dropdown-item" runat="server" OnClick="btLogOut"><i data-feather="power" class="svg-icon mr-2 ml-1"></i> Salir </asp:linkbutton>
+
                                 </div>
                             </li>
 
@@ -194,7 +189,7 @@
                     <nav class="sidebar-nav">
                         <ul id="sidebarnav">
 
-                            <li class="sidebar-item">
+                            <li class="sidebar-item" runat="server" id="Dashboard">
                                 <a class="sidebar-link sidebar-link" href="Dashboard.aspx" aria-expanded="false">
                                     <i data-feather="home" class="feather-icon"></i>
                                     <span class="hide-menu">Dashboard</span>
@@ -205,7 +200,7 @@
 
                             <li class="nav-small-cap"><span class="hide-menu">Consultas</span></li>
 
-                            <li class="sidebar-item">
+                            <li class="sidebar-item" runat="server" id="Busqueda">
                                 <a class="sidebar-link" href="Search.aspx" aria-expanded="false">
                                     <i data-feather="tag" class="feather-icon"></i>
                                     <span class="hide-menu">Registros | INE</span>
@@ -218,45 +213,41 @@
                                     <span class="hide-menu">Catalogo</span>
                                 </a>
                             </li>
-							<li class="sidebar-item"><a class="sidebar-link has-arrow" href="javascript:void(0)"
+							<li class="sidebar-item" runat="server" id="catalogos"><a class="sidebar-link has-arrow" href="javascript:void(0)"
 								aria-expanded="false"><i data-feather="bar-chart" class="feather-icon"></i><span
 									class="hide-menu">Catálogos </span></a>
 								<ul aria-expanded="false" class="collapse  first-level base-level-line">
 									<li class="sidebar-item"><a href="Territorial.aspx" class="sidebar-link">
                                         <span class="hide-menu">Asignaciones </span></a>
 									</li>
-									<li class="sidebar-item"><a href="#" class="sidebar-link">
-                                        <span class="hide-menu">ChartJs </span></a>
-									</li>
-									<li class="sidebar-item"><a href="chart-knob.html" class="sidebar-link">
-                                        <span class="hide-menu">Knob Chart </span></a>
-									</li>
+									
+									
 								</ul>
 							</li>
-							<li class="sidebar-item">
+							<li class="sidebar-item" runat="server" id="divElectoral">
 								<a class="sidebar-link has-arrow" href="javascript:void(0)" aria-expanded="false">
 									<i data-feather="calendar" class="feather-icon"></i>
 									<span class="hide-menu">Division Electoral</span>
 
 								</a>
 								<ul aria-expanded="false" class="collapse first-level base-level-line">
-                                    <li class="sidebar-item">
+                                    <li class="sidebar-item" runat="server" id="M_Distrito">
 										<a href="Catalogo.aspx" class="sidebar-link">
 											<span class="hide-menu">Distritos</span>
 										</a>
 									</li>
 									
-                                    <li class="sidebar-item">
+                                    <li class="sidebar-item" runat="server" id="M_Region">
 										<a href="Regiones.aspx" class="sidebar-link">
 											<span class="hide-menu">Regiones</span>
 										</a>
 									</li>
-                                    <li class="sidebar-item">
+                                    <li class="sidebar-item" runat="server" id="M_Seccion">
 										<a href="Seccionales.aspx" class="sidebar-link">
 											<span class="hide-menu">Secciones</span>
 										</a>
 									</li>
-                                    <li class="sidebar-item">
+                                    <li class="sidebar-item" runat="server" id="M_Manzana">
 										<a href="Manzaneros.aspx" class="sidebar-link">
 											<span class="hide-menu">Manzanas</span>
 										</a>

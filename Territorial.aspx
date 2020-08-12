@@ -11,7 +11,7 @@
 	<script src="../src/angularLocationpicker.jquery.js"></script>
 
 
-	<script type="text/html" src="https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJrTLr-GyuEmsRBfy61i59si0&key=AIzaSyCxW-VPfw8x42DIwrfQ9gL8sh-iu42QhCY"></script>
+<%--	<script type="text/html" src="https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJrTLr-GyuEmsRBfy61i59si0&key=AIzaSyCxW-VPfw8x42DIwrfQ9gL8sh-iu42QhCY"></script>--%>
 
 
 
@@ -48,8 +48,6 @@
 			position: absolute;
 		}
 	</style>
-
-
 	<script type="text/javascript">
 
 
@@ -152,10 +150,6 @@
 
 
 	</script>
-
-
-
-
 	<script async defer
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbmMQ2Ma1uZKipVyBagGkaxAmd65aRXPg&callback=initMap&libraries=places">
 	</script>
@@ -442,7 +436,7 @@
 																</div>
 
 																<div class="col-xs-12 col-lg-4">
-																	<label>Regiones</label>
+																	<label>Distritos</label>
 																	<div class="input-group">
 																		<asp:DropDownList ID="ddlDistrito" runat="server" CssClass="form-control"></asp:DropDownList>
 

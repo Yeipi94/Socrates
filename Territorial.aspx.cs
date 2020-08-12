@@ -321,6 +321,7 @@ public partial class Territorial : System.Web.UI.Page
                     txtseccion.Text = "";
                     txtTelefono.Text = "";
                     txtCodigo.Text = "";
+
                 }
                 else
                 {

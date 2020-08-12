@@ -15,49 +15,80 @@
 	</style>
      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+        google.charts.load('current', { 'packages': ['corechart'] });
+		google.charts.setOnLoadCallback(drawChart);
+        google.charts.setOnLoadCallback(chart2);
+        google.charts.setOnLoadCallback(chart3);
+        google.charts.setOnLoadCallback(chart4);
+        
 
-      function drawChart() {
+		function drawChart() {
 
-        var data = google.visualization.arrayToDataTable(<%=obtenerDatos()%>);
+            var datos = google.visualization.arrayToDataTable(<%=obtenerDatos()%>);
+            var options = {
+                title: 'Distrito',
+               
+				slices: {
+					0: { color: '#ff4f70' },
+					1: { color: '#edf2f6' },
+                },
+                pieHole: 0.50,
+            };
+            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+			chart.draw(datos, options);
 
-        var options = {
-            title: 'Distrito',
-			slices: {
-				0: { color: 'rgb(255, 79, 112)' },
-				1: { color: 'rgb(1, 202, 241)' },
-            },
-            pieHole: 0.50,
-            
-        };
+        }
+		function chart2() {
 
-        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+			var datos = google.visualization.arrayToDataTable(<%=Chart_Regiones()%>);
+			 var options = {
+				 //title: 'Distrito',
+				
+				 slices: {
+					 0: { color: '#22ca80' },
+					 1: { color: '#edf2f6' },
+				 },
+				 pieHole: 0.50,
+			 };
+			var chart = new google.visualization.PieChart(document.getElementById('char_Region'));
+			 chart.draw(datos, options);
+        }
+		function chart3() {
 
-          chart.draw(data, options);
+			var datos = google.visualization.arrayToDataTable(<%=Chart_Seccion()%>);
+			 var options = {
+				 //title: 'Distrito',
+				 
+				 slices: {
+					 0: { color: '#5f76e8' },
+					 1: { color: '#edf2f6' },
+				 },
+				 pieHole: 0.50,
+			 };
+			var chart = new google.visualization.PieChart(document.getElementById('chart_Seccion'));
+			 chart.draw(datos, options);
+		}
+		function chart4() {
 
-		  var percent = 0;
-		  // start the animation loop
-		  var handler = setInterval(function () {
-			  // values increment
-			  percent += 1;
-			  // apply new values
-			  data.setValue(0, 1, percent);
-			  data.setValue(1, 1, 100 - percent);
-			  // update the pie
-			  chart.draw(data, options);
-			  // check if we have reached the desired value
-			  if (percent > handler)
-				  // stop the loop
-				  clearInterval(handler);
-		  }, 30);
-      }
+			var datos = google.visualization.arrayToDataTable(<%=Chart_Manzana()%>);
+			 var options = {
+				 //title: 'Distrito',
+				 
+				 slices: {
+					 0: { color: '#01caf1' },
+					 1: { color: '#edf2f6' },
+				 },
+				 pieHole: 0.50,
+			 };
+			var chart = new google.visualization.PieChart(document.getElementById('chart_Manzana'));
+			 chart.draw(datos, options);
+		 }
 	</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
  
     <div class="row">
-		<div class="col-lg-4 col-md-12">
+		<div class="col-lg-6 col-md-12">
 			<div class="card">
 				<div class="card-body">
 					<h4 class="card-title">Avance por distrito</h4>
@@ -66,6 +97,34 @@
 				</div>
 			</div>
 		</div>
+        <div class="col-lg-6 col-md-12">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Avance por Region</h4>
+					<div id="char_Region" class="mt-2" style="height:283px; width:100%;"></div>
+
+				</div>
+			</div>
+		</div>
+        <div class="col-lg-6 col-md-12">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Avance por Seccion</h4>
+					<div id="chart_Seccion" class="mt-2" style="height:283px; width:100%;"></div>
+
+				</div>
+			</div>
+		</div>
+        <div class="col-lg-6 col-md-12">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Avance por Mananas</h4>
+					<div id="chart_Manzana" class="mt-2" style="height:283px; width:100%;"></div>
+
+				</div>
+			</div>
+		</div>
+     
 	</div>
 
 

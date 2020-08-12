@@ -74,15 +74,33 @@ public partial class Index : System.Web.UI.Page
                     {
                         Session["User"] = dt.Rows[0]["num_empleado"];
 						Session["empleadoCaptura"] = dt.Rows[0]["num_empleado"];
-						Response.Redirect("Search.aspx");
+						Response.Redirect("Territorial.aspx");
                     }
-					else if (dt.Rows[0][1].ToString() == "Carto")
+					else if (dt.Rows[0][1].ToString() == "User1")
 					{
-						Session["Carto"] = dt.Rows[0]["num_empleado"];
+						Session["User1"] = dt.Rows[0]["num_empleado"];
 						Session["empleadoCaptura"] = dt.Rows[0]["num_empleado"];
-						Response.Redirect("Cartografía.aspx");
+						Response.Redirect("Catalogo.aspx");
 					}
-				}
+                    else if (dt.Rows[0][1].ToString() == "User2")
+                    {
+                        Session["User2"] = dt.Rows[0]["num_empleado"];
+                        Session["empleadoCaptura"] = dt.Rows[0]["num_empleado"];
+                        Response.Redirect("Regiones.aspx");
+                    }
+                    else if (dt.Rows[0][1].ToString() == "User3")
+                    {
+                        Session["User3"] = dt.Rows[0]["num_empleado"];
+                        Session["empleadoCaptura"] = dt.Rows[0]["num_empleado"];
+                        Response.Redirect("Seccionales.aspx");
+                    }
+                    else if (dt.Rows[0][1].ToString() == "User4")
+                    {
+                        Session["User4"] = dt.Rows[0]["num_empleado"];
+                        Session["empleadoCaptura"] = dt.Rows[0]["num_empleado"];
+                        Response.Redirect("Manzaneros.aspx");
+                    }
+                }
                 else
                 {
 					throw new Exception("Ingrese los datos correctamente.");

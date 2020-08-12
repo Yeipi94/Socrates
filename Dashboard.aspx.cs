@@ -25,7 +25,7 @@ public partial class Dashboard : System.Web.UI.Page
         SqlConnection con = new SqlConnection(strConnString);
         con.Open();
 
-        string result1 = SqlDataSource1.SelectCommand = "SELECT TOP (1000) fk_idDistrito, Meta, Avance, Faltante, AvancePorciento, FaltantePorciento FROM solaris.dbo.Meta_Distrital";
+        string result1 = SqlDataSource1.SelectCommand = "SELECT TOP (1000) fk_idDistrito, Meta, Avance, Faltante, AvancePorciento, FaltantePorciento FROM Meta_Distrital";
 
         SqlDataSource1.DataBind();
 
@@ -46,19 +46,84 @@ public partial class Dashboard : System.Web.UI.Page
         DataTable Datos = new DataTable();
         Datos.Load(cmd.ExecuteReader());
         con.Close();
-
-        //DataTable Datos = new DataTable();
-
-        //Datos.Columns.Add(new DataColumn("Meta", typeof(string)));
-        //Datos.Columns.Add(new DataColumn("Porciento", typeof(string)));
-
-        //Datos.Rows.Add(new Object[] { "Avance", 3 });
-        //Datos.Rows.Add(new Object[] { "Pendiente", 97 });
-
         string strDatos;
 
         strDatos = "[['Meta','Porciento'],";
 
+        foreach (DataRow dr in Datos.Rows)
+        {
+            strDatos = strDatos + "[";
+            strDatos = strDatos + "'" + dr[0] + "'" + "," + dr[1];
+            strDatos = strDatos + "],";
+        }
+        strDatos = strDatos + "]";
+        return strDatos;
+
+    }
+
+
+    protected string Chart_Regiones()
+    {
+        SqlConnection con = new SqlConnection(strConnString);
+
+        SqlCommand cmd = new SqlCommand();
+        cmd.CommandText = "Select Estatus, Avance from Metas_Regional where fk_idRegion=4";
+        cmd.CommandType = CommandType.Text;
+        cmd.Connection = con;
+        con.Open();
+        DataTable Datos = new DataTable();
+        Datos.Load(cmd.ExecuteReader());
+        con.Close();
+        string strDatos;
+        strDatos = "[['Meta','Porciento'],";
+        foreach (DataRow dr in Datos.Rows)
+        {
+            strDatos = strDatos + "[";
+            strDatos = strDatos + "'" + dr[0] + "'" + "," + dr[1];
+            strDatos = strDatos + "],";
+        }
+        strDatos = strDatos + "]";
+        return strDatos;
+
+    }
+    protected string Chart_Seccion()
+    {
+        SqlConnection con = new SqlConnection(strConnString);
+
+        SqlCommand cmd = new SqlCommand();
+        cmd.CommandText = "Select Estatus, Avance from Metas_Secciones where fk_idSeccion=12";
+        cmd.CommandType = CommandType.Text;
+        cmd.Connection = con;
+        con.Open();
+        DataTable Datos = new DataTable();
+        Datos.Load(cmd.ExecuteReader());
+        con.Close();
+        string strDatos;
+        strDatos = "[['Meta','Porciento'],";
+        foreach (DataRow dr in Datos.Rows)
+        {
+            strDatos = strDatos + "[";
+            strDatos = strDatos + "'" + dr[0] + "'" + "," + dr[1];
+            strDatos = strDatos + "],";
+        }
+        strDatos = strDatos + "]";
+        return strDatos;
+
+    }
+    protected string Chart_Manzana()
+    {
+        SqlConnection con = new SqlConnection(strConnString);
+
+        SqlCommand cmd = new SqlCommand();
+        cmd.CommandText = "Select Estatus, Avance from Metas_Manzanas where fk_idManzana=128";
+        cmd.CommandType = CommandType.Text;
+        cmd.Connection = con;
+        con.Open();
+        DataTable Datos = new DataTable();
+        Datos.Load(cmd.ExecuteReader());
+        con.Close();
+        string strDatos;
+        strDatos = "[['Meta','Porciento'],";
         foreach (DataRow dr in Datos.Rows)
         {
             strDatos = strDatos + "[";
