@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define("require exports tslib ../../PopupTemplate ../../core/Error ../../core/promiseUtils ../../intl/messages ./support/utils".split(" "),function(w,f,a,l,r,t,u,m){function v(g){return a.__awaiter(this,void 0,void 0,function(){var b,d,c;return a.__generator(this,function(e){switch(e.label){case 0:return b=g.layer,d=g.renderer,[4,b.load()];case 1:e.sent();c=d||b.renderer;if("heatmap"!==c.type)throw new r("heatmap-popup:invalid-parameters","renderer.type must be 'heatmap'");return[2,{layer:b,renderer:c}]}})})}
+Object.defineProperty(f,"__esModule",{value:!0});f.getTemplates=function(g){return a.__awaiter(this,void 0,void 0,function(){var b,d,c,e,f,k,n,p,h,q;return a.__generator(this,function(a){switch(a.label){case 0:return[4,t.all([v(g),u.loadMessageBundle("esri/smartMapping/t9n/smartMapping")])];case 1:return b=a.sent(),d=b[0],c=d.renderer,e=d.layer,f=b[1],c.field?[4,m.getFieldAndExpressionInfos({renderer:c,layer:e})]:[2,null];case 2:return k=a.sent().fieldInfos,p=l.bind,h={},[4,m.getContentFromFieldInfos(e,
+{fieldInfos:k})];case 3:return n=new (p.apply(l,[void 0,(h.content=a.sent(),h.fieldInfos=k,h)])),q={name:"heatmap",title:f.heatmap,value:n},[2,{primaryTemplate:q,secondaryTemplates:[]}]}})})}});

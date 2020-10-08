@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define("require exports ../../core/accessorSupport/ensureType ../elements/AttachmentElement ../elements/Element ../elements/FieldElement ../elements/GroupElement ../elements/RelationshipElement".split(" "),function(p,d,g,h,k,l,m,n){Object.defineProperty(d,"__esModule",{value:!0});var c={base:k.Element,key:"type",typeMap:{attachment:h,field:l,group:m,relationship:n}},f={base:c.base,key:c.key,typeMap:{attachment:c.typeMap.attachment,field:c.typeMap.field,relationship:c.typeMap.relationship}};d.fromJSON=
+function(b,a){void 0===a&&(a=!0);if(!b)return null;var e=a?c.typeMap:f.typeMap;return b.filter(function(a){return e[a.type]}).map(function(a){return e[a.type].fromJSON(a)})};d.toJSON=function(b,a){void 0===a&&(a=!0);if(!b)return null;var e=a?c.typeMap:f.typeMap;return b.filter(function(a){return e[a.type]}).map(function(a){return a.toJSON()})};d.ensureType=function(b,a){void 0===a&&(a=!0);return b?b.map(function(b){return g.ensureOneOfType(a?c:f,b)}):null}});

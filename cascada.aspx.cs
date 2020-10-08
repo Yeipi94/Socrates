@@ -8,7 +8,7 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class cascada : System.Web.UI.Page
+public partial class cascada : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

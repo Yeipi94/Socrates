@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define("require exports tslib ../../core/JSONSupport ../../core/lang ../../core/accessorSupport/decorators ../../core/accessorSupport/ensureType".split(" "),function(c,a,d,f,g,e,h){Object.defineProperty(a,"__esModule",{value:!0});c=function(c){function b(a){a=c.call(this,a)||this;a.id="";a.sublayerIds=null;return a}d.__extends(b,c);a=b;b.prototype.clone=function(){return new a({id:this.id,sublayerIds:g.clone(this.sublayerIds)})};var a;d.__decorate([e.property({type:String,json:{write:!0}})],b.prototype,
+"id",void 0);d.__decorate([e.property({type:[h.Integer],json:{read:{source:"subLayerIds"},write:{target:"subLayerIds"}}})],b.prototype,"sublayerIds",void 0);return b=a=d.__decorate([e.subclass("esri.webscene.support.SlideVisibleLayer")],b)}(f.JSONSupport);a.SlideVisibleLayer=c;a.default=c});

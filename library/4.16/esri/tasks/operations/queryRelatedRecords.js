@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define(["require","exports","tslib","../../request","./urlUtils"],function(p,b,c,m,n){function f(a){a=a.toJSON();a.objectIds&&(a.objectIds=a.objectIds.join(","));a.outFields&&(a.outFields=a.outFields.join(","));a.outSpatialReference&&(a.outSR=a.outSR.wkid||JSON.stringify(a.outSR.toJSON()),delete a.outSpatialReference);a.source&&(a.layer=JSON.stringify({source:a.source}),delete a.source);return a}Object.defineProperty(b,"__esModule",{value:!0});b.toQueryStringParameters=f;b.executeRelationshipQuery=
+function(a,d,b){d={query:n.mapParameters(c.__assign(c.__assign(c.__assign({},a.query),{f:"json"}),f(d)))};b&&(d=c.__assign(c.__assign({},b),d));return m(a.path+"/queryRelatedRecords",d).then(function(a){for(var b=a.data,c=b.geometryType,d=b.spatialReference,g={},h=0,f=b.relatedRecordGroups;h<f.length;h++){var e=f[h],l={fields:void 0,objectIdFieldName:void 0,geometryType:c,spatialReference:d,hasZ:!!b.hasZ,hasM:!!b.hasM,features:e.relatedRecords};if(null!=e.objectId)g[e.objectId]=l;else for(var k in e)e.hasOwnProperty(k)&&
+"relatedRecords"!==k&&(g[e[k]]=l)}a.data=g;return a})}});

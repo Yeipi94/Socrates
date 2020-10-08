@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define(["require","exports"],function(l,f){function g(a,b){void 0===b&&(b=5);if(h(a.params)){var c=a.params.allowedValues;if(c){c=c.map(function(a){return JSON.stringify(a)});if(c.length>b){var e="("+(c.length-b)+" more...)",c=c.slice(0,b);c.push(e)}a.message="should be equal to one of: "+c.join(", ")}}else k(a.params)&&(a.message="should NOT have additional property: "+a.params.additionalProperty);return a}function h(a){return null!=(a&&a.allowedValues)}function k(a){return null!=(a&&a.additionalProperty)}
+Object.defineProperty(f,"__esModule",{value:!0});f.convertAjvErrors=function(a,b){void 0===b&&(b=10);var c={};a=a.map(g).map(function(a,c){return{e:a,i:c}}).sort(function(a,c){var b=a.e;a=a.i;var d=c.e;c=c.i;b=b.dataPath?b.dataPath.split(".").length:0;d=d.dataPath?d.dataPath.split(".").length:0;return b===d?a-c:d-b}).map(function(a){a=a.e;return""+(a.dataPath?a.dataPath+": ":"")+a.message}).filter(function(a){var b=!c[a];c[a]=!0;return b});if(a.length>b){var e="("+(a.length-b)+" more...)";a=a.slice(0,
+b);a.push(e)}return a}});

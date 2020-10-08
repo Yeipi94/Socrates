@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define(["require","exports","../../../../../../core/maybe","../../../../../../geometry/support/jsonUtils","../../../../../../symbols/cim/effects/CIMEffectHelper"],function(h,k,n,l,c){Object.defineProperty(k,"__esModule",{value:!0});h=function(){function a(){}a.prototype.writeMesh=function(a,f,b,m,d){if(n.isSome(this.effects)){var g=c.CIMEffectHelper.executeEffects(this.effects,d.geometry),e=c.CIMEffectHelper.next(g);for(b=l.getJsonType(e);e;)this.writeMeshWithGeometry(a,f,b,m,d,e),e=c.CIMEffectHelper.next(g),
+b=l.getJsonType(e)}else this.writeMeshWithGeometry(a,f,b,m,d,d.geometry)};a.prototype.writeMeshWithGeometry=function(a,f,b,c,d,g){};a.prototype.bindFeature=function(a,c,b){};return a}();k.default=h});

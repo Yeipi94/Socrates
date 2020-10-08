@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Regiones : System.Web.UI.Page
+public partial class Regiones : BasePage
 {
 	string strConnString = ConfigurationManager.ConnectionStrings["SISTEM_ALIADOSConnectionString"].ConnectionString;
     WebServiceDatos Tools = new WebServiceDatos();

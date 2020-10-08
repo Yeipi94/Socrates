@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define(["require","exports","tslib","../../core/JSONSupport","../../core/accessorSupport/decorators"],function(d,b,c,f,e){Object.defineProperty(b,"__esModule",{value:!0});d=function(d){function a(a){return d.call(this,a)||this}c.__extends(a,d);b=a;a.prototype.clone=function(){return new b({name:this.name,fields:this.fields,isAscending:this.isAscending,isUnique:this.isUnique,description:this.description})};var b;c.__decorate([e.property({constructOnly:!0})],a.prototype,"name",void 0);c.__decorate([e.property({constructOnly:!0})],
+a.prototype,"fields",void 0);c.__decorate([e.property({constructOnly:!0})],a.prototype,"isAscending",void 0);c.__decorate([e.property({constructOnly:!0})],a.prototype,"isUnique",void 0);c.__decorate([e.property({constructOnly:!0})],a.prototype,"description",void 0);return a=b=c.__decorate([e.subclass("esri.layers.support.FeatureIndex")],a)}(f.JSONSupport);b.FeatureIndex=d;b.default=d});

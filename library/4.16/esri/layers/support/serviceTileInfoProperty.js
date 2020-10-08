@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define(["require","exports","tslib","./TileInfo"],function(p,c,f,d){function e(b,g,h,c){if(!b)return null;h=g.minScale;var k=g.maxScale,e=g.minLOD,l=g.maxLOD;if(null!=e&&null!=l)return c&&c.ignoreMinMaxLOD?d.fromJSON(b):d.fromJSON(f.__assign(f.__assign({},b),{lods:b.lods.filter(function(a){a=a.level;return null!=a&&a>=e&&a<=l})}));if(0!==h&&0!==k){var m=h?Math.round(1E4*h)/1E4:Infinity,n=k?Math.round(1E4*k)/1E4:-Infinity;return d.fromJSON(f.__assign(f.__assign({},b),{lods:b.lods.filter(function(a){a=
+Math.round(1E4*a.scale)/1E4;return a<=m&&a>=n})}))}return d.fromJSON(b)}Object.defineProperty(c,"__esModule",{value:!0});c.serviceTileInfoProperty={type:d,json:{origins:{service:{read:{source:["tileInfo","minScale","maxScale","minLOD","maxLOD"],reader:e}}}}};c.readServiceTileInfo=e});

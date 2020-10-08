@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define(["require","exports","tslib","../engine","./webgl/WGLContainer"],function(c,d,e,f,g){Object.defineProperty(d,"__esModule",{value:!0});c=function(b){function a(){return null!==b&&b.apply(this,arguments)||this}e.__extends(a,b);a.prototype.prepareRenderPasses=function(a){var c=this,d=a.registerRenderPass({name:"bitmap",brushes:[f.brushes.Bitmap],target:function(){return c.children}});return e.__spreadArrays(b.prototype.prepareRenderPasses.call(this,a),[d])};a.prototype.createRenderParams=function(a){return e.__assign(e.__assign({},
+b.prototype.createRenderParams.call(this,a)),{blendMode:this.blendMode})};return a}(g.default);d.BitmapContainer=c});

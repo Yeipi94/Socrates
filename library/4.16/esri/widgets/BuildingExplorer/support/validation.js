@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define(["require","exports","../../../core/mathUtils","../../../core/maybe"],function(m,e,l,f){function g(b,a){return f.isSome(a.min)&&f.isSome(a.max)?l.clamp(b,a.min,a.max):b}function h(b,a){if(0===a.length)return b;if(Infinity===b)return a[a.length-1];if(-Infinity===b)return a[0];for(var c=a[0],d=Math.abs(c-b),e=0;e<a.length;e++){var k=a[e],f=Math.abs(k-b);f<d&&(c=k,d=f)}return c}Object.defineProperty(e,"__esModule",{value:!0});e.getDomainInfo=function(b){for(var a={fieldValueMap:new Map,allowedValues:[]},
+c=function(b){var c=a.fieldValueMap;b.fieldValueMap.forEach(function(b,d){c.has(d)||(c.set(d,b),a.allowedValues.push(d))})},d=0;d<b.length;d++)c(b[d]);a.allowedValues.sort(function(a,b){return a-b});return a};e.getMin=function(b){for(var a=null,c=0;c<b.length;c++)var d=b[c],a=f.isSome(a)?Math.min(a,d):d;return a};e.getMax=function(b){for(var a=null,c=0;c<b.length;c++)var d=b[c],a=f.isSome(a)?Math.max(a,d):d;return a};e.getValidNumber=function(b,a){return 0<a.allowedValues.length?h(b,a.allowedValues):
+g(b,a)};e.getClamped=g;e.findClosest=h});

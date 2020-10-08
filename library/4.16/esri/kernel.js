@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define(["require","exports","./core/has","./support/revision","@dojo/framework/shim/Promise"],function(d,a,e,b){Object.defineProperty(a,"__esModule",{value:!0});a.revision=b.commitHash;a.version="4.16";a.workerMessages={request:function(a,b){return(new Promise(function(a,b){d(["./request"],a,b)})).then(function(f){var c=a.options||{};c.responseType="array-buffer";c.signal=null===b||void 0===b?void 0:b.signal;return f(a.url,c)}).then(function(a){return{result:{data:a.data,ssl:a.ssl},transferList:[a.data]}})}};
+a.setId=function(b){a.id=b};e("host-webworker")||console.debug("Using ArcGIS API for JavaScript "+a.version+" [Date: "+b.buildDate+", Revision: "+b.commitHash.slice(0,8)+"]")});

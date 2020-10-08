@@ -43,5 +43,19 @@ Copyright (C) Microsoft Corporation. Todos los derechos reservados.
       <Value>$(AssemblyVersion)</Value>
     </AssemblyAttributes>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Users\Casa Alameda 01\source\repos\Proyecto_E\datos\datos.csproj">
+      <Project>{E19E95D4-AFCD-4986-87F1-C1FCF3832C27}</Project>
+      <Name>datos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Users\Casa Alameda 01\source\repos\Proyecto_E\Entidades\Entidades.csproj">
+      <Project>{E4E9E71E-6B21-43C7-9124-975D76F64BCD}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\Users\Casa Alameda 01\source\repos\Proyecto_E\logica\logica.csproj">
+      <Project>{094CD4AC-A2D2-49B4-B039-22985AFCC47A}</Project>
+      <Name>logica</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(_WebPublishTargetsPath)\Web\Microsoft.WebSite.Publishing.targets" />
 </Project>

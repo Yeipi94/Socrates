@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define(["require","exports","tslib"],function(d,e,f){Object.defineProperty(e,"__esModule",{value:!0});d=function(){function c(a,b){this._module=a;this._loadModule=b}c.prototype.get=function(){return this._module};c.prototype.reload=function(){return f.__awaiter(this,void 0,void 0,function(){var a;return f.__generator(this,function(b){switch(b.label){case 0:return a=this,[4,this._loadModule()];case 1:return a._module=b.sent(),[2,this._module]}})})};return c}();e.ReloadableShaderModule=d});

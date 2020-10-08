@@ -8,7 +8,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Metas_graficas : System.Web.UI.Page
+public partial class Metas_graficas : BasePage
 {
     string strConnString = ConfigurationManager.ConnectionStrings["SISTEM_ALIADOSConnectionString"].ConnectionString;
     DataTable dt;

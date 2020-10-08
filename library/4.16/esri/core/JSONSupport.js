@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define("require exports tslib ./Accessor ./accessorSupport/decorators ./accessorSupport/read ./accessorSupport/write".split(" "),function(f,d,e,k,g,l,m){Object.defineProperty(d,"__esModule",{value:!0});d.JSONSupportMixin=function(a){a=function(a){function b(){for(var h=[],c=0;c<arguments.length;c++)h[c]=arguments[c];return a.apply(this,h)||this}e.__extends(b,a);b.prototype.read=function(a,c){l.default(this,a,c)};b.prototype.write=function(a,c){return m.default(this,a||{},c)};b.prototype.toJSON=function(a){return this.write(null,
+a)};b.fromJSON=function(a,c){if(a){if(a.declaredClass)throw Error("JSON object is already hydrated");var b=new this;b.read(a,c);a=b}else a=null;return a};return b=e.__decorate([g.subclass("esri.core.JSONSupport")],b)}(a);a.prototype.toJSON.isDefaultToJSON=!0;return a};d.isJSONSupport=function(a){return a&&"read"in a&&"write"in a&&"toJSON"in a};f=function(a){function d(){return null!==a&&a.apply(this,arguments)||this}e.__extends(d,a);return d=e.__decorate([g.subclass("esri.core.JSONSupport")],d)}(d.JSONSupportMixin(k));
+d.JSONSupport=f});

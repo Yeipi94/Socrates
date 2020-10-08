@@ -111,7 +111,7 @@
                                                     </HeaderTemplate>
                                                     <ItemTemplate>
                                                         <asp:HiddenField ID="hfIdParentMenu" runat="server" Visible="false" Value='<%#Eval("IdMenuParent") %>' />
-                                                        <asp:Label ID="lblPadreMenu" runat="server" Text='<%#((Eval("SubMenu") as List<CapaEntidades.Menu>).Count > 0)? (Eval("SubMenu") as List<CapaEntidades.Menu>)[0].Nombre : "" %>'></asp:Label>
+                                                        <asp:Label ID="lblPadreMenu" runat="server" Text='<%#((Eval("SubMenu") as List<Entidades.Menu>).Count > 0)? (Eval("SubMenu") as List<Entidades.Menu>)[0].Nombre : "" %>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>
@@ -179,7 +179,7 @@
                                                     </HeaderTemplate>
                                                     <ItemTemplate>
                                                         <asp:HiddenField ID="hfIdParentMenu" runat="server" Visible="false" Value='<%#Eval("IdMenuParent") %>' />
-                                                        <asp:Label ID="lblPadreMenu" runat="server" Text='<%#((Eval("SubMenu") as List<CapaEntidades.Menu>).Count > 0)? (Eval("SubMenu") as List<CapaEntidades.Menu>)[0].Nombre : "" %>'></asp:Label>
+                                                        <asp:Label ID="lblPadreMenu" runat="server" Text='<%#((Eval("SubMenu") as List<Entidades.Menu>).Count > 0)? (Eval("SubMenu") as List<Entidades.Menu>)[0].Nombre : "" %>'></asp:Label>
                                                     </ItemTemplate>
                                                 </asp:TemplateField>
                                             </Columns>

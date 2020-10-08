@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define("require exports tslib ../../request ../../core/urlUtils ../../layers/support/AttachmentInfo ./urlUtils".split(" "),function(r,g,b,k,m,n,p){function q(a){a=a.toJSON();a.attachmentTypes&&(a.attachmentTypes=a.attachmentTypes.join(","));a.keywords&&(a.keywords=a.keywords.join(","));a.globalIds&&(a.globalIds=a.globalIds.join(","));a.objectIds&&(a.objectIds=a.objectIds.join(","));a.size&&(a.size=a.size.join(","));return a}Object.defineProperty(g,"__esModule",{value:!0});g.processAttachmentQueryResult=
+function(a,c){for(var d={},b=0;b<a.length;b++)for(var e=a[b],h=e.parentObjectId,g=e.parentGlobalId,l=0,e=e.attachmentInfos;l<e.length;l++){var f=e[l],k=m.addProxy(m.addTokenParameter(c+"/"+h+"/attachments/"+f.id)),f=n.fromJSON(f);f.set({url:k,parentObjectId:h,parentGlobalId:g});d[h]?d[h].push(f):d[h]=[f]}return d};g.executeAttachmentQuery=function(a,c,d){c={query:p.mapParameters(b.__assign(b.__assign(b.__assign({},a.query),{f:"json"}),q(c)))};d&&(c=b.__assign(b.__assign({},d),c));return k(a.path+
+"/queryAttachments",c)}});

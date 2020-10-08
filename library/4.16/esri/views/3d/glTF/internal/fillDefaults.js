@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define(["require","exports","tslib","../../../../core/compilerUtils"],function(l,c,a,f){Object.defineProperty(c,"__esModule",{value:!0});var e={baseColorFactor:[1,1,1,1],metallicFactor:1,roughnessFactor:1},g={pbrMetallicRoughness:e,emissiveFactor:[0,0,0],alphaMode:"OPAQUE",alphaCutoff:.5,doubleSided:!1},h={ESRI_externalColorMixMode:"tint"};c.material=function(b){void 0===b&&(b={});var c=a.__assign(a.__assign({},e),b.pbrMetallicRoughness),d=a.__assign(a.__assign({},h),b.extras);switch(d.ESRI_externalColorMixMode){case "multiply":case "tint":case "ignore":case "replace":break;
+default:f.neverReached(d.ESRI_externalColorMixMode),d.ESRI_externalColorMixMode="tint"}return a.__assign(a.__assign(a.__assign({},g),b),{pbrMetallicRoughness:c,extras:d})};var k={magFilter:9729,minFilter:9987,wrapS:10497,wrapT:10497};c.textureSampler=function(b){return a.__assign(a.__assign({},k),b)}});

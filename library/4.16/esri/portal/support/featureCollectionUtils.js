@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define(["require","exports","tslib","../PortalItem","./portalItemUtils"],function(k,b,c,f,g){function d(a,h,b,d){return c.__awaiter(this,void 0,void 0,function(){var e;return c.__generator(this,function(c){switch(c.label){case 0:if(!a.layerType||"ArcGISFeatureLayer"!==a.layerType||a.url)return[2,!1];if(a.featureCollectionType&&a.featureCollectionType===b)return[2,!0];if(!a.itemId)return[3,2];e=new f({id:a.itemId,portal:h});return[4,e.load()];case 1:return c.sent(),[2,"Feature Collection"===e.type&&
+g.hasTypeKeyword(e,d)];case 2:return[2,!1]}})})}Object.defineProperty(b,"__esModule",{value:!0});b.isMapNotesLayer=function(a,b){return d(a,b,"notes","Map Notes")};b.isRouteLayer=function(a,b){return d(a,b,"route","Route Layer")}});

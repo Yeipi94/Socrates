@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define(["require","exports","../../../object","./type"],function(t,h,k,n){function p(a,b,d,c){k.setDeepValue(d,g(a,c),b)}function g(a,b){return a&&"function"===typeof a.write?a.write({},b):a&&"function"===typeof a.toJSON?a.toJSON():"number"===typeof a?l(a):a}function l(a){return-Infinity===a?-Number.MAX_VALUE:Infinity===a?Number.MAX_VALUE:isNaN(a)?null:a}function q(a,b,d,c){null===a?a=null:a&&"function"===typeof a.map?(a=a.map(function(a){return g(a,c)}),"function"===typeof a.toArray&&(a=a.toArray())):
+a=[g(a,c)];k.setDeepValue(d,a,b)}function m(a,b,d){return 0!==d&&Array.isArray(a)?a.map(function(a){return m(a,b,d-1)}):g(a,b)}function r(a){return function(b,d,c,f){if(null===b)b=null;else{b=m(b,f,a);f=a;for(var e=b;0<f&&Array.isArray(e);)f--,e=e[0];if(void 0!==e)for(e=0;e<f;e++)b=[b]}k.setDeepValue(c,b,d)}}Object.defineProperty(h,"__esModule",{value:!0});h.create=function(a,b,d,c){!c.write||c.write.writer||!1===c.write.enabled&&!c.write.overridePolicy||(1===b||n.isCollection(a)?c.write.writer=q:
+c.write.writer=1<b?r(b):p)};h.numberToJSON=l});

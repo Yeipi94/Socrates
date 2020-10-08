@@ -74,7 +74,7 @@
 								<label>Estados</label>
 								<asp:DropDownList ID="ddlEstados_Cat" runat="server"  CssClass="form-control" Width="100%" OnSelectedIndexChanged="ddlEstados_Cat_SelectedIndexChanged" >
 							<asp:ListItem Text="Todos los Estados" Value="0"></asp:ListItem>
-							<asp:ListItem Text="AGUASCALIENTES2" Value="1"></asp:ListItem>
+							<asp:ListItem Text="AGUASCALIENTES" Value="1"></asp:ListItem>
 							<asp:ListItem Text="BAJA CALIFORNIA" Value="2"></asp:ListItem>
 							<asp:ListItem Text="BAJA CALIFORNIA SUR" Value="3"></asp:ListItem>
 							<asp:ListItem Text="CAMPECHE" Value="4"></asp:ListItem>
@@ -125,7 +125,7 @@
 									MinimumPrefixLength="2"
 									CompletionInterval="500" 
 									EnableCaching="true" 
-									CompletionSetCount="20"  
+									CompletionSetCount="3"  
 									TargetControlID="txtNombre" 
 									UseContextKey="true"
 									ID="AutoCompleteExtender1" 
@@ -147,7 +147,7 @@
           
 					
 					<div style="width: 100%; height: auto; max-height: 400px; overflow-y: scroll" class="table-responsive">
-						<asp:GridView ID="GridView1"  class="table table-bordered  text-center" ShowHeaderWhenEmpty="true"  EmptyDataText="No se encontraron registros con los criterios de búsqueda."  runat="server" OnPageIndexChanging="GridView1_PageIndexChanging" AutoGenerateColumns="false" DataKeyNames="CVE" PagerSettings-Position="Top" OnRowDataBound="GridView1_RowDataBound" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" HeaderStyle-VerticalAlign="Top">
+						<asp:GridView ID="GridView1"  class="table-striped table-bordered no-wrap table table-sm mb-0 text-center" ShowHeaderWhenEmpty="true"  EmptyDataText="No se encontraron registros con los criterios de búsqueda."  runat="server" OnPageIndexChanging="GridView1_PageIndexChanging" AutoGenerateColumns="false" DataKeyNames="CVE" PagerSettings-Position="Top" OnRowDataBound="GridView1_RowDataBound" OnSelectedIndexChanged="GridView1_SelectedIndexChanged" HeaderStyle-VerticalAlign="Top">
 							
 							<HeaderStyle CssClass="bg-danger text-white" />
 							
@@ -161,7 +161,7 @@
 								<asp:BoundField DataField="colonia" HeaderText="Colonia" SortExpression="colonia" />
 								<asp:BoundField DataField="E" HeaderText="Entidad" SortExpression="E" />
 								<asp:BoundField DataField="d_estado" HeaderText="Estado" SortExpression="d_estado" />
-								<asp:CommandField ButtonType="Link" ControlStyle-CssClass="btn btn-success btn-danger" ShowSelectButton="true" />
+								<asp:CommandField ButtonType="Link" ControlStyle-CssClass="btn btn-sm btn-rounded btn-primary" ShowSelectButton="true" />
 							</Columns>
 							<HeaderStyle />
 							<PagerSettings Mode="NumericFirstLast" Position="Bottom" FirstPageText="1" LastPageText="2" NextPageText="3" PreviousPageText="" Visible="false" />
@@ -194,7 +194,7 @@
 
 
 					<div style="width: 100%; height: auto; max-height: 400px; overflow-y: scroll" class="table-responsive">
-						<asp:GridView ID="GvwMonterrey" class="table table-bordered  text-center" runat="server" OnPageIndexChanging="GvwMonterrey_PageIndexChanging" EmptyDataText="No se encontraron registros con los criterios de búsqueda."  AutoGenerateColumns="false" DataKeyNames="id" DataSourceID="SqlDataSource2" PagerSettings-Position="Top" OnRowDataBound="GvwMonterrey_RowDataBound" OnSelectedIndexChanged="GvwMonterrey_SelectedIndexChanged" HeaderStyle-CssClass="info">
+						<asp:GridView ID="GvwMonterrey" class="table-striped table-bordered no-wrap table table-sm mb-0 text-center" runat="server" OnPageIndexChanging="GvwMonterrey_PageIndexChanging" EmptyDataText="No se encontraron registros con los criterios de búsqueda."  AutoGenerateColumns="false" DataKeyNames="id" DataSourceID="SqlDataSource2" PagerSettings-Position="Top" OnRowDataBound="GvwMonterrey_RowDataBound" OnSelectedIndexChanged="GvwMonterrey_SelectedIndexChanged" HeaderStyle-CssClass="info">
 							<HeaderStyle CssClass="bg-danger text-white" />
 							<Columns>
 								<asp:BoundField DataField="id" HeaderText="id" ReadOnly="True" SortExpression="id" Visible="false" />
@@ -203,7 +203,7 @@
 								<asp:BoundField DataField="direccion_comp" HeaderText="direccion_comp" SortExpression="direccion_comp" />
 								<asp:BoundField DataField="municipio" HeaderText="Municipio" SortExpression="municipio" />
 								<asp:BoundField DataField="INE_Origen" HeaderText="INE_Origen" SortExpression="INE_Origen" Visible="false" />
-								<asp:CommandField ButtonType="Link" ControlStyle-CssClass="btn btn-rounded btn-danger" ShowSelectButton="true" />
+								<asp:CommandField ButtonType="Link" ControlStyle-CssClass="btn btn-sm btn-rounded btn-primary" ShowSelectButton="true" />
 							</Columns>
 							<HeaderStyle />
 							<PagerSettings Mode="NumericFirstLast" Position="Bottom" FirstPageText="1" LastPageText="2" NextPageText="3" PreviousPageText="" Visible="false" />

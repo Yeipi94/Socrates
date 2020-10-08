@@ -8362,8 +8362,8 @@ a.btn.disabled, fieldset:disabled a.btn {
 
 .btn-dark {
     color: #fff;
-    background-color: #1c2d41;
-    border-color: #1c2d41
+    background-color: #022C66;
+    border-color: #022C66
 }
 
     .btn-dark:hover {
@@ -17095,7 +17095,7 @@ ul.list-style-none {
 }
 
     .auth-wrapper .auth-box {
-        box-shadow: 0 3px 9px 0 rgba(162,176,190,.15);
+        box-shadow: 20px 20px 20px 20px rgba(0,0,0,.15);
         max-width: 800px;
         margin: 5% 0;
         position: relative

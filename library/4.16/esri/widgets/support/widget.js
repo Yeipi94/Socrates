@@ -1,0 +1,4 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define("require exports tslib ./decorators ./jsxFactory ./widgetUtils ./shim/SVGElement".split(" "),function(g,b,c,d,e,f){Object.defineProperty(b,"__esModule",{value:!0});c.__exportStar(d,b);c.__exportStar(e,b);c.__exportStar(f,b);b.isWidget=function(a){return a&&"function"===typeof a.render};b.hasDomNode=function(a){return a&&"function"===typeof a.postMixInProperties&&"function"===typeof a.buildRendering&&"function"===typeof a.postCreate&&"function"===typeof a.startup}});

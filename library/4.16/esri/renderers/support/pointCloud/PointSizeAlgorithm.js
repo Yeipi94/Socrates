@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define("require exports tslib ../../../core/jsonMap ../../../core/JSONSupport ../../../core/accessorSupport/decorators".split(" "),function(a,b,d,f,g,e){Object.defineProperty(b,"__esModule",{value:!0});b.typeKebabDictionary=new f.default({pointCloudFixedSizeAlgorithm:"fixed-size",pointCloudSplatAlgorithm:"splat"});a=function(a){function c(){return null!==a&&a.apply(this,arguments)||this}d.__extends(c,a);d.__decorate([e.property({type:b.typeKebabDictionary.apiValues,readOnly:!0,nonNullable:!0,json:{type:b.typeKebabDictionary.jsonValues,
+read:!1,write:b.typeKebabDictionary.write}})],c.prototype,"type",void 0);return c=d.__decorate([e.subclass("esri.renderers.support.pointCloud.PointSizeAlgorithm")],c)}(g.JSONSupport);b.PointSizeAlgorithm=a;b.default=a});

@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define("require exports tslib ../request ../core/maybe ../core/accessorSupport/decorators ../geometry/support/normalizeUtils ./Task ./support/ImageServiceIdentifyResult".split(" "),function(p,q,b,g,h,k,l,m,n){return function(d){function a(){return null!==d&&d.apply(this,arguments)||this}b.__extends(a,d);a.prototype.execute=function(a,d){var f=this;return l.normalizeCentralMeridian(a.geometry?[a.geometry]:[]).then(function(e){var c=a.toJSON();e=e&&e[0];h.isSome(e)&&(c.geometry=JSON.stringify(e.toJSON()));
+c=f._encode(b.__assign(b.__assign({f:"json"},f.parsedUrl.query),c));c=b.__assign(b.__assign({query:c},f.requestOptions),d);return g(f.parsedUrl.path+"/identify",c)}).then(function(a){return n.fromJSON(a.data)})};return a=b.__decorate([k.subclass("esri.tasks.ImageServiceIdentifyTask")],a)}(m)});

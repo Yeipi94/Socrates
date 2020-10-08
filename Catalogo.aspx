@@ -4,6 +4,9 @@
 	<link href="DataTables/DataTables-1.10.21/css/buttons.dataTables.min.css" rel="stylesheet" />
 	<script src="path/to/chartjs/dist/Chart.js"></script>
 
+	<link rel="stylesheet" href="https://www.example.com/arcgis_js_api/library/4.16/dijit/themes/claro/claro.css" />
+    <link rel="stylesheet" href="https://www.example.com/arcgis_js_api/library/4.16/esri/themes/light/main.css" />
+
 	<style type="text/css">
 		#Select1 {
 			height: 16px;
@@ -12,14 +15,38 @@
 		.showHide {
 			cursor: pointer;
 		}
+
+		#viewDiv {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+		}
+		 .embed-container {
+			position: relative;
+			padding-bottom: 80%;
+			height: 0;
+			max-width: 100%;
+		}
+
+
+			.embed-container iframe, .embed-container object, .embed-container iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+
+		small {
+			position: absolute;
+			z-index: 40;
+			bottom: 0;
+			margin-bottom: -15px;
+		}
 	</style>
 
-	<script type="text/javascript">
-
-
-
-
-</script>
+	
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -29,24 +56,14 @@
 		<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" ScriptMode="Debug"></asp:ScriptManager>
 		<div class="alert alert-danger alert-dismissible fade in" role="alert" id="msgError" runat="server" style="display: none; background-color: #ad0a0a; color: #fff"></div>
 
-		<div class="col-sm-12 col-md-12 col-lg-12">
+		<div class="col-sm-6 col-md-6 col-lg-12">
 			<div class="card">
 				<div class="card-body">
 
+					
+					
 
-					<div class="row">
-						<div class="col-7 align-self-center">
-							<h4 class="card-title mb-3">DISTRITOS ASIGNADOS</h4>
-
-						</div>
-						<div class="col-5 align-self-center">
-							<div class="customize-input float-right">
-								<button type="button" title="Asignaciones" class="btn btn-primary" data-target="#Asignaciones" data-toggle="modal"><span class='fas fa-plus'></span>Nuevo</button>
-							</div>
-						</div>
-					</div>
-
-					<div class="row">
+					<div class="row" runat="server">
 						<div class="col-xs-12 col-lg-6">
 							<div class="form-group">
 								<label>Estados</label>
@@ -67,12 +84,8 @@
 							</div>
 						</div>
 
-
-					</div>
-
-
-					<div class="table-responsive">
-						<asp:GridView ID="Gw_ListaAsignacion" class="table-bordered no-wrap table table-sm mb-0" runat="server" OnPageIndexChanging="Gw_ListaAsignacion_PageIndexChanging" AutoGenerateColumns="false" DataKeyNames="clave_elector" PagerSettings-Position="Top" OnRowDataBound="Gw_ListaAsignacion_RowDataBound" OnSelectedIndexChanged="Gw_ListaAsignacion_SelectedIndexChanged" HeaderStyle-CssClass="info">
+						<div class="table-responsive">
+						<asp:GridView ID="Gw_ListaAsignacion" class="table-striped table-bordered no-wrap table table-sm mb-0 text-center" runat="server" OnPageIndexChanging="Gw_ListaAsignacion_PageIndexChanging" AutoGenerateColumns="false" DataKeyNames="clave_elector" PagerSettings-Position="Top" OnRowDataBound="Gw_ListaAsignacion_RowDataBound" OnSelectedIndexChanged="Gw_ListaAsignacion_SelectedIndexChanged" HeaderStyle-CssClass="info">
 							<HeaderStyle CssClass="bg-danger text-white" />
 							<Columns>
 								<asp:BoundField DataField="clave_elector" HeaderText="Clave Elector" ReadOnly="True" SortExpression="clave_elector" />
@@ -88,24 +101,94 @@
 						</asp:GridView>
 						<asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:SISTEM_ALIADOSConnectionString %>"></asp:SqlDataSource>
 					</div>
+					</div>
+
+					<%--<div class="row">
+						<div class="table-responsive">
+						
 
 
 
-
-
+					<asp:GridView ID="grdAsignaciones" runat="server" CssClass="table-bordered no-wrap table table-sm mb-0" AutoGenerateColumns="false">
+						<HeaderStyle CssClass="bg-danger text-white" />
+                                            <Columns>
+                                                   
+                                                <asp:TemplateField>
+                                                    <HeaderTemplate>
+                                                        <asp:Label ID="lblHeaderid" runat="server" Text="id"></asp:Label>
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:HiddenField ID="hfIdMenu" Visible="false" runat="server" Value='<%#Eval("id") %>' />
+                                                        <asp:Label ID="lblNombreMenu" runat="server" Text='<%#Eval("id") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                                <asp:TemplateField>
+                                                    <HeaderTemplate>
+                                                        <asp:Label ID="lblHeaderRuta" runat="server" Text="Clave Elector"></asp:Label>
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblRutaMenu" runat="server" Text='<%#Eval("clave_elector") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                               <asp:TemplateField>
+                                                    <HeaderTemplate>
+                                                        <asp:Label ID="lblHeaderRuta" runat="server" Text="Nombre"></asp:Label>
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblRutaMenu" runat="server" Text='<%#Eval("nombre") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+												<asp:TemplateField>
+                                                    <HeaderTemplate>
+                                                        <asp:Label ID="lblHeaderRuta" runat="server" Text="Apellido Paterno"></asp:Label>
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblRutaMenu" runat="server" Text='<%#Eval("apellido_paterno") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+												<asp:TemplateField>
+                                                    <HeaderTemplate>
+                                                        <asp:Label ID="lblHeaderRuta" runat="server" Text="Apellido Materno"></asp:Label>
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblRutaMenu" runat="server" Text='<%#Eval("apellido_materno") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+												
+                                               <asp:TemplateField>
+                                                    <HeaderTemplate>
+                                                        <asp:Label ID="lblHeaderRuta" runat="server" Text="Asignación"></asp:Label>
+                                                    </HeaderTemplate>
+                                                    <ItemTemplate>
+                                                        <asp:Label ID="lblRutaMenu" runat="server" Text='<%#Eval("fk_Catalogo_Asignado") %>'></asp:Label>
+                                                    </ItemTemplate>
+                                                </asp:TemplateField>
+                                               
+                                            </Columns>
+                                        </asp:GridView>
+					</div>
+					</div>
+					--%>
 				</div>
 			</div>
 		</div>
 
-
+		<div class="col-sm-6 col-md-6 col-lg-12">
+			<div class="card">
+				<div class="card-body">
+					<div class="embed-container">
+						<iframe src="https://ssolariss777.maps.arcgis.com/apps/instant/interactivelegend/index.html?appid=9fc0a77b04b648daa19c5a2ac2fb4c39" width="100" height="400" frameborder="0" style="border: 0" allowfullscreen>No se admiten iFrames en esta página.</iframe>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
+	
 
 
 
-
-
-
+	 <asp:HiddenField ID="hfIdEmpleado" runat="server" Visible="false" Value="0" />
 
 	<%--
     

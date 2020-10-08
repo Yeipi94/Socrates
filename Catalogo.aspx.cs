@@ -7,10 +7,14 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Entidades;
+using logica;
 
-public partial class Catalogo : System.Web.UI.Page
+public partial class Catalogo : BasePage
 {
     WebServiceDatos Tools = new WebServiceDatos();
+
+
     string strConnString = ConfigurationManager.ConnectionStrings["SISTEM_ALIADOSConnectionString"].ConnectionString;
     DataTable dt;
     AutocompletarService Service = new AutocompletarService();
@@ -21,19 +25,38 @@ public partial class Catalogo : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
         }
+
+        if (Session["UserSessionEmpleado"] != null)
+        {
+            Empleado objEmpeado = (Empleado)Session["UserSessionEmpleado"];
+         
+            int idEmp = Convert.ToInt32(objEmpeado.ID);
+
+            //var listaResonasR = Div_ElectoraLN.getInstance().ListarPersonas(idEmp);
+            //grdAsignaciones.DataSource = listaResonasR;
+            //grdAsignaciones.DataBind();
+
+
+           
+        }
+
+        
+        
+     
     }
     
 
-  
 
 
-    /// <summary>
-    /// GRIDVIEW Y WEB SERVICES CON PARAMETROS DE ENTRADA Y SIN PARAMETROS
-    /// </summary>
+
+
+
+
     private void ListDistritales()
     {
         try
         {
+
             DataTable dt = lista.GetNacionalLista();
             Gw_ListaAsignacion.DataSource = dt;
             Gw_ListaAsignacion.DataBind();

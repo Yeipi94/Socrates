@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define(["require","exports","../../../core/lang","../../../geometry/support/jsonUtils","../CIMCursor"],function(b,d,e,f,g){Object.defineProperty(d,"__esModule",{value:!0});b=function(){function a(){}a.local=function(){null===a.instance&&(a.instance=new a);return a.instance};a.prototype.execute=function(h,a,c){return new k(h,a,c)};a.instance=null;return a}();d.EffectReverse=b;var k=function(){function a(a,b,c){this._inputGeometries=a;this._reverse=void 0!==b.reverse?b.reverse:!0;c}a.prototype.next=
+function(){for(var a=this._inputGeometries.next();a;){if(!this._reverse)return a;if(f.isPolyline(a))return a=e.clone(a),g.reverseMultipath(a.paths),a;a=this._inputGeometries.next()}return null};return a}()});

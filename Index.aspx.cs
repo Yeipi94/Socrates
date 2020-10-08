@@ -9,6 +9,9 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Configuration;
+using Entidades;
+using logica;
+using System.Web.Security;
 
 
 
@@ -25,99 +28,51 @@ using System.Configuration;
 //}
 public partial class Index : System.Web.UI.Page
 {
-	WebServiceDatos Tools = new WebServiceDatos();
+	//WebServiceDatos Tools = new WebServiceDatos();
 
-	string strConnString = ConfigurationManager.ConnectionStrings["SISTEM_ALIADOSConnectionString"].ConnectionString;
+	//string strConnString = ConfigurationManager.ConnectionStrings["SISTEM_ALIADOSConnectionString"].ConnectionString;
 	protected void Page_Load(object sender, EventArgs e)
     {
-        
 
-        if (IsPostBack)
+
+        if (!Page.IsPostBack)
         {
-        }
-
-    }
-    protected void IngresarLogin(object sender, EventArgs e)
-    {
-        try
-        {
-            //string strConnString = ConfigurationManager.ConnectionStrings["SISTEM_ALIADOSConnectionString"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(strConnString))
-            {
-                con.Open();
-
-                SqlCommand cmd = new SqlCommand("SELECT * From tblEmpleado WHERE usuario = @username AND password = @password", con);
-
-
-
-                cmd.Parameters.AddWithValue("@username", txtuser.Text);
-                cmd.Parameters.AddWithValue("@password", txtpassword.Text);
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                if (dt.Rows.Count > 0)
-                {
-
-                    if (dt.Rows[0][1].ToString() == "Admin")
-                    {
-                        Session["Admin"] = dt.Rows[0]["num_empleado"];
-						Session["empleadoCaptura"] = dt.Rows[0]["num_empleado"];
-						Response.Redirect("Search.aspx");
-                    }
-                    else if (dt.Rows[0][1].ToString() == "Datos")
-                    {
-                        Session["Datos"] = dt.Rows[0]["num_empleado"];
-                        Session["empleadoCaptura"] = dt.Rows[0]["num_empleado"];
-                        Response.Redirect("Search.aspx");
-                    }
-                    else if (dt.Rows[0][1].ToString() == "User")
-                    {
-                        Session["User"] = dt.Rows[0]["num_empleado"];
-						Session["empleadoCaptura"] = dt.Rows[0]["num_empleado"];
-						Response.Redirect("Territorial.aspx");
-                    }
-					else if (dt.Rows[0][1].ToString() == "User1")
-					{
-						Session["User1"] = dt.Rows[0]["num_empleado"];
-						Session["empleadoCaptura"] = dt.Rows[0]["num_empleado"];
-						Response.Redirect("Catalogo.aspx");
-					}
-                    else if (dt.Rows[0][1].ToString() == "User2")
-                    {
-                        Session["User2"] = dt.Rows[0]["num_empleado"];
-                        Session["empleadoCaptura"] = dt.Rows[0]["num_empleado"];
-                        Response.Redirect("Regiones.aspx");
-                    }
-                    else if (dt.Rows[0][1].ToString() == "User3")
-                    {
-                        Session["User3"] = dt.Rows[0]["num_empleado"];
-                        Session["empleadoCaptura"] = dt.Rows[0]["num_empleado"];
-                        Response.Redirect("Seccionales.aspx");
-                    }
-                    else if (dt.Rows[0][1].ToString() == "User4")
-                    {
-                        Session["User4"] = dt.Rows[0]["num_empleado"];
-                        Session["empleadoCaptura"] = dt.Rows[0]["num_empleado"];
-                        Response.Redirect("Manzaneros.aspx");
-                    }
-                }
-                else
-                {
-					throw new Exception("Ingrese los datos correctamente.");
-                }
-            }
+            Session["UserSessionId"] = null;
+			
 
         }
-        catch (Exception ex)
-        {
-			Tools.setError(msgError, ex.Message, true);
-
-		}
-
-
 
 	}
+    protected void IngresarLogin(object sender, EventArgs e)
+    {
+  
+
+    }
+    protected void LoginUser_Authenticate(object sender, AuthenticateEventArgs e)
+    {
+        bool auth = Membership.ValidateUser(LoginUser.UserName, LoginUser.Password);
+
+        if (auth)
+        {
             
+            Empleado objEmpleado = EmpleadoLN.getInstance().AccesoSistema(LoginUser.UserName, LoginUser.Password);
+
+            if (objEmpleado != null)
+            {
+                
+                SessionManager _SessionManager = new SessionManager(Session);
+                //SessionManager.UserSessionId = objEmpleado.ID.ToString();
+                _SessionManager.UserSessionEmpleado = objEmpleado;
+                FormsAuthentication.RedirectFromLoginPage(LoginUser.UserName, false);
+            }
+            else
+            {
+                Response.Write("<script>alert('USUARIO INCORRECTO.')</script>");
+            }
+        }
+		
+    }
+
 }
         
 

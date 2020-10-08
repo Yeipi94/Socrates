@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define(["require","exports","../../core/libs/gl-matrix-2/mat4f64","./externalRenderers/ExternalRendererStore","./support/projectionUtils"],function(v,b,t,u,g){function k(a,b){l.add(a,b)}function m(a,b){l.remove(a,b)}function n(a){a._stage.renderView.setNeedsRender()}function p(a,b,d,c,f,e,h){c=c||a.spatialReference;return g.bufferToBuffer(b,c,d,f,a.renderCoordsHelper.spatialReference,e,h)?f:null}function q(a,b,d,c,f,e,h){e=e||a.spatialReference;return g.bufferToBuffer(b,a.renderCoordsHelper.spatialReference,
+d,c,e,f,h)?c:null}function r(a,b,d,c){c||(c=t.mat4f64.create());d=d||a.spatialReference;return g.computeLinearTransformation(d,b,c,a.renderCoordsHelper.spatialReference)?c:null}Object.defineProperty(b,"__esModule",{value:!0});var l=new u;b.add=k;b.remove=m;b.requestRender=n;b.toRenderCoordinates=p;b.fromRenderCoordinates=q;b.renderCoordinateTransformAt=r;b.getRenderCamera=function(a){return a.state.camera.clone()};b.bind=function(a){return{add:k.bind(this,a),remove:m.bind(this,a),requestRender:n.bind(this,
+a),toRenderCoordinates:p.bind(this,a),fromRenderCoordinates:q.bind(this,a),renderCoordinateTransformAt:r.bind(this,a)}}});

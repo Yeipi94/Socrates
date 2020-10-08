@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define("require exports tslib ../../../../../core/accessorSupport/decorators ../../../../../core/libs/gl-matrix-2/vec3 ../../../../../core/libs/gl-matrix-2/vec3f64 ./MomentumController ../../utils/navigationUtils".split(" "),function(b,g,e,h,f,k,l,m){Object.defineProperty(g,"__esModule",{value:!0});var n=k.vec3f64.create(),d=k.vec3f64.create();b=function(b){function c(a){a=b.call(this,a)||this;a.interactionType=4;return a}e.__extends(c,b);c.prototype.momentumStep=function(a,b){var c=this.momentum.value1(a);
+a=this.momentum.value2(a);f.vec3.copy(d,b.eye);f.vec3.normalize(d,d);f.vec3.cross(this.momentum.axis2,d,this.momentum.axis1);m.applyRotationWithTwoAxes(b,n,this.momentum.axis1,c,this.momentum.axis2,a)};e.__decorate([h.property({constructOnly:!0})],c.prototype,"momentum",void 0);return c=e.__decorate([h.subclass("esri.views.3d.state.controllers.momentum.PanSphericalMomentumController")],c)}(l.MomentumController);g.PanSphericalMomentumController=b});

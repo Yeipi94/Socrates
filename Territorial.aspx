@@ -4,19 +4,12 @@
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-
-	<script type="text/javascript" src='https://maps.google.com/maps/api/js?sensor=false&libraries=places'></script>
-	<script src="../dist/locationpicker.jquery.min.js"></script>
-	<script src="../src/angularLocationpicker.jquery.js"></script>
-
-
-<%--	<script type="text/html" src="https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJrTLr-GyuEmsRBfy61i59si0&key=AIzaSyCxW-VPfw8x42DIwrfQ9gL8sh-iu42QhCY"></script>--%>
-
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbmMQ2Ma1uZKipVyBagGkaxAmd65aRXPg&libraries=places"></script>
 
 
 	<style>
-		#map {
+		#geomap {
 			height: 500px;
 			width: 100%;
 		}
@@ -47,37 +40,631 @@
 			z-index: 99999;
 			position: absolute;
 		}
+
+		#geomap {
+			width: 100%;
+			height: 500px;
+		}
+
+		.embed-container {
+			position: relative;
+			padding-bottom: 80%;
+			height: 0;
+			max-width: 100%;
+		}
+
+			.embed-container iframe, .embed-container object, .embed-container iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+
+		small {
+			position: absolute;
+			z-index: 40;
+			bottom: 0;
+			margin-bottom: -15px;
+		}
+
+		@media screen and (min-width: 1045px) {
+			.priority-5 {
+				display: none;
+			}
+
+			.priority-6 {
+				display: none;
+			}
+
+			.priority-7 {
+				display: none;
+			}
+
+			.priority-8 {
+				display: none;
+			}
+
+			.priority-9 {
+				display: none;
+			}
+
+			.priority-10 {
+				display: none;
+			}
+
+			.priority-11 {
+				display: none;
+			}
+
+			.priority-12 {
+				display: none;
+			}
+
+			.priority-13 {
+				display: none;
+			}
+
+			.priority-14 {
+				display: none;
+			}
+		}
+
+		@media screen and (max-width: 1045px) and (min-width: 835px) {
+			.priority-5 {
+				display: none;
+			}
+
+			.priority-4 {
+				display: none;
+			}
+
+			.priority-6 {
+				display: none;
+			}
+
+			.priority-7 {
+				display: none;
+			}
+
+			.priority-8 {
+				display: none;
+			}
+
+			.priority-9 {
+				display: none;
+			}
+
+			.priority-10 {
+				display: none;
+			}
+
+			.priority-11 {
+				display: none;
+			}
+
+			.priority-12 {
+				display: none;
+			}
+
+			.priority-13 {
+				display: none;
+			}
+
+			.priority-14 {
+				display: none;
+			}
+		}
+
+		@media screen and (max-width: 565px) and (min-width: 300px) {
+			.priority-5 {
+				display: none;
+			}
+
+			.priority-4 {
+				display: none;
+			}
+
+			.priority-3 {
+				display: none;
+			}
+
+			.priority-6 {
+				display: none;
+			}
+
+			.priority-7 {
+				display: none;
+			}
+
+			.priority-8 {
+				display: none;
+			}
+
+			.priority-9 {
+				display: none;
+			}
+
+			.priority-10 {
+				display: none;
+			}
+
+			.priority-11 {
+				display: none;
+			}
+
+			.priority-12 {
+				display: none;
+			}
+
+			.priority-13 {
+				display: none;
+			}
+
+			.priority-14 {
+				display: none;
+			}
+		}
+
+		@media screen and (max-width: 300px) {
+			.priority-5 {
+				display: none;
+			}
+
+			.priority-4 {
+				display: none;
+			}
+
+			.priority-3 {
+				display: none;
+			}
+
+			.priority-2 {
+				display: none;
+			}
+
+			.priority-1 {
+				font-size: 9px;
+			}
+
+			.priority-6 {
+				display: none;
+			}
+
+			.priority-7 {
+				display: none;
+			}
+
+			.priority-8 {
+				display: none;
+			}
+
+			.priority-9 {
+				display: none;
+			}
+
+			.priority-10 {
+				display: none;
+			}
+
+			.priority-11 {
+				display: none;
+			}
+
+			.priority-12 {
+				display: none;
+			}
+
+			.priority-13 {
+				display: none;
+			}
+
+			.priority-14 {
+				display: none;
+			}
+		}
 	</style>
+
+
 	<script type="text/javascript">
 
+		var geocoder;
+		var map;
+		var marker;
+		var infoview;
 
-		/*FUNCION PARA LLENAR CAJAS DE TEXTO DESPUES DE SELECCIONAR OPCION AUTOCOMPLETADO*/
-		function ClientItemSelected(sender, e) {
-			var row = e._item.parentElement;
-			$get("<%=txtClaveE.ClientID %>").value = row.getElementsByTagName('td')[1].textContent;
+		(function () {
+			var content = document.getElementById("geolocation-test");
 
+			if (navigator.geolocation) {
+				navigator.geolocation.getCurrentPosition(function (objPosition) {
+					var initialLong = objPosition.coords.longitude;
+					var initialLat = objPosition.coords.latitude;
 
-		}
+					var latlng = new google.maps.LatLng(initialLat, initialLong);
 
-		/*FUNCION PARA MOSTRAR RESULTADOS DE AUTOCOMPPLETADO EN UNA TABLA*/
-		function Employees_Populated(sender, e) {
-			var employees = sender.get_completionList().childNodes;
-			var div = "<table class=\"table table-sm mb-0\">";
-			div += "<thead><tr><th>Nombre Completo</th><th>Clave Elector</th><th>Fecha Nacimiento</th><th>Calle</th><th>Numero Ext.</th></tr> </thead>";
-			for (var i = 0; i < employees.length; i++) {
+					var options = {
+						zoom: 17,
+						styles: [
+							{
+								"stylers": [
+									{
+										"saturation": -5
+									},
+									{
+										"lightness": -10
+									}
+								]
+							},
+							{
+								"elementType": "geometry",
+								"stylers": [
+									{
+										"color": "#1d2c4d"
+									}
+								]
+							},
+							{
+								"elementType": "labels.text.fill",
+								"stylers": [
+									{
+										"color": "#8ec3b9"
+									}
+								]
+							},
+							{
+								"elementType": "labels.text.stroke",
+								"stylers": [
+									{
+										"color": "#1a3646"
+									}
+								]
+							},
+							{
+								"featureType": "administrative.country",
+								"elementType": "geometry.stroke",
+								"stylers": [
+									{
+										"color": "#4b6878"
+									}
+								]
+							},
+							{
+								"featureType": "administrative.land_parcel",
+								"elementType": "labels.text.fill",
+								"stylers": [
+									{
+										"color": "#64779e"
+									}
+								]
+							},
+							{
+								"featureType": "administrative.province",
+								"elementType": "geometry.stroke",
+								"stylers": [
+									{
+										"color": "#4b6878"
+									}
+								]
+							},
+							{
+								"featureType": "landscape.man_made",
+								"elementType": "geometry.stroke",
+								"stylers": [
+									{
+										"color": "#334e87"
+									}
+								]
+							},
+							{
+								"featureType": "landscape.natural",
+								"elementType": "geometry",
+								"stylers": [
+									{
+										"color": "#023e58"
+									}
+								]
+							},
+							{
+								"featureType": "poi",
+								"elementType": "geometry",
+								"stylers": [
+									{
+										"color": "#283d6a"
+									}
+								]
+							},
+							{
+								"featureType": "poi",
+								"elementType": "labels.text.fill",
+								"stylers": [
+									{
+										"color": "#6f9ba5"
+									}
+								]
+							},
+							{
+								"featureType": "poi",
+								"elementType": "labels.text.stroke",
+								"stylers": [
+									{
+										"color": "#1d2c4d"
+									}
+								]
+							},
+							{
+								"featureType": "poi.park",
+								"elementType": "geometry.fill",
+								"stylers": [
+									{
+										"color": "#023e58"
+									}
+								]
+							},
+							{
+								"featureType": "poi.park",
+								"elementType": "labels.text.fill",
+								"stylers": [
+									{
+										"color": "#3C7680"
+									}
+								]
+							},
+							{
+								"featureType": "road",
+								"elementType": "geometry",
+								"stylers": [
+									{
+										"color": "#304a7d"
+									}
+								]
+							},
+							{
+								"featureType": "road",
+								"elementType": "labels.text.fill",
+								"stylers": [
+									{
+										"color": "#98a5be"
+									}
+								]
+							},
+							{
+								"featureType": "road",
+								"elementType": "labels.text.stroke",
+								"stylers": [
+									{
+										"color": "#1d2c4d"
+									}
+								]
+							},
+							{
+								"featureType": "road.highway",
+								"elementType": "geometry",
+								"stylers": [
+									{
+										"color": "#2c6675"
+									}
+								]
+							},
+							{
+								"featureType": "road.highway",
+								"elementType": "geometry.stroke",
+								"stylers": [
+									{
+										"color": "#255763"
+									}
+								]
+							},
+							{
+								"featureType": "road.highway",
+								"elementType": "labels.text.fill",
+								"stylers": [
+									{
+										"color": "#b0d5ce"
+									}
+								]
+							},
+							{
+								"featureType": "road.highway",
+								"elementType": "labels.text.stroke",
+								"stylers": [
+									{
+										"color": "#023e58"
+									}
+								]
+							},
+							{
+								"featureType": "transit",
+								"elementType": "labels.text.fill",
+								"stylers": [
+									{
+										"color": "#98a5be"
+									}
+								]
+							},
+							{
+								"featureType": "transit",
+								"elementType": "labels.text.stroke",
+								"stylers": [
+									{
+										"color": "#1d2c4d"
+									}
+								]
+							},
+							{
+								"featureType": "transit.line",
+								"elementType": "geometry.fill",
+								"stylers": [
+									{
+										"color": "#283d6a"
+									}
+								]
+							},
+							{
+								"featureType": "transit.station",
+								"elementType": "geometry",
+								"stylers": [
+									{
+										"color": "#3a4762"
+									}
+								]
+							},
+							{
+								"featureType": "water",
+								"elementType": "geometry",
+								"stylers": [
+									{
+										"color": "#0e1626"
+									}
+								]
+							},
+							{
+								"featureType": "water",
+								"elementType": "labels.text.fill",
+								"stylers": [
+									{
+										"color": "#4e6d70"
+									}
+								]
+							}
+						],
+						center: latlng,
+						mapTypeId: google.maps.MapTypeId.ROADMAP
+					};
 
-				div += " <tbody><tr><td>" + employees[i].innerHTML.split('-')[0] + "</td><td>" + employees[i].innerHTML.split('-')[1] + "</td><td>" + employees[i].innerHTML.split('-')[2] + "</td><td>" + employees[i].innerHTML.split('-')[3] + "</td><td>" + employees[i].innerHTML.split('-')[4] + "</td></tr></tbody>";
+					map = new google.maps.Map(document.getElementById("geomap"), options);
+
+					geocoder = new google.maps.Geocoder();
+
+					marker = new google.maps.Marker({
+						map: map,
+						draggable: true,
+						position: latlng
+					});
+
+					google.maps.event.addListener(marker, "dragend", function () {
+						var point = marker.getPosition();
+						map.panTo(point);
+						geocoder.geocode({ 'latLng': marker.getPosition() }, function (results, status) {
+							if (status == google.maps.GeocoderStatus.OK) {
+								map.setCenter(results[0].geometry.location);
+								marker.setPosition(results[0].geometry.location);
+								$('.search_addr').val(results[0].formatted_address);
+								$('.search_latitude').val(marker.getPosition().lat());
+								$('.search_longitude').val(marker.getPosition().lng());
+							}
+						});
+					});
+
+					var input = document.getElementById('search_location');
+					map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+					var autocomplete = new google.maps.places.Autocomplete(input);
+					autocomplete.bindTo('bounds', map);
+
+					autocomplete.addListener('place_changed', function () {
+						marker.setVisible(false);
+						var place = autocomplete.getPlace();
+						if (!place.geometry) {
+							window.alert("Autocomplete's returned place contains no geometry");
+							return;
+						}
+						// If the place has a geometry, then present it on a map.
+						if (place.geometry.viewport) {
+							map.fitBounds(place.geometry.viewport);
+						} else {
+							map.setCenter(place.geometry.location);
+							map.setZoom(17);
+						}
+						marker.setPosition(place.geometry.location);
+						marker.setVisible(true);
+					});
+
+					var PostCodeid = '#search_location';
+					$(function () {
+						$(PostCodeid).autocomplete({
+							source: function (request, response) {
+								geocoder.geocode({
+									'address': request.term
+								}, function (results, status) {
+									response($.map(results, function (item) {
+										return {
+											label: item.formatted_address,
+											value: item.formatted_address,
+											lat: item.geometry.location.lat(),
+											lon: item.geometry.location.lng()
+										};
+									}));
+								});
+							},
+							select: function (event, ui) {
+								$('.search_addr').val(ui.item.value);
+								$('.search_latitude').val(ui.item.lat);
+								$('.search_longitude').val(ui.item.lon);
+								var latlng = new google.maps.LatLng(ui.item.lat, ui.item.lon);
+								marker.setPosition(latlng);
+								initialize();
+							}
+						});
+					});
+
+                    /*
+                     * Point location on google map
+                     */
+					$('.get_map').click(function (e) {
+						var address = $(PostCodeid).val();
+						geocoder.geocode({ 'address': address }, function (results, status) {
+							if (status == google.maps.GeocoderStatus.OK) {
+								map.setCenter(results[0].geometry.location);
+								marker.setPosition(results[0].geometry.location);
+								$('.search_addr').val(results[0].formatted_address);
+								$('.search_latitude').val(marker.getPosition().lat());
+								$('.search_longitude').val(marker.getPosition().lng());
+							} else {
+								alert("La localización no fue exitosa por la siguiente razón: " + status);
+							}
+						});
+						e.preventDefault();
+					});
+
+					//Add listener to marker for reverse geocoding
+					google.maps.event.addListener(marker, 'drag', function () {
+						geocoder.geocode({ 'latLng': marker.getPosition() }, function (results, status) {
+							if (status == google.maps.GeocoderStatus.OK) {
+								if (results[0]) {
+									$('.search_addr').val(results[0].formatted_address);
+									$('.search_latitude').val(marker.getPosition().lat());
+									$('.search_longitude').val(marker.getPosition().lng());
+								}
+							}
+						});
+					});
+
+				}, function (objPositionError) {
+					switch (objPositionError.code) {
+						case objPositionError.PERMISSION_DENIED:
+							content.innerHTML = "No se ha permitido el acceso a la posición del usuario.";
+							break;
+						case objPositionError.POSITION_UNAVAILABLE:
+							content.innerHTML = "No se ha podido acceder a la información de su posición.";
+							break;
+						case objPositionError.TIMEOUT:
+							content.innerHTML = "El servicio ha tardado demasiado tiempo en responder.";
+							break;
+						default:
+							content.innerHTML = "Error desconocido.";
+					}
+				}, {
+					maximumAge: 75000,
+					timeout: 15000
+				});
 			}
-			div += "</table>";
-			sender._completionListElement.innerHTML = div;
-		}
-
-		function load() {
-			if (GBrowserIsCompatible()) {
-				var map = new GMap2(document.getElementById("map"));
-				map.setCenter(new GLatLng(37.4419, -122.1419), 13);
+			else {
+				content.innerHTML = "Su navegador no soporta la API de geolocalización.";
 			}
-		}
+		})();
+
+
 
 
 
@@ -88,20 +675,13 @@
 		}
 
 		function pageLoad() {
+
 			$("#<%=ddlEstados_Cat.ClientID%>").select2({
 				placeholder: "Seleccionar Estado",
 
 			});
 
 
-			$("#<%=cord1.ClientID%>").select2({
-				placeholder: "Y",
-
-			});
-			$("#<%=cord2.ClientID%>").select2({
-				placeholder: "X",
-
-			});
 		}
 
 
@@ -147,12 +727,8 @@
 		}
 
 
-
-
 	</script>
-	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbmMQ2Ma1uZKipVyBagGkaxAmd65aRXPg&callback=initMap&libraries=places">
-	</script>
+
 
 
 </asp:Content>
@@ -168,39 +744,31 @@
 
 	</div>
 
+	<div class="row">
+		<div class="col-xl-12">
+			<div class="card">
 
-	<div class="col-xl-12">
-		<div class="card">
-			<div class="card-body">
-				<h4 class="card-title mb-3">ASIGNACIÓN TERRITORIAL</h4>
-
-				<%--NAVEGACION TABS--%>
-				<ul class="nav nav-pills bg-nav-pills nav-justified mb-2">
-					<li class="nav-item">
-						<a href="#DatPer" aria-expanded="true"
-							class="nav-link rounded-0 active">
-							<span class="tab-justified">Datos Personales</span>
+				<ul class="nav nav-pills bg-nav-pills nav-justified mb-2" id="pills-tab" role="tablist">
+					<li class="nav-item" role="presentation">
+						<a href="#DatPer" id="DatPer-tab" data-toggle="pill" role="tab" aria-controls="DatPer" class="nav-link active" aria-selected="true"><span class="tab-justified">Datos Personales</span>
 						</a>
 					</li>
-					<li class="nav-item">
-						<a href="#Direccion" aria-expanded="false"
-							class="nav-link rounded-0">
+					<li class="nav-item" role="presentation">
+						<a href="#Direccion" id="direccion-tab" data-toggle="pill" role="tab" aria-controls="Direccion" class="nav-link" aria-selected="false">
 							<span class="tab-justified">Direccion</span>
 						</a>
 					</li>
 
 				</ul>
-				<%--CONTENIDO TABS--%>
-				<div class="tab-content" id="regTab">
-					<div class="tab-pane show active" id="DatPer">
-
+				<div class="tab-content" id="pills-tabContent">
+					<div class="tab-pane fade show active" id="DatPer" role="tabpanel" aria-labelledby="DatPer-tab">
 						<div class="row">
+
 							<div class="col-12">
 								<div class="card">
 									<div class="card-body">
 										<div class="col-sm-12 col-md-12 col-lg-12 m-auto">
 											<div class="row">
-												<%--CONTENIDO 1--%>
 												<div class="col-xs-3 col-lg-3">
 													<div class="form-group">
 														<label>Estados</label>
@@ -245,16 +813,15 @@
 
 
 
-
 												<div class="col-xs-9 col-lg-9" runat="server">
 													<div class="form-group">
 														<label>Nombre Completo</label>
-														<asp:TextBox ID="txtAutocomplete" CssClass="form-control" runat="server" OnTextChanged="TextBox1_TextChanged" AutoPostBack="true" placeholder="Nombre Completo" onkeyup="SetContextKey()"></asp:TextBox>
+														<asp:TextBox ID="txtAutocomplete" CssClass="form-control" runat="server" placeholder="Nombre Completo" onkeyup="SetContextKey()"></asp:TextBox>
 														<cc1:AutoCompleteExtender ServiceMethod="Autocompletar"
 															MinimumPrefixLength="2"
 															CompletionInterval="200"
 															EnableCaching="false"
-															CompletionSetCount="10"
+															CompletionSetCount="3"
 															TargetControlID="txtAutocomplete"
 															UseContextKey="true"
 															ID="AutoCompleteExtender1"
@@ -272,7 +839,7 @@
 												<div class="col-sm-12 col-md-6 col-lg-4">
 													<div class="form-group">
 														<label>Clave Elector</label>
-														<asp:TextBox ID="txtClaveE" runat="server" CssClass="form-control"></asp:TextBox>
+														<asp:TextBox ID="txtClaveE" runat="server" CssClass="form-control" Enabled="false"></asp:TextBox>
 														<small>
 															<asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator2" ControlToValidate="txtClaveE" CssClass="float-right" ErrorMessage="* Obligatorio." ForeColor="Red" ValidationGroup="FrmRequerido"></asp:RequiredFieldValidator></small>
 													</div>
@@ -302,14 +869,7 @@
 															<asp:RequiredFieldValidator runat="server" ID="RApellidoM" ControlToValidate="txtApellidoMa" CssClass="float-right" ErrorMessage="* Obligatorio." ForeColor="Red" ValidationGroup="FrmRequerido"></asp:RequiredFieldValidator></small>
 													</div>
 												</div>
-												<div class="col-sm-12 col-md-6 col-lg-4">
-													<div class="form-group">
-														<label>Fecha Nac.</label>
-														<asp:TextBox ID="txtFechaN" TextMode="Date" runat="server" CssClass="form-control"></asp:TextBox>
-														<small>
-															<asp:RequiredFieldValidator runat="server" ID="RFechaN" ControlToValidate="txtFechaN" CssClass="float-right" ErrorMessage="* Obligatorio." ForeColor="Red" ValidationGroup="FrmRequerido"></asp:RequiredFieldValidator></small>
-													</div>
-												</div>
+
 												<div class="col-sm-12 col-md-6 col-lg-4">
 													<div class="form-group">
 														<label>Teléfono</label>
@@ -389,9 +949,14 @@
 								</div>
 							</div>
 						</div>
-
+						<div style="overflow: auto;">
+							<div style="float: right;">
+							</div>
+						</div>
 					</div>
-					<div class="tab-pane" id="Direccion">
+
+					<%--TAB2--%>
+					<div class="tab-pane fade" id="Direccion" role="tabpanel" aria-labelledby="direccion-tab">
 						<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" ScriptMode="Debug"></asp:ScriptManager>
 						<asp:UpdatePanel ID="upPanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
 
@@ -406,20 +971,28 @@
 															<div class="row">
 
 
-																<%--CONTENIDO 2--%>
 
 
 
 
 
+																<div class="col-xs-12 col-lg-2">
+																	<div class="form-group">
+																		<label>Tipo Asignación</label>
+																		<asp:DropDownList ID="ddltipoA" runat="server" CssClass="form-control" Width="100%" AutoPostBack="true">
+																			<asp:ListItem Text="Distrito" Value="1" Selected="true"></asp:ListItem>
+																			<asp:ListItem Text="Sección" Value="2"></asp:ListItem>
+																			<asp:ListItem Text="Manzana" Value="3"></asp:ListItem>
+																		</asp:DropDownList>
+																		<asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator4" ControlToValidate="ddltipoA" ErrorMessage="Obligatorio." ForeColor="Red"></asp:RequiredFieldValidator>
+																	</div>
+																</div>
 
 
-
-																<div class="col-xs-12 col-lg-4">
+																<div class="col-xs-12 col-lg-3">
 																	<div class="form-group">
 																		<label>Estados</label>
 																		<asp:DropDownList ID="ddlEstad" runat="server" CssClass="form-control"></asp:DropDownList>
-																		<asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator8" ControlToValidate="ddlEstad" ErrorMessage="Obligatorio." ForeColor="Red" ValidationGroup="FrmRequerido"></asp:RequiredFieldValidator>
 																		<asp:CascadingDropDown ID="CascadingDropDown3" runat="server" Category="Estados" TargetControlID="ddlEstad" LoadingText="Cargando Estados.." ServicePath="../AutocompletarService.asmx" ServiceMethod="Get_ListEstado" PromptText="Seleccionar Estado"></asp:CascadingDropDown>
 
 																	</div>
@@ -429,279 +1002,154 @@
 																	<div class="form-group">
 																		<label>Municipios</label>
 																		<asp:DropDownList ID="ddlMunicipio" runat="server" CssClass="form-control"></asp:DropDownList>
-																		<asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator9" ControlToValidate="ddlMunicipio" ErrorMessage="Obligatorio." ForeColor="Red" ValidationGroup="FrmRequerido"></asp:RequiredFieldValidator>
 																		<asp:CascadingDropDown ID="StateCascading" runat="server" Category="Municipios" TargetControlID="ddlMunicipio" ParentControlID="ddlEstad" LoadingText="Cargando Municipios..." ServiceMethod="Get_ListMunicipio" ServicePath="../AutocompletarService.asmx" PromptText="Seleccionar Municipios"></asp:CascadingDropDown>
-
+																		<asp:HiddenField ID="hfIdMunicipio" runat="server" Visible="false" Value="0" />
 																	</div>
 																</div>
 
-																<div class="col-xs-12 col-lg-4">
+
+
+																<div class="col-xs-12 col-lg-3" id="Distritos_D" runat="server">
 																	<label>Distritos</label>
 																	<div class="input-group">
 																		<asp:DropDownList ID="ddlDistrito" runat="server" CssClass="form-control"></asp:DropDownList>
-
-
 																	</div>
-																	<asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator10" ControlToValidate="ddlDistrito" ErrorMessage="Obligatorio." ForeColor="Red" ValidationGroup="FrmRequerido"></asp:RequiredFieldValidator>
 																	<asp:CascadingDropDown ID="CityCascading" runat="server" Category="Distritos" TargetControlID="ddlDistrito" ParentControlID="ddlMunicipio" LoadingText="Cargando Distritos..." ServiceMethod="Get_ListDistrito" ServicePath="../AutocompletarService.asmx" PromptText="Seleccionar Distritos"></asp:CascadingDropDown>
 																</div>
-
-
-
-
-
-																<div class="col-xs-12 col-lg-4" id="Regiones" runat="server">
-																	<label>Regiones</label>
+																<div class="col-xs-12 col-lg-4" id="Div1" runat="server">
+																	<label>Colonias</label>
 																	<div class="input-group">
-																		<asp:DropDownList ID="ddlRegiones" runat="server" CssClass="form-control"></asp:DropDownList>
-
-
+																		<asp:DropDownList ID="ddlColonias" runat="server" CssClass="form-control"></asp:DropDownList>
 																	</div>
-																	<%--						<asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator11" ControlToValidate="ddlRegiones" ErrorMessage="Obligatorio." ForeColor="Red" ValidationGroup="Regional"></asp:RequiredFieldValidator>--%>
-																	<asp:CascadingDropDown ID="CascadingDropDown1" runat="server" Category="Regiones" TargetControlID="ddlRegiones" ParentControlID="ddlDistrito" LoadingText="Cargando Regiones..." ServiceMethod="Get_ListRegiones" ServicePath="../AutocompletarService.asmx" PromptText="Seleccionar Regiones"></asp:CascadingDropDown>
+																	<asp:CascadingDropDown ID="CascadingDropDown5" runat="server" Category="colonias" TargetControlID="ddlColonias" ParentControlID="ddlDistrito" LoadingText="Cargando Colonias..." ServiceMethod="Get_ListColonias" ServicePath="../AutocompletarService.asmx" PromptText="Seleccionar Sección"></asp:CascadingDropDown>
 																</div>
+
+
+
+
+
 																<div class="col-xs-12 col-lg-4" id="sec_on" runat="server">
 																	<label>Secciones</label>
 																	<div class="input-group">
 																		<asp:DropDownList ID="ddlSecciones" runat="server" CssClass="form-control"></asp:DropDownList>
 
 																	</div>
-																	<%--						<asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator12" ControlToValidate="ddlSecciones" ErrorMessage="Obligatorio." ForeColor="Red" ValidationGroup="Seccional"></asp:RequiredFieldValidator>--%>
-																	<asp:CascadingDropDown ID="CascadingDropDown2" runat="server" Category="Secciones" TargetControlID="ddlSecciones" ParentControlID="ddlRegiones" LoadingText="Cargando Secciones..." ServiceMethod="Get_ListSecciones" ServicePath="../AutocompletarService.asmx" PromptText="Seleccionar Sección"></asp:CascadingDropDown>
+																	<asp:CascadingDropDown ID="CascadingDropDown2" runat="server" Category="Secciones" TargetControlID="ddlSecciones" ParentControlID="ddlColonias" LoadingText="Cargando Secciones..." ServiceMethod="Get_ListSecciones" ServicePath="../AutocompletarService.asmx" PromptText="Seleccionar Sección"></asp:CascadingDropDown>
 																</div>
+
+
+
 																<div class="col-xs-12 col-lg-4" id="Manzanas" runat="server">
 																	<label>Manzanas</label>
 																	<div class="input-group">
 																		<asp:DropDownList ID="ddlManzanas" runat="server" CssClass="form-control"></asp:DropDownList>
 																	</div>
-																	<%--                        <asp:RequiredFieldValidator runat="server" ID="RequiredFieldValidator13" ControlToValidate="ddlManzanas" ErrorMessage="Obligatorio." ForeColor="Red" ValidationGroup="Manzanero"></asp:RequiredFieldValidator>--%>
 																	<asp:CascadingDropDown ID="CascadingDropDown4" runat="server" Category="Manzanas" TargetControlID="ddlManzanas" ParentControlID="ddlSecciones" LoadingText="Cargando Manzanas..." ServiceMethod="Get_ListManzanas" ServicePath="../AutocompletarService.asmx" PromptText="Seleccionar Manzanas"></asp:CascadingDropDown>
 																</div>
 
 
 															</div>
+
+															
 														</div>
 													</div>
+
 												</div>
 											</div>
 										</div>
-									</div>
-								</div>
+										
+										
 
+									</div>
+									</div>
+								<asp:HiddenField ID="id" runat="server" Visible="false" />
 							</ContentTemplate>
 						</asp:UpdatePanel>
 						<div class="row">
-							<div class="col-sm-12 col-md-12">
-								<div class="card">
-									<div class="card-body">
-										<div class="row">
-											<div class="col-xs-12 col-lg-6 col-md-12">
-												<label>Ubicación</label>
-												<asp:TextBox ID="txtUbicacionMaps" CssClass="form-control" runat="server"></asp:TextBox>
-											</div>
-											<div class="col-xs-12 col-lg-3 col-md-6">
-												<div class="form-group">
-													<label>Latitud</label>
+									<div class="col-sm-12 col-md-12">
+										<div class="card">
+											<div class="card-body">
+												<div class="form-body">
+													<div class="row">
+														<div class="col-md-12 m-auto">
+															<div class="row">
+																<input type="text" id="search_location" class="form-control form-control-sm" placeholder="Buscar Dirección" style="width: 75%">
+																<div id="geomap"></div>
+															</div>
+														</div>
+													</div>
 
-													<asp:TextBox ID="cord1" runat="server" CssClass="form-control" Width="100%"></asp:TextBox>
 												</div>
 											</div>
-											<div class="col-xs-12 col-lg-3 col-md-6">
-												<div class="form-group">
-													<label>Longitud</label>
+										</div>
 
-													<asp:TextBox ID="cord2" runat="server" CssClass="form-control" Width="100%"></asp:TextBox>
+										<div class="card">
+											<div class="card-body">
+												<div class="form-body">
+													<div class="row">
+														<div class="col-md-12 m-auto">
+															<div class="row">
+																<div class="col-xs-12 col-lg-12 col-md-12">
+													<label>Ubicación</label>
+													<asp:TextBox ID="txtUbicacionMaps" CssClass="search_addr form-control" runat="server"></asp:TextBox>
+												</div>
+
+
+
+
+
+												<div class="col-xs-12 col-lg-6 col-md-6">
+													<div class="form-group">
+														<label>Latitud</label>
+														<asp:TextBox ID="cord1" runat="server" CssClass="search_latitude form-control" Width="100%"></asp:TextBox>
+													</div>
+												</div>
+												<div class="col-xs-12 col-lg-6 col-md-6">
+													<div class="form-group">
+														<label>Longitud</label>
+
+														<asp:TextBox ID="cord2" runat="server" CssClass="search_longitude form-control" Width="100%"></asp:TextBox>
+													</div>
+												</div>
+
+
+												<div class="col-xs-12 col-lg-12 col-md-12" style="text-align: right">
+
+													<asp:Button ID="Add_Registro" runat="server" CssClass="btn btn-primary" Text="Agregar" OnClick="btnRegistrar_Click" ValidationGroup="FrmRequerido" />
+												</div>
+
+
+
+
+
+
+												<div class="col-xs-12 col-lg-12 col-md-12" runat="server" visible="false">
+													<asp:TextBox ID="valorAsigna" runat="server"></asp:TextBox>
+													<button id="boton-cargar">Cargar elementos</button>
+													<div class="embed-container">
+														<iframe id="iframeID" width="100%" height="400%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="Distrito-Formulario" src="Map_BCS.html"></iframe>
+													</div>
+
+												</div>
+															</div>
+														</div>
+													</div>
+
 												</div>
 											</div>
-
-
 										</div>
-
-										<%--											<div id="map2"></div>--%>
-										<div class="row">
-											<div id="locationpickerOptions2" style="width: 100%; height: 400px;"></div>
-											<div class="clearfix">&nbsp;</div>
 										</div>
-
-									</div>
-								</div>
 							</div>
 
-						</div>
-
-						<div class="col-12">
-						</div>
-
+						
 					</div>
+
 				</div>
-				<%--BOTONES--%>
-				<div>
-					<div style="overflow: auto;">
-						<div style="float: right;">
-							<button type="button" class="btn btn-dark" id="prevBtn" onclick="nextPrev(-1)">Anterior</button>
-							<button type="button" class="btn waves-effect waves-light btn-primary" id="nextBtn" onclick="nextPrev(1)">Siguiente</button>
-							<asp:Button ID="Add_Registro" runat="server" CssClass="btn btn-dark" Text="Agregar" OnClick="btnRegistrar_Click" ValidationGroup="FrmRequerido" />
-						</div>
-						<%--<div class="modal-footer">
-								<button type="button" class="btn btn-primary" onclick="return confirm('¿Esta seguro que desea cancelar?')" data-dismiss="modal">Close</button>
-								
-							</div>--%>
-					</div>
-				</div>
+
 			</div>
+
 		</div>
 	</div>
-
-	<div class="col-sm-12 col-md-12 col-lg-12">
-		<div class="card">
-			<div class="card-body">
-				<div class="row">
-					<%--<h6>Haga clic para mostrar u ocultar columna: </h6>
-								<div class="btn-list">
-									<button type="button" class="showHide btn waves-effect waves-light btn-success" data-columnindex="0">Distrito</button>
-									<button type="button" class="showHide btn waves-effect waves-light btn-success" data-columnindex="1">Nombre</button>
-									<button type="button" class="showHide btn waves-effect waves-light btn-success" data-columnindex="2">Appellido Pa.</button>
-									<button type="button" class="showHide btn waves-effect waves-light btn-success" data-columnindex="3">Apellido Ma</button>
-								</div>
-								<br />--%>
-					<div class="table-responsive">
-						<table id="studentTable" class="table table-striped table-bordered no-wrap" data-order='[[ 0, "asc" ]]' data-page-length='25'>
-							<thead>
-								<tr>
-									<th>Distrito</th>
-									<th>Nombre</th>
-									<th>Apellido Pa.</th>
-									<th>Apellido Ma.</th>
-									<%--						Y/th>--%>
-								</tr>
-							</thead>
-							<tfoot>
-								<tr>
-									<th>id_Distrital</th>
-									<th>nombre</th>
-									<th>apellido_paterno</th>
-									<th>apellido_materno</th>
-									<%--<th>
-											<button type = "button" value = "Actualizar" title = "Actualizar" class= "btn btn-primary btn-circle" data-target="#imodal" data-toggle="modal" > <i class="far fa-edit"></i></button ><button type="button" value="Eliminar" title="Eliminar" class="btn btn-danger btn-circle"><i class="fas fa-eraser" aria-hidden="true"></i></button>
-										</th>--%>
-								</tr>
-							</tfoot>
-						</table>
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-	<div class="col-sm-12 col-md-12 col-lg-12">
-		<div class="card">
-			<div class="card-body">
-				<div class="row">
-					<h4 class="card-title">Estadistica Secciones 2009</h4>
-					<div class="row">
-						<div class="col-md-3">
-							<div class="form-group">
-								<label>Lista Top 25% Gral.</label>
-								<asp:TextBox ID="txtgral2009" runat="server" class="form-control" Enabled="false"></asp:TextBox>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label>Top 25% votos</label>
-								<asp:TextBox ID="txtporciento2009" runat="server" class="form-control" Enabled="false"></asp:TextBox>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label>Top 25% vs 2°Lug.</label>
-								<asp:TextBox ID="txtdif2009" runat="server" class="form-control" Enabled="false"></asp:TextBox>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label>"Meta 3 de 3"</label>
-								<asp:TextBox ID="txtcond2009" runat="server" class="form-control" Enabled="false"></asp:TextBox>
-							</div>
-						</div>
-					</div>
-					<h4 class="card-title">Estadistica Secciones 2015</h4>
-					<div class="row">
-						<div class="col-md-3">
-							<div class="form-group">
-								<label>Lista Top 25% Gral.</label>
-								<asp:TextBox ID="txtgral2015" runat="server" class="form-control" Enabled="false"></asp:TextBox>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label>Top 25% votos</label>
-								<asp:TextBox ID="txtporciento2015" runat="server" class="form-control" Enabled="false"></asp:TextBox>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label>Top 25% vs 2°Lug.</label>
-								<asp:TextBox ID="txtdif2015" runat="server" class="form-control" Enabled="false"></asp:TextBox>
-							</div>
-						</div>
-						<div class="col-md-3">
-							<div class="form-group">
-								<label>"Meta 3 de 3"</label>
-								<asp:TextBox ID="txtcond2015" runat="server" class="form-control" Enabled="false"></asp:TextBox>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="col-sm-12 col-md-12 col-lg-12" runat="server" visible="false">
-		<div class="card">
-			<div class="card-body">
-				<div class="row">
-					<div style="width: 100%; height: auto; max-height: 400px; overflow-y: scroll" class="table-responsive">
-						<asp:GridView ID="GvwMonterrey" class="table table-striped table-bordered no-wrap" runat="server" OnPageIndexChanging="GvwMonterrey_PageIndexChanging" AutoGenerateColumns="false" DataKeyNames="id" DataSourceID="SqlDataSource1" PagerSettings-Position="Top" OnRowDataBound="GvwMonterrey_RowDataBound" OnSelectedIndexChanged="GvwMonterrey_SelectedIndexChanged" HeaderStyle-CssClass="info" ShowHeader="true">
-							<HeaderStyle CssClass="bg-danger text-white" />
-							<Columns>
-								<asp:TemplateField>
-									<HeaderTemplate>
-										<asp:Label ID="lblHeaderAsignar" runat="server" Text="Estado"></asp:Label>
-									</HeaderTemplate>
-									<ItemTemplate>
-										<asp:CheckBox ID="chkSeleccionar" runat="server" Checked="true" />
-									</ItemTemplate>
-								</asp:TemplateField>
-								<asp:BoundField DataField="id" HeaderText="id" ReadOnly="True" SortExpression="id" Visible="false" />
-								<%--                                <asp:BoundField DataField="clave_elector" HeaderText="Clave elector" SortExpression="clave_elector" />--%>
-								<asp:BoundField DataField="nombre" HeaderText="Nombre" SortExpression="nombre" />
-								<asp:BoundField DataField="apellido_paterno" HeaderText="Apellido Pa." SortExpression="apellido_paterno" />
-								<asp:BoundField DataField="apellido_materno" HeaderText="Apellido Ma." SortExpression="apellido_materno" />
-								<asp:BoundField DataField="colonia" HeaderText="Colonia." SortExpression="colonia" />
-								<%--                                <asp:BoundField DataField="estado" HeaderText="estado" SortExpression="estado" />--%>
-								<%--                                <asp:CommandField ButtonType="Link" ControlStyle-CssClass="btn btn-rounded btn-danger" ShowSelectButton="true" />--%>
-							</Columns>
-							<HeaderStyle />
-							<PagerSettings Mode="NumericFirstLast" Position="Bottom" FirstPageText="1" LastPageText="2" NextPageText="3" PreviousPageText="" Visible="false" />
-							<PagerStyle VerticalAlign="Bottom" />
-						</asp:GridView>
-						<asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:SISTEM_ALIADOSConnectionString %>" OnSelected="SqlDataSource1_Selected"></asp:SqlDataSource>
-					</div>
-
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-
-
-
-
-
 
 
 
@@ -714,46 +1162,92 @@
 
 
 	<script>
-
-
-		$('#locationpickerOptions2').locationpicker({
-			radius: 5,
-			location: {
-				latitude: 25.6438666,
-				longitude: -100.2769715
-			},
-			enableAutocomplete: true,
-			inputBinding: {
-				latitudeInput: $('#<%=cord1.ClientID%>'),
-				longitudeInput: $('#<%=cord2.ClientID%>'),
-				locationNameInput: $('#<%=txtUbicacionMaps.ClientID%>')
-			},
-
-			onchanged: function (currentLocation, radius, isMarkerDropped) {
-				var Latitud = parseFloat($get('<%=cord1.ClientID %>').value);
-				var Longitud = parseFloat($get("<%=cord2.ClientID %>").value);
-				var mty = { lat: Latitud, lng: Longitud };
-
-			}
-
-
-		});
-		$('#nextBtn').on('show.bs.locationpickerOptions2', function () {
-			$('#locationpickerOptions2').locationpicker('autosize');
-		});
-
-
-
 		$(document).ready(function () {
-			$('.js-example-basic-single').select2();
+			$('#boton-cargar').click(function () {
+
+				/*Obtener datos almacenados*/
+				var nombre = localStorage.getItem("Nombre");
+				alert(nombre);
+				/*Mostrar datos almacenados*/
+				document.getElementById('<%=valorAsigna.ClientID %>').value = nombre;
+				//document.getElementById("nombre").innerText = nombre;
+			});
 		});
 
 
+
+		/*FUNCION PARA LLENAR CAJAS DE TEXTO DESPUES DE SELECCIONAR OPCION AUTOCOMPLETADO*/
+		function ClientItemSelected(sender, e) {
+			var row = e._item.parentElement;
+			$get("<%=txtAutocomplete.ClientID %>").value = row.getElementsByTagName('td')[0].textContent;
+			$get("<%=txtClaveE.ClientID %>").value = row.getElementsByTagName('td')[1].textContent;
+
+			$get("<%=txtCalle.ClientID %>").value = row.getElementsByTagName('td')[3].textContent;
+			$get("<%=txtNumE.ClientID %>").value = row.getElementsByTagName('td')[4].textContent;
+			$get("<%=txtNombre.ClientID %>").value = row.getElementsByTagName('td')[5].textContent;
+			$get("<%=txtApellidoPa.ClientID %>").value = row.getElementsByTagName('td')[6].textContent;
+			$get("<%=txtApellidoMa.ClientID %>").value = row.getElementsByTagName('td')[7].textContent;
+
+			$get("<%=txtAfiliacion.ClientID %>").value = row.getElementsByTagName('td')[8].textContent;
+			$get("<%=txtNumeroI.ClientID %>").value = row.getElementsByTagName('td')[9].textContent;
+			$get("<%=txtCodigo.ClientID %>").value = row.getElementsByTagName('td')[10].textContent;
+			$get("<%=txtMunicipio.ClientID%>").value = row.getElementsByTagName('td')[11].textContent;
+			$get("<%=txtColonia.ClientID %>").value = row.getElementsByTagName('td')[12].textContent;
+			$get("<%=txtseccion.ClientID %>").value = row.getElementsByTagName('td')[13].textContent;
+
+
+		}
+
+
+
+		/*FUNCION PARA MOSTRAR RESULTADOS DE AUTOCOMPPLETADO EN UNA TABLA*/
+		function Employees_Populated(sender, e) {
+			var employees = sender.get_completionList().childNodes;
+			var div = "<table id=\"contact-detail\" class=\"table no-wrap table-hover table-sm mb-0\">";
+			div += "<thead class=\"bg-primary text-white\"><tr>"
+				+ "<th class=\"priority-1\">Nombre Completo</th>"
+				+ "<th class=\"priority-2\">Clave Elector</th>"
+				+ "<th class=\"priority-3\">Fecha Nacimiento</th>"
+				+ "<th  class=\"priority-4\">Calle</th>"
+				+ "<th class=\"priority-5\">Numero Ext.</th>"
+				+ "<th  class=\"priority-6\">Nombre.</th>"
+				+ "<th  class=\"priority-7\">Apellido Pa.</th>"
+				+ "<th  class=\"priority-8\">Apellido Ma.</th>"
+				+ "<th  class=\"priority-9\">Partido Afiliación.</th>"
+				+ "<th  class=\"priority-10\">Num. Int.</th>"
+				+ "<th  class=\"priority-11\">CP.</th>"
+				+ "<th  class=\"priority-12\">Municipio.</th>"
+				+ "<th  class=\"priority-13\">Colonia.</th>"
+				+ "<th  class=\"priority-14\">Sección.</th></tr>"
+				+ "</thead >";
+			for (var i = 0; i < employees.length; i++) {
+
+				div += " <tbody><tr>" +
+					"<td class=\"priority-1\">" + employees[i].innerHTML.split('-')[0] + "</td>"
+					+ "<td class=\"priority-2\">" + employees[i].innerHTML.split('-')[1] + "</td>"
+					+ "<td  class=\"priority-3\">" + employees[i].innerHTML.split('-')[2] + "</td>"
+					+ "<td class=\"priority-4\">" + employees[i].innerHTML.split('-')[3] + "</td>"
+					+ "<td class=\"priority-5\">" + employees[i].innerHTML.split('-')[4] + "</td>"
+					+ "<td class=\"priority-6\">" + employees[i].innerHTML.split('-')[5] + "</td>"
+					+ "<td class=\"priority-7\">" + employees[i].innerHTML.split('-')[6] + "</td>"
+					+ "<td class=\"priority-8\">" + employees[i].innerHTML.split('-')[7] + "</td>"
+					+ "<td class=\"priority-9\">" + employees[i].innerHTML.split('-')[8] + "</td>"
+					+ "<td class=\"priority-10\">" + employees[i].innerHTML.split('-')[9] + "</td>"
+					+ "<td class=\"priority-11\">" + employees[i].innerHTML.split('-')[10] + "</td>"
+					+ "<td class=\"priority-12\">" + employees[i].innerHTML.split('-')[11] + "</td>"
+					+ "<td class=\"priority-13\">" + employees[i].innerHTML.split('-')[12] + "</td>"
+					+ "<td class=\"priority-14\">" + employees[i].innerHTML.split('-')[13] + "</td>"
+
+					+ "</tr></tbody > ";
+			}
+			div += "</table>";
+			sender._completionListElement.innerHTML = div;
+		}
+
+		
 
 
 	</script>
-	<script src="js/Tabs.js"></script>
-	<script src="js/Catalogos.js"></script>
 
 
 

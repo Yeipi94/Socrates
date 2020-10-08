@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define("require exports tslib ../core/Identifiable ../core/JSONSupport ../core/lang ../core/accessorSupport/decorators ../core/accessorSupport/ensureType ../geometry/Extent ../webdoc/support/Thumbnail".split(" "),function(p,q,c,h,k,l,d,m,n,e){return function(g){function b(a){a=g.call(this,a)||this;a.extent=null;a.name=null;a.thumbnail=new e.default;return a}c.__extends(b,g);f=b;b.prototype.castThumbnail=function(a){return"string"===typeof a?new e.default({url:a}):m.ensureType(e.default,a)};b.prototype.clone=
+function(){return new f(l.clone({extent:this.extent,name:this.name,thumbnail:this.thumbnail}))};var f;c.__decorate([d.property({type:n,nonNullable:!0,json:{write:{isRequired:!0}}})],b.prototype,"extent",void 0);c.__decorate([d.property({type:String,nonNullable:!0,json:{write:{isRequired:!0}}})],b.prototype,"name",void 0);c.__decorate([d.property({type:e.default,json:{write:{overridePolicy:function(a){return{enabled:!(!a||!a.url)}}}}})],b.prototype,"thumbnail",void 0);c.__decorate([d.cast("thumbnail")],
+b.prototype,"castThumbnail",null);return b=f=c.__decorate([d.subclass("esri.webmap.Bookmark")],b)}(h.IdentifiableMixin(k.JSONSupport))});

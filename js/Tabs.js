@@ -7,11 +7,12 @@ function showTab(n) {
     x[n].style.display = "block";
     //... and fix the Previous/Next buttons:
     if (n == 0) {
-        document.getElementById("prevBtn").style.display = "none";
+        document.getElementById("prevBtn").style.display = "inline";
     }
     else
     {
         document.getElementById("prevBtn").style.display = "inline";
+
     }
     if (n == (x.length - 1))
     {

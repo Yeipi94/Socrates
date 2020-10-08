@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define("require exports tslib ../../core/maybe ../../core/accessorSupport/decorators ./Symbol3DMaterial".split(" "),function(a,b,d,f,e,g){Object.defineProperty(b,"__esModule",{value:!0});a=function(a){function c(){return null!==a&&a.apply(this,arguments)||this}d.__extends(c,a);b=c;c.prototype.clone=function(){return new b({color:f.isSome(this.color)?this.color.clone():null,colorMixMode:this.colorMixMode})};var b;d.__decorate([e.enumeration({multiply:"multiply",replace:"replace",tint:"tint"})],c.prototype,
+"colorMixMode",void 0);return c=b=d.__decorate([e.subclass("esri.symbols.support.Symbol3DFillMaterial")],c)}(g.default);b.Symbol3DFillMaterial=a;b.default=a});

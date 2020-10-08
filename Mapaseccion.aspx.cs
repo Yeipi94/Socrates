@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Mapaseccion : System.Web.UI.Page
+public partial class Mapaseccion : BasePage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

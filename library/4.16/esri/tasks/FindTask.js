@@ -1,0 +1,6 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define("require exports tslib ../request ../core/accessorSupport/decorators ./Task ./operations/find ./support/FindParameters ./support/FindResult".split(" "),function(n,p,c,g,e,h,k,l,m){return function(f){function b(a){a=f.call(this,a)||this;a.gdbVersion=null;a.url=null;return a}c.__extends(b,f);b.prototype.execute=function(a,b){a=this._normalizeParams(a);var d=k.findToFindRESTParameters(a);a=this._parseUrl(this.url);a.path+="/find";d=this._encode(c.__assign(c.__assign(c.__assign({},a.query),{f:"json"}),
+d));this.gdbVersion&&(d.gdbVersion=this.gdbVersion);d={query:d};if(this.requestOptions||b)d=c.__assign(c.__assign(c.__assign({},this.requestOptions),b),d);return g(a.path,d).then(this._handleExecuteResponse)};b.prototype._handleExecuteResponse=function(a){a=a.data;a.results=a.results||[];var b={results:[]};b.results=a.results.map(function(a){return m.fromJSON(a)});return b};b.prototype._normalizeParams=function(a){return a=l.from(a)};c.__decorate([e.property()],b.prototype,"gdbVersion",void 0);c.__decorate([e.property()],
+b.prototype,"url",void 0);return b=c.__decorate([e.subclass("esri.tasks.FindTask")],b)}(h)});

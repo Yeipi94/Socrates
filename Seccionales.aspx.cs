@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Seccionales : System.Web.UI.Page
+public partial class Seccionales : BasePage
 {
     string strConnString = ConfigurationManager.ConnectionStrings["SISTEM_ALIADOSConnectionString"].ConnectionString;
     WebServiceDatos Tools = new WebServiceDatos();

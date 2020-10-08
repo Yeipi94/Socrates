@@ -15,7 +15,7 @@ using System.Web.Services;
 using System.Web.Script.Services;
 using System.Web.Script.Serialization;
 
-public partial class Search : System.Web.UI.Page
+public partial class Search : BasePage
 {
 	WebServiceDatos Tools = new WebServiceDatos();
 	AutocompletarService Service = new AutocompletarService();
@@ -49,6 +49,7 @@ public partial class Search : System.Web.UI.Page
 
 	}
 
+	
 
 
 	//[System.Web.Script.Services.ScriptMethod()]
@@ -413,5 +414,13 @@ public partial class Search : System.Web.UI.Page
 
 	protected void ddlEstados_Cat_SelectedIndexChanged(object sender, EventArgs e)
 	{
+	}
+
+	[WebMethod]
+	public static bool Logout()
+	{
+		HttpContext.Current.Session.Clear();
+		HttpContext.Current.Session.Abandon();
+		return true;
 	}
 }

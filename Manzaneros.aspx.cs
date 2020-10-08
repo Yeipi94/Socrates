@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Manzaneros : System.Web.UI.Page
+public partial class Manzaneros : BasePage
 {
     string strConnString = ConfigurationManager.ConnectionStrings["SISTEM_ALIADOSConnectionString"].ConnectionString;
     WebServiceDatos Tools = new WebServiceDatos();

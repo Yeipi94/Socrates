@@ -1,0 +1,5 @@
+// All material copyright ESRI, All Rights Reserved, unless otherwise specified.
+// See https://js.arcgis.com/4.16/esri/copyright.txt for details.
+//>>built
+define("require exports tslib ../Mesh ./meshUtils/georeference ./meshUtils/merge @dojo/framework/shim/Promise".split(" "),function(f,a,b,h,g,k){Object.defineProperty(a,"__esModule",{value:!0});a.createFromElevation=function(c,e,d){return b.__awaiter(this,void 0,void 0,function(){var a;return b.__generator(this,function(b){switch(b.label){case 0:return[4,new Promise(function(a,c){f(["./meshUtils/elevation"],a,c)})];case 1:return a=b.sent(),[2,a.create(c,e,d)]}})})};a.createElevationSampler=function(a,
+e){return b.__awaiter(this,void 0,void 0,function(){var c;return b.__generator(this,function(b){switch(b.label){case 0:return[4,new Promise(function(a,c){f(["./meshUtils/elevationSampler"],a,c)})];case 1:return c=b.sent(),[2,c.create(a,e)]}})})};a.georeference=function(a,b,d){return g.georeference(a,b,d)};a.ungeoreference=function(a,b,d){return g.ungeoreference(a,b,d)};a.merge=function(a){return new h(k.merge(a))}});
