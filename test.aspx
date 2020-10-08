@@ -46,9 +46,8 @@
 			}
 		});</script>--%>
 
-	<style>.embed-container {position: relative; padding-bottom: 80%; height: 0; max-width: 100%;} .embed-container iframe, .embed-container object, .embed-container iframe{position: absolute; top: 0; left: 0; width: 100%; height: 100%;} small{position: absolute; z-index: 40; bottom: 0; margin-bottom: -15px;}</style><div class="embed-container"><iframe width="500" height="400" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" title="mapa y puntos" src="//ssolariss777.maps.arcgis.com/apps/Embed/index.html?webmap=e3bbd4f7385f4715b5cca6d5b04d31d7&extent=-100.3967,25.6657,-100.2699,25.7138&home=true&zoom=true&previewImage=false&scale=true&legend=true&disable_scroll=true&theme=light"></iframe></div>
+	<style>.embed-container {position: relative; padding-bottom: 80%; height: 0; max-width: 100%;} .embed-container iframe, .embed-container object, .embed-container iframe{position: absolute; top: 0; left: 0; width: 100%; height: 100%;} small{position: absolute; z-index: 40; bottom: 0; margin-bottom: -15px;}</style><div class="embed-container"><iframe src="https://ssolariss777.maps.arcgis.com/apps/instant/interactivelegend/index.html?appid=7bfc76c04b22410fbd0850fcb7b6d653" width="600" height="450" frameborder="0" style="border:0" allowfullscreen>No se admiten iFrames en esta página.</iframe>	</div>
 
-</body>
 </html>
 
 

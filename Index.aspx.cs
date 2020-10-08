@@ -63,7 +63,8 @@ public partial class Index : System.Web.UI.Page
                 SessionManager _SessionManager = new SessionManager(Session);
                 //SessionManager.UserSessionId = objEmpleado.ID.ToString();
                 _SessionManager.UserSessionEmpleado = objEmpleado;
-                FormsAuthentication.RedirectFromLoginPage(LoginUser.UserName, false);
+                //FormsAuthentication.RedirectFromLoginPage(LoginUser.UserName, false);
+                Response.Redirect("Search.aspx");
             }
             else
             {

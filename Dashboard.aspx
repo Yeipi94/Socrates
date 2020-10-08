@@ -55,17 +55,17 @@
 	</style>
      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.charts.load('current', { 'packages': ['corechart'] });
+		google.charts.load('current', { 'packages': ['corechart'] });
 		google.charts.setOnLoadCallback(drawChart);
-        google.charts.setOnLoadCallback(chart2);
-        google.charts.setOnLoadCallback(chart3);
-        google.charts.setOnLoadCallback(chart4);
-        
+		google.charts.setOnLoadCallback(chart2);
+		google.charts.setOnLoadCallback(chart3);
+		google.charts.setOnLoadCallback(chart4);
+
 
 		function drawChart() {
 
-            var datos = google.visualization.arrayToDataTable(<%=obtenerDatos()%>);
-            var options = {
+			var datos = google.visualization.arrayToDataTable(<%=obtenerDatos()%>);
+			var options = {
 				backgroundColor: {
 					fill: '#333',
 					fillOpacity: 0.1,
@@ -75,19 +75,19 @@
 					position: "bottom",
 					textStyle: {
 						fontSize: 15,
-						color:"#fff"
+						color: "#fff"
 					},
 				},
 				slices: {
 					0: { color: '#ffab00' },
 					1: { color: '#00d25b' },
-                },
-                pieHole: 0.50,
-            };
-            var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+				},
+				pieHole: 0.50,
+			};
+			var chart = new google.visualization.PieChart(document.getElementById('piechart'));
 			chart.draw(datos, options);
 
-        }
+		}
 		function chart2() {
 
 			var datos = google.visualization.arrayToDataTable(<%=Chart_Regiones()%>);
@@ -143,28 +143,28 @@
 		function chart4() {
 
 			var datos = google.visualization.arrayToDataTable(<%=Chart_Manzana()%>);
-			 var options = {
-				 //title: 'Distrito',
-				 backgroundColor: {
-					 fill: '#333',
-					 fillOpacity: 0.1,
-				 },
-				 is3D: true,
-				 legend: {
-					 position: "bottom",
-					 textStyle: {
-						 fontSize: 15,
-						 color: "#fff"
-					 },
-				 },
-				 slices: {
-					 0: { color: '#00d25b' },
-					 1: { color: '#0090e7' },
-				 },
-				 pieHole: 0.50,
-			 };
+			var options = {
+				//title: 'Distrito',
+				backgroundColor: {
+					fill: '#333',
+					fillOpacity: 0.1,
+				},
+				is3D: true,
+				legend: {
+					position: "bottom",
+					textStyle: {
+						fontSize: 15,
+						color: "#fff"
+					},
+				},
+				slices: {
+					0: { color: '#00d25b' },
+					1: { color: '#0090e7' },
+				},
+				pieHole: 0.50,
+			};
 			var chart = new google.visualization.PieChart(document.getElementById('chart_Manzana'));
-			 chart.draw(datos, options);
+			chart.draw(datos, options);
 		}
 
 
@@ -178,7 +178,7 @@
 				map: map
 			});
 		}
-		
+
 	</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -193,26 +193,16 @@
 			<div class="card">
 				<div class="card-body">
 					<div class="embed-container">
-		<%--<small>
-			<a href="//solarweb.maps.arcgis.com/apps/Embed/index.html?webmap=f807bea1e78d42c4bce710b18a7e263a&extent=-100.7865,25.3848,-99.7724,25.8967&home=true&zoom=true&scale=true&basemap_toggle=true&alt_basemap=terrain&disable_scroll=true&theme=dark" style="color: #0000FF; text-align: left" target="_blank">Ver mapa más grande</a>
-		</small>
-		<br>
-
-						<iframe src="https://ssolariss777.maps.arcgis.com/apps/instant/interactivelegend/index.html?appid=8c5868481b4144d5b9418219b73bcf63" width="600" height="450" frameborder="0" style="border:0" allowfullscreen>No se admiten iFrames en esta página.</iframe>--%>
-<iframe src="https://ssolariss777.maps.arcgis.com/apps/instant/interactivelegend/index.html?appid=9fc0a77b04b648daa19c5a2ac2fb4c39" width="600" height="450" frameborder="0" style="border:0" allowfullscreen>No se admiten iFrames en esta página.</iframe>					</div>
-
-
+						<iframe src="https://ssolariss777.maps.arcgis.com/apps/instant/interactivelegend/index.html?appid=9fc0a77b04b648daa19c5a2ac2fb4c39" width="600" height="450" frameborder="0" style="border:0" allowfullscreen>No se admiten iFrames en esta página.</iframe>			
+					</div>
 				</div>
 			</div>
 		</div>
-
-
 		<div class="col-lg-6 col-md-12">
 			<div class="card">
 				<div class="card-body">
 					<h4 class="card-title">Avance por distrito</h4>
 					<div id="piechart" class="mt-2" style="height:283px; width:100%;"></div>
-
 				</div>
 			</div>
 		</div>
@@ -230,7 +220,6 @@
 				<div class="card-body">
 					<h4 class="card-title">Avance por Seccion</h4>
 					<div id="chart_Seccion" class="mt-2" style="height:283px; width:100%;"></div>
-
 				</div>
 			</div>
 		</div>
@@ -361,9 +350,18 @@
 
 
 
+	<script  type="text/javascript">
+		var elements = document.getElementsByClassName('esri-feature-fields__field-data');
+
+		for (var i = 0; i < elements.length; i++) {
+			var element = elements[i];
+
+			setCoordinates(element);
+		}
+	</script>
 
 
-   
+
 
 
 </asp:Content>

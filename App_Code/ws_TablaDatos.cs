@@ -31,12 +31,13 @@ public class ws_TablaDatos : System.Web.Services.WebService
 
 
     [WebMethod]
-    public DataTable GetNacionalLista()
+    public DataTable GetNacionalLista(int empleado)
     {
         Connections cnn = new Connections();
         SqlCommand cmd = new SqlCommand();
         cmd.CommandType = System.Data.CommandType.StoredProcedure;
         cmd.CommandText = "sp_ListAsignaciones";
+        cmd.Parameters.AddWithValue("@empleado", empleado);
         cmd.Connection = cnn.cnn();
         SqlDataReader dr = cmd.ExecuteReader();
         DataTable dt = new DataTable();
@@ -46,30 +47,15 @@ public class ws_TablaDatos : System.Web.Services.WebService
         cnn.close();
         return dt;
     }
+    
     [WebMethod]
-    public DataTable GetListaRegiones()
-    {
-        Connections cnn = new Connections();
-        SqlCommand cmd = new SqlCommand();
-        cmd.CommandType = System.Data.CommandType.StoredProcedure;
-        cmd.CommandText = "sp_ListRegionales";
-        cmd.Connection = cnn.cnn();
-        SqlDataReader dr = cmd.ExecuteReader();
-        DataTable dt = new DataTable();
-        dt.Load(dr);
-
-        cmd.Connection.Close();
-        cnn.close();
-        return dt;
-    }
-
-    [WebMethod]
-    public DataTable GetListaSecciones()
+    public DataTable GetListaSecciones(int empleado)
     {
         Connections cnn = new Connections();
         SqlCommand cmd = new SqlCommand();
         cmd.CommandType = System.Data.CommandType.StoredProcedure;
         cmd.CommandText = "sp_ListSecciones";
+        cmd.Parameters.AddWithValue("@empleado", empleado);
         cmd.Connection = cnn.cnn();
         SqlDataReader dr = cmd.ExecuteReader();
         DataTable dt = new DataTable();
@@ -81,12 +67,13 @@ public class ws_TablaDatos : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public DataTable GetListaManzanas()
+    public DataTable GetListaManzanas( int empleado)
     {
         Connections cnn = new Connections();
         SqlCommand cmd = new SqlCommand();
         cmd.CommandType = System.Data.CommandType.StoredProcedure;
         cmd.CommandText = "sp_ListManzanas";
+        cmd.Parameters.AddWithValue("@empleado", empleado);
         cmd.Connection = cnn.cnn();
         SqlDataReader dr = cmd.ExecuteReader();
         DataTable dt = new DataTable();

@@ -1,0 +1,587 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport"
+		  content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>
+		Asignaciones
+	</title>
+
+	<link rel="stylesheet" href="https://js.arcgis.com/4.16/esri/themes/light/main.css" />
+	<script src="https://js.arcgis.com/4.16/"></script>
+
+
+	<style>
+		html,
+		body,
+		#viewDiv {
+			padding: 0;
+			margin: 0;
+			height: 100%;
+			width: 100%;
+		}
+
+		#formDiv {
+			width: 100%;
+		}
+
+		.esri-item-list__scroller {
+			overflow-y: visible;
+		}
+
+		.editArea-container {
+			background: #fff;
+			line-height: 1.5em;
+			overflow: auto;
+			padding: 12px 15px;
+			width: 300px;
+		}
+
+		.list-heading {
+			font-weight: normal;
+			margin-top: 20px;
+			margin-bottom: 10px;
+			color: #323232;
+		}
+
+		.or-wrap {
+			background-color: #e0e0e0;
+			height: 1px;
+			margin: 2em 0;
+			overflow: visible;
+		}
+
+		.or-text {
+			background: #fff;
+			line-height: 0;
+			padding: 0 1em;
+			position: relative;
+			bottom: 0.75em;
+		}
+
+		/* override default styles */
+		.esri-feature-form {
+			background: #fff;
+		}
+
+		.esri-feature-templates {
+			width: 256px;
+		}
+
+		.esri-feature-templates__section-header {
+			display: none;
+		}
+
+		.esri-feature-templates__section {
+			box-shadow: none;
+		}
+
+		.esri-feature-templates__scroller {
+			max-height: 200px;
+		}
+
+		#search {
+			display: block;
+			position: absolute;
+			z-index: 2;
+			top: 20px;
+			left: 74px;
+		}
+	</style>
+
+	<script>
+		require([
+			"esri/Map",
+			//"esri/dijit/Search",
+			"esri/views/MapView",
+			"esri/layers/FeatureLayer",
+			"esri/widgets/Search",
+			"esri/Graphic",
+			"esri/widgets/Expand",
+			"esri/widgets/FeatureForm",
+			"esri/widgets/FeatureTemplates"
+			//"dojo/domReady!"
+		], function (Map, MapView, FeatureLayer, Search, Graphic, Expand, FeatureForm, FeatureTemplates) {
+			let editFeature, highlight;
+				//Puntos Asignados
+				const featureLayer = new FeatureLayer({
+					url:
+						"https://services5.arcgis.com/ATZiORCWaapxHmjJ/arcgis/rest/services/Asignaciones_S/FeatureServer/0",
+
+					outFields: ["*"],
+					popupEnabled: true,
+					id: "incidentsLayer"
+				});
+				//Asignacion de Manzanas
+				//var featureLayerManzanas = new FeatureLayer({
+				//	url:
+				//		"https://services5.arcgis.com/JeTKcjIv5oa05fLI/arcgis/rest/services/DISTRITOS_LOCALES_BCS/FeatureServer/0",
+				//	//
+				//	popupTemplate: {
+				//		title: "Estado: {ENTIDAD} </br>Municipio: {TIPO} </br>Distrito: {DISTRITO_L}",
+				//		overwriteActions: true
+				//	}
+
+				//});
+				////Asignacion de Secciones
+				//var featureLayerSecion = new FeatureLayer({
+				//	url:
+				//		"https://services5.arcgis.com/JeTKcjIv5oa05fLI/arcgis/rest/services/DISTRITOS_LOCALES_BCS/FeatureServer/0",
+				//	//
+				//	popupTemplate: {
+				//		title: "Estado: {ENTIDAD} </br>Municipio: {TIPO} </br>Distrito: {DISTRITO_L}",
+				//		overwriteActions: true
+				//	}
+
+				//});
+				
+
+			//Nueva capa de Distritos-poligonos
+			var featureLayerDistricts = new FeatureLayer({
+				url:
+					"https://services5.arcgis.com/ATZiORCWaapxHmjJ/arcgis/rest/services/Chihuahua_seccion/FeatureServer/0",
+				//
+				popupTemplate: {
+					title: "Municipio: {fk_idMunicipio} </br>Distrito: {fk_idDistrito} </br>Seccion: {fk_idSeccion}",
+					overwriteActions: true
+				}
+
+			});
+
+
+
+
+
+
+			//Tipo de mapa a utilizar
+			const map = new Map({
+				basemap: "streets-night-vector",
+				//layers: [featureLayer, featureLayerDistricts]
+			});
+			//capas que se agregaron al mapa
+			map.add(featureLayer, 0);
+			map.add(featureLayerDistricts, 0);
+
+			//Haciendo referecia al contenedor donse se visualizara
+			const view = new MapView({
+				container: "viewDiv",
+				map: map,
+				center: [-110.30, 24.15],
+				zoom: 8
+
+			});
+			var searchWidget = new Search({
+				view: view,
+				allPlaceholder: "Distrito, sección o Manzana",
+				sources: [
+					{
+						layer: featureLayerDistricts,
+						searchFields: ["fk_idSeccion"],
+						displayField: "fk_idSeccion",
+						exactMatch: false,
+						outFields: ["fk_idMunicipio", "fk_idDistrito", "fk_idSeccion"],
+						name: "Distritos",
+						suggestionTemplate: "Distrito:{fk_idDistrito}: Seccion:{fk_idSeccion}",
+						placeholder: "Ejemplo: 10"
+
+
+					},
+
+				]
+			});
+			view.ui.add(searchWidget, {
+				position: "top-right"
+			});
+			// New FeatureForm and set its layer to 'Incidents' FeatureLayer.
+			// FeatureForm displays attributes of fields specified in fieldConfig.
+			//Campos que se modificaran en la tabla de puntos
+
+			const featureForm = new FeatureForm({
+				container: "formDiv",
+				layer: featureLayer,
+				fieldConfig: [
+					{
+						name: "asignacion",
+						label: "Asignación"
+					}
+					//{
+					//	name: "Nombre",
+					//	label: "Nombre"
+					//},
+					//{
+					//	name: "ApellidoPaterno",
+					//	label: "Apellido Paterno"
+					//},
+					//{
+					//	name: "ApellidoMaterno",
+					//	label: "Apellido Materno"
+					//},
+					//{
+					//	name: "FechaNacimiento",
+					//	label: "Fecha de Nacimiento"
+					//},
+					//{
+					//	name: "Telefono",
+					//	label: "Telefono"
+					//},
+					//{
+					//	name: "Colonia",
+					//	label: "Colonia"
+					//},
+					//{
+					//	name: "Calle",
+					//	label: "Calle"
+					//},
+					//{
+					//	name: "Numero",
+					//	label: "Numero"
+					//},
+					//{
+					//	name: "CodigoPostal",
+					//	label: "CP."
+					//}
+
+				]
+			});
+
+
+
+			// Listen to the feature form's submit event.
+			// Update feature attributes shown in the form.
+			featureForm.on("submit", function () {
+				if (editFeature) {
+					// Grab updated attributes from the form.
+					const updated = featureForm.getValues();
+
+					// Loop through updated attributes and assign
+					// the updated values to feature attributes.
+					Object.keys(updated).forEach(function (name) {
+						editFeature.attributes[name] = updated[name];
+					});
+
+					// Setup the applyEdits parameter with updates.
+					const edits = {
+						updateFeatures: [editFeature]
+					};
+					applyEditsToIncidents(edits);
+					document.getElementById("viewDiv").style.cursor = "auto";
+				}
+			});
+
+			// Check if the user clicked on the existing feature
+			selectExistingFeature();
+
+			// The FeatureTemplates widget uses the 'addTemplatesDiv'
+			// element to display feature templates from incidentsLayer
+			const templates = new FeatureTemplates({
+				container: "addTemplatesDiv",
+				layers: [featureLayer]
+			});
+
+			// Listen for when a template item is selected
+			templates.on("select", function (evtTemplate) {
+				// Access the template item's attributes from the event's
+				// template prototype.
+				attributes = evtTemplate.template.prototype.attributes;
+				unselectFeature();
+				document.getElementById("viewDiv").style.cursor = "crosshair";
+
+				// With the selected template item, listen for the view's click event and create feature
+				const handler = view.on("click", function (event) {
+					//alerta para detectar que se agregara nuevo punto
+					//alert("EStas por agregar nuevo punto");
+					// remove click event handler once user clicks on the view
+					// to create a new feature
+					handler.remove();
+					event.stopPropagation();
+					featureForm.feature = null;
+
+					if (event.mapPoint) {
+						point = event.mapPoint.clone();
+						point.z = undefined;
+						point.hasZ = false;
+
+						// Create a new feature using one of the selected
+						// template items.
+						editFeature = new Graphic({
+
+							geometry: point,
+							attributes: {
+								asignacion: attributes.asignacion
+
+							}
+
+						});
+
+						// Setup the applyEdits parameter with adds.
+						const edits = {
+							addFeatures: [editFeature]
+						};
+						applyEditsToIncidents(edits);
+						document.getElementById("viewDiv").style.cursor = "auto";
+					} else {
+						console.error("event.mapPoint is not defined");
+					}
+				});
+			});
+
+			// Call FeatureLayer.applyEdits() with specified params.
+			function applyEditsToIncidents(params) {
+				// unselectFeature();
+				featureLayer
+					.applyEdits(params)
+					.then(function (editsResult) {
+						// Get the objectId of the newly added feature.
+						// Call selectFeature function to highlight the new feature.
+						if (editsResult.addFeatureResults.length > 0 || editsResult.updateFeatureResults.length > 0) {
+							unselectFeature();
+							let objectId;
+							if (editsResult.addFeatureResults.length > 0) {
+
+								objectId = editsResult.addFeatureResults[0].objectId;
+								console.log(editsResult.addFeatureResults[0].objectId);
+								//nuevaAsignacion(objectId);
+								localStorage.setItem("Nombre", objectId);
+							
+
+							} else {
+								featureForm.feature = null;
+								objectId = editsResult.updateFeatureResults[0].objectId;
+								console.log("Se actualizo la info.");
+								//Se limpia el localstorage al confirmar actualización
+								localStorage.clear();
+							}
+
+							selectFeature(objectId);
+							
+							if (addFeatureDiv.style.display === "block") {
+								//Se abre el formulario esri para agregar
+								toggleEditingDivs("none", "block");
+
+								const tipo = document.getElementsByClassName("formDiv")[0]
+
+							}
+
+						}
+						// show FeatureTemplates if user deleted a feature
+						else if (editsResult.deleteFeatureResults.length > 0) {
+							toggleEditingDivs("block", "none");
+						}
+					})
+					.catch(function (error) {
+						console.log("===============================================");
+						console.error(
+							"[ applyEdits ] FAILURE: ",
+							error.code,
+							error.name,
+							error.message
+						);
+						console.log("error = ", error);
+					});
+			}
+
+				
+			// Check if a user clicked on an incident feature.
+			function selectExistingFeature() {
+
+				view.on("click", function (event) {
+					// clear previous feature selection
+					unselectFeature();
+					//Detecta si el cursor es diferente al efecto crosshair
+					if (document.getElementById("viewDiv").style.cursor != "crosshair") {
+						//alert("Seleccionaste un punto para agregar o modificar");
+						view.hitTest(event).then(function (response) {
+							// If a user clicks on an incident feature, select the feature.
+							if (response.results.length === 0) {
+								toggleEditingDivs("block", "none");
+							}
+							else if (response.results[0].graphic && response.results[0].graphic.layer.id == "incidentsLayer") {
+								if (addFeatureDiv.style.display === "block") {
+									toggleEditingDivs("none", "block");
+								}
+								selectFeature(response.results[0].graphic.attributes[featureLayer.objectIdField]);
+							}
+						});
+					}
+				});
+			}
+
+			// Highlights the clicked feature and display
+			// the feature form with the incident's attributes.
+			function selectFeature(objectId) {
+				// query feature from the server
+
+				//obtiene el id seleccionado para modificar
+				
+				
+
+				console.log(objectId);
+				featureLayer
+					.queryFeatures({
+						objectIds: [objectId],
+						outFields: ["*"],
+						returnGeometry: true
+					})
+					.then(function (results) {
+
+						if (results.features.length > 0) {
+							editFeature = results.features[0];
+
+
+							// display the attributes of selected feature in the form
+							featureForm.feature = editFeature;
+							// highlight the feature on the view
+							view
+								.whenLayerView(editFeature.layer)
+								.then(function (layerView) {
+									highlight = layerView.highlight(editFeature);
+								});
+						}
+					});
+			}
+			//Funcion para llenar datos cajas en Territorial
+			
+			// Expand widget for the editArea div.
+			const editExpand = new Expand({
+				expandIconClass: "esri-icon-edit",
+				expandTooltip: "Expand Edit",
+				expanded: true,
+				view: view,
+				content: document.getElementById("editArea")
+			});
+			//posicion modal de opciones con puntos para agregar
+				view.ui.add(editExpand, "top-left");
+
+			// input boxes for the attribute editing
+			const addFeatureDiv = document.getElementById("addFeatureDiv");
+			const attributeEditing = document.getElementById("featureUpdateDiv");
+
+			// Controls visibility of addFeature or attributeEditing divs
+			function toggleEditingDivs(addDiv, attributesDiv) {
+				addFeatureDiv.style.display = addDiv;
+				attributeEditing.style.display = attributesDiv;
+
+				document.getElementById("updateInstructionDiv").style.display = addDiv;
+			}
+
+			// Remove the feature highlight and remove attributes
+			// from the feature form.
+			function unselectFeature() {
+				if (highlight) {
+					highlight.remove();
+				}
+			}
+
+			// Update attributes of the selected feature.
+			document.getElementById("btnUpdate").onclick = function () {
+				// Fires feature form's submit event.
+				featureForm.submit();
+			};
+
+			// Delete the selected feature. ApplyEdits is called
+			// with the selected feature to be deleted.
+			document.getElementById("btnDelete").onclick = function () {
+				// setup the applyEdits parameter with deletes.
+				const edits = {
+					deleteFeatures: [editFeature]
+				};
+				applyEditsToIncidents(edits);
+				document.getElementById("viewDiv").style.cursor = "auto";
+			};
+
+				//**************************************************************************************************
+				view.when(function () {
+					// Create the LayerList widget with the associated actions
+					// and add it to the top-right corner of the view.
+
+					var layerList = new LayerList({
+						view: view,
+						// executes for each ListItem in the LayerList
+						listItemCreatedFunction: defineActions
+					});
+
+					// Event listener that fires each time an action is triggered
+
+					layerList.on("trigger-action", function (event) {
+						// The layer visible in the view at the time of the trigger.
+						var visibleLayer = featureLayer.visible ? featureLayer : featureLayerDistricts;
+
+						// Capture the action id.
+						var id = event.action.id;
+
+						if (id === "full-extent") {
+							// if the full-extent action is triggered then navigate
+							// to the full extent of the visible layer
+							view.goTo(visibleLayer.fullExtent).catch(function (error) {
+								if (error.name != "AbortError") {
+									console.error(error);
+								}
+							});
+						} else if (id === "information") {
+							// if the information action is triggered, then
+							// open the item details page of the service layer
+							window.open(visibleLayer.url);
+						} else if (id === "increase-opacity") {
+							// if the increase-opacity action is triggered, then
+							// increase the opacity of the GroupLayer by 0.25
+
+							if (demographicGroupLayer.opacity < 1) {
+								demographicGroupLayer.opacity += 0.25;
+							}
+						} else if (id === "decrease-opacity") {
+							// if the decrease-opacity action is triggered, then
+							// decrease the opacity of the GroupLayer by 0.25
+
+							if (demographicGroupLayer.opacity > 0) {
+								demographicGroupLayer.opacity -= 0.25;
+							}
+						}
+					});
+
+					// Add widget to the top right corner of the view
+					view.ui.add(layerList, "top-right");
+				});
+
+
+		});
+
+
+	</script>
+</head>
+
+<body>
+	<div id="editArea" class="editArea-container esri-widget--panel">
+		<div id="addFeatureDiv" style="display: block;">
+			<!--<h3 class="list-heading">Mapa de Asignaciones</h3>
+			<ul style="font-size: 13px; padding-left: 1.5em;">
+				<li>Select template from the list</li>
+				<li>Click on the map to create a new feature</li>
+				<li>Update associated attribute data</li>
+				<li>Click <i>Update Incident Info</i></li>
+			</ul>-->
+			<div id="addTemplatesDiv" style="background: #323232;"></div>
+		</div>
+
+		<div id="featureUpdateDiv" style="display: none; margin-top: 1em;">
+			<h3 class="list-heading">Ingrese la información de asignación</h3>
+			<!-- Campos del formulario agregar y editar -->
+			<div id="attributeArea">
+				<div id="formDiv"></div>
+				<input type="button" class="esri-button" value="Actualizar la información" id="btnUpdate" formmethod="post" formaction="Territorial.aspx"/>
+			</div>
+			<br />
+			<div id="deleteArea">
+				<input type="button" class="esri-button" value="Eliminar" id="btnDelete" />
+			</div>
+		</div>
+
+		<div id="updateInstructionDiv" style="text-align: center; display: block;">
+			<p class="or-wrap"><span class="or-text">Or</span></p>
+			<p id="selectHeader">Seleccione una asignación para editar o eliminar.</p>
+		</div>
+	</div>
+	<div id="search"></div>
+	<div id="viewDiv"></div>
+</body>
+</html>

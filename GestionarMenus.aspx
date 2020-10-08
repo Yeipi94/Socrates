@@ -1,6 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/SolarisMaster.master" AutoEventWireup="true" CodeFile="GestionarMenus.aspx.cs" Inherits="GestionarMenus" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+     <style>
+        .check-height {
+            height: 34px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
 	 <div class="card-body">
@@ -51,7 +56,7 @@
                         </div>
 
                         <div class="text-center">
-                            <asp:Button ID="btnRegistrar" runat="server" CssClass="btn btn-primary" Text="Registrar Menú" />
+                            <asp:Button ID="btnRegistrar" runat="server" CssClass="btn btn-primary" Text="Registrar Menú" OnClick="btnRegistrar_Click" />
                         </div>
 
                     </div>
@@ -76,7 +81,6 @@
                                         <th>Sub-Menú</th>
                                         <th>Menu Padre</th>
                                         <th>Acciones</th>
-                                        <th>icon</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -92,51 +96,51 @@
 
     </div>
 
-    <div class="modal fade" id="imodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Actualizar Permiso</h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label>NOMBRE</label>
+     <div class="modal fade" id="imodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Actualizar Permiso</h4>
                     </div>
-                    <div class="form-group">
-                        <asp:TextBox ID="txtANombrePermiso" runat="server" Text="" CssClass="form-control"></asp:TextBox>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label>NOMBRE</label>
+                        </div>
+                        <div class="form-group">
+                            <asp:TextBox ID="txtANombrePermiso" runat="server" Text="" CssClass="form-control"></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <label>RUTA</label>
+                        </div>
+                        <div class="form-group">
+                            <asp:TextBox ID="txtAUrlPermiso" runat="server" Text="" CssClass="form-control"></asp:TextBox>
+                        </div>
+                        <div class="form-group">
+                            <label>MENÚ PRINCIPAL</label>
+                        </div>
+                        <div class="form-group">
+                            <asp:DropDownList ID="ddlAMenuPrincipal" runat="server" CssClass="form-control"></asp:DropDownList>
+                        </div>
+                        <div class="form-group">
+                            <label>SUBMENÚ</label>
+                        </div>
+                        <div class="form-group">
+                            <asp:CheckBox ID="chkAIsSubmenu" runat="server" />
+                        </div>
+                        <div class="form-group">
+                            <label>ACTIVAR</label>
+                        </div>
+                        <div class="form-group">
+                            <asp:CheckBox ID="chkAActivo" runat="server" />
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label>RUTA</label>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnactualizar">Actualizar</button>
                     </div>
-                    <div class="form-group">
-                        <asp:TextBox ID="txtAUrlPermiso" runat="server" Text="" CssClass="form-control"></asp:TextBox>
-                    </div>
-                    <div class="form-group">
-                        <label>MENÚ PRINCIPAL</label>
-                    </div>
-                    <div class="form-group">
-                        <asp:DropDownList ID="ddlAMenuPrincipal" runat="server" CssClass="form-control"></asp:DropDownList>
-                    </div>
-                    <div class="form-group">
-                        <label>SUBMENÚ</label>
-                    </div>
-                    <div class="form-group">
-                        <asp:CheckBox ID="chkAIsSubmenu" runat="server" />
-                    </div>
-                    <div class="form-group">
-                        <label>ACTIVAR</label>
-                    </div>
-                    <div class="form-group">
-                        <asp:CheckBox ID="chkAActivo" runat="server" />
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="btnactualizar">Actualizar</button>
                 </div>
             </div>
         </div>
-    </div>
 
 	<script src="js/menus.js" type="text/javascript"></script>
 </asp:Content>

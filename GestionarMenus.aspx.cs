@@ -8,7 +8,7 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class GestionarMenus : BasePage
+public partial class GestionarMenus : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {

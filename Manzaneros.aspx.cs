@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -20,11 +21,20 @@ public partial class Manzaneros : BasePage
 
     private void ListRegiones()
     {
+        
+
         try
         {
-            DataTable dt = lista.GetListaManzanas();
-            Gw_ListaAsignacion.DataSource = dt;
-            Gw_ListaAsignacion.DataBind();
+            if (Session["UserSessionEmpleado"] != null)
+            {
+                Empleado objEmpeado = (Empleado)Session["UserSessionEmpleado"];
+                int idEmp = Convert.ToInt32(objEmpeado.ID);
+
+                DataTable dt = lista.GetListaManzanas(idEmp);
+                Gw_ListaAsignacion.DataSource = dt;
+                Gw_ListaAsignacion.DataBind();
+            }
+
         }
         catch (Exception ex)
         {
